@@ -11,11 +11,17 @@ search: true
 
 #Introduction
 
+> This is the simplest possible bot in botSON.
+
 ```json
 {
   "states": [
     {
       "label": "initial",
+      "input": {
+        "variable": "first_text_from_user",
+        "action": "free_text"
+      },
       "output": "Hello World!",
       "next_step": "exit"
     }
@@ -27,15 +33,11 @@ botSON is a JSON based programming language to create chatbots for the [Hubtype]
 
 Additionally, botSON supports [triggers](#triggers), which are high priority actions that the user can invoke regardless of the current state of the conversation.
 
-botSON is messenger agnostic, meaning that is not designed specifically for a single messaging app but it works with any messaging channel supported by Hubtype, however not all interactive elements are supported by all channels (like [carrousels](#carrousel)).
+botSON is messenger agnostic, meaning that it's not designed specifically for a single messaging app but it works with any messaging channel supported by Hubtype, however not all interactive elements are supported by all channels (like [carrousels](#carrousel)).
 
 #Getting Started
 
 ##Creating a state
-
-The definition of the bot is composed by states. Each one has a `label`, a `next_step` and at least one `output` or `input`. The state 'exit' indicates the end of execution. There are four additional obligatory states needed for the correct execution: 'initial', 'input_failure', 'external_request_failure' and 'fallback_instruction'.
-
-##First complete definition
 
 ```json
 {
@@ -43,8 +45,8 @@ The definition of the bot is composed by states. Each one has a `label`, a `next
     {
       "label": "initial",
       "input": {
-        "variable":"first_text_from_user",
-        "action":"free_text"
+        "variable": "first_text_from_user",
+        "action": "free_text"
       },
       "next_step": "helloworld"
     },
@@ -57,19 +59,18 @@ The definition of the bot is composed by states. Each one has a `label`, a `next
 }
 ```
 
-The definition of the bot is composed by states. Each one has a `label`, a `next_step` and at least one `output` or 
-`input`.
+A bot is composed by states. Each state has a `label`, a `next_step` and usually an `output` or `input` (or both). When the bot enters a state, the first thing it does is to send the `output` (if there's one) to the user, then awaits for the user input if there's an `input` section. Finally it jumps to the state defined in the expression `next_step`. The state 'exit' indicates the end of the session, if the user talks again then a new session will start from the 'initial' state.
 
-Every bot starts it's execution in the state 'initial' when the user does the first input. Then, it goes to the next 
-state: 'helloworld'. There, the bot will output  'Hello World!' and go to 'exit', where the bot reach the end of 
-execution.
+There's only one mandatory state: 'initial', which indicates the beginning of the conversation flow. The initial state must have an `input` section that captures the first interaction from user. The 'initial' state is different from the other states as the `input` statement is evaluated before the `output`, while the usual execution is `output` first, then `input`.
+
+When the bot enters a state with no `input`, it just sends the `output` (if any) and jumps to `next_state` immediatelly. It is possible to chain several state jumps without any `input`, the bot will just send all the outputs consecutively until it reaches a state with an `input` statement, then it will pause until the user sends a new message.
 
 ##Basic bot
 
 ```json
 {
     "input_retry": 3,
-    "definition": [
+    "states": [
         {
             "label": "initial",
             "input": {
@@ -82,18 +83,16 @@ execution.
             "label": "choice",
             "output": {
                 "type": "text",
-                "data": "Here you have a choice:",
+                "data": "Here you have to choose:",
                 "keyboard": [
-                    {"label": "RED", "data": "RED"},
-                    {"label": "BLUE", "data": "BLUE"},
-                    {"label": "GREEN", "data": "GREEN"}
+                    {"label": "Red", "data": "RED"},
+                    {"label": "Blue", "data": "BLUE"},
+                    {"label": "Green", "data": "GREEN"}
                 ]
             },
             "input": {
                 "action": "get_in_set",
-                "action_parameters": [
-                    "RED", "BLUE", "GREEN"
-                ],
+                "action_parameters": ["RED", "BLUE", "GREEN"],
                 "variable": "user_choice"
             },
             "next_step": "result"
@@ -112,21 +111,15 @@ execution.
 }
 ```
 
-A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of 
-`input` and `output` other than simple text.
+A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of `input` and `output` other than simple text.
 
-In this case, after the first text of the user, this bot will show two quick replies ('RED', 'BLUE' and 'GREEN'). The 
-user can click them or write itself the response. 
+In this case, after the first text of the user, this bot will show three quick replies: 'Red', 'Blue' and 'Green'. The user can click them or write itself the response. 
  
-Then, the bot expects an input string that can be 'RED', 'BLUE' or 'GREEN', store it in the variable `user_choice` 
-and go to the next state `result`.
+Then, the bot expects an input string that can be 'RED', 'BLUE' or 'GREEN', store it in the variable `user_choice` and go to the next state `result`.
 
-* If the user wrote anything else, the chatbot would reply with the possible options in a message like "Please, 
-choose one of the following values: RED, BLUE" at most `input_retry` times. If it fails all 3 times it will go to the 
-state `input_failure`.
+* If the user wrote anything else, the chatbot would reply with the possible options in a message like "Please, choose one of the following values: RED, BLUE" at most `input_retry` times. If it fails all 3 times it will go to the state `input_failure`.
 
-Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the 
-`choice` state.
+Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the `choice` state.
 
 #Top level properties
 
@@ -147,8 +140,8 @@ Finally, in the state `result` the bot sends a text message saying what was the 
       "foo": "bar"
     }
   },
-  "triggers":{},
-  "definition":{}
+  "triggers": {},
+  "states": []
 }
 ```
 
@@ -187,7 +180,7 @@ Defines the default values that are used throughout the chatbot flow in differen
   "triggers": {
     "payload":[
       {
-        "match":"^WATCH_VIDEO_(?P<video_id>[a-z0-9-]+)$",
+        "match": "^WATCH_VIDEO_(?P<video_id>[a-z0-9-]+)$",
         "context": {
           "video_url": "videos/{{video_id}}.mp4"
         },
@@ -196,11 +189,11 @@ Defines the default values that are used throughout the chatbot flow in differen
     ],
     "text":[
       {
-        "match":"trigger_(?P<id>\\w+)",
+        "match": "trigger_(?P<id>\\w+)",
         "next_step": "trigger_{{id}}"
       },
       {
-        "match":"help",
+        "match": "help",
         "next_step": "trigger_help"
       }
     ]
@@ -224,7 +217,7 @@ info.
 
 Usually triggers are used to capture button clicks (what Facebook calls 'Postbacks') and general commands like "help".
 
-##definition
+##states
 
 This field contains an array of all the states of the bot.
 
@@ -233,7 +226,7 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-  "definition": [
+  "states": [
     {
       "label": "initial",
       "input": {
@@ -283,7 +276,7 @@ The state name.
 
 *(Optional)*
 
-Variables to be assigned when entering the state.
+Variables to be assigned when entering the state. See context.
 
 ###output 
 
@@ -302,6 +295,23 @@ Input of the bot. It can come from the user or as a response to url calls. The f
 
 Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states 
 depending of variables) see [templating](#templating).
+
+#Context
+
+> The context is just a set of variables that can contain any JSON type
+
+```json
+
+{
+  "user": {
+    "name": "John",
+    "last_name": "Doe"
+  },
+  "is_customer": true
+}
+```
+
+The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
 #Output types
 
@@ -787,7 +797,7 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 | Attributes | Contains |
 | --------- | ------------- |
 | message | Explanation of the error |
-| trace | Approximate path to the error in the json. _Note: in definition and trigger arrays it will use label/match value instead of index number_  |
+| trace | Approximate path to the error in the json. _Note: in states and trigger arrays it will use label/match value instead of index number_  |
 
 #AI integration
 You are able to use watson or api.ai bots to manage the botSON flow. 
