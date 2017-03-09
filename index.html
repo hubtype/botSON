@@ -1,0 +1,633 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>botSON Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://hubtype.com/'>Hubtype</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>botSON definitions for the bots created and mantained for hubtype.</p>
+
+<p>This folder contains several examples of chatbots defined in our JSON specification language (botSON). Here you&rsquo;ll also find the bots we define for our real clients, for demos or for fun (consumer oriented).</p>
+
+<p>botSON is a JSON structure defined to create chatbots. Bots are finite states machines that are able to comunicate with external resources and do some stuff defined by their transitions. It uses <a href="http://jinja.pocoo.org/">Jinja</a> to give flexible state interactions.</p>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<h2 id="creating-a-state">Creating a state</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"definition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"helloworld"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The definition of the bot is composed by states. Each one has a <code class="prettyprint">label</code>, a <code class="prettyprint">next_step</code> and at least one <code class="prettyprint">output</code> or <code class="prettyprint">input</code>. The state &lsquo;exit&rsquo; indicates the end of execution. There are four additional obligatory states needed for the correct execution: &#39;initial&rsquo;, &#39;input_failure&rsquo;, &#39;external_request_failure&rsquo; and &#39;fallback_instruction&rsquo;.</p>
+
+<h2 id="first-complete-definition">First complete definition</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"definition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"initial"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"free_text"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"helloworld"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"input_failure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This happens when the end user don't put the expected input data"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w">  </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"external_request_failure"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This happens when a response is outside the range 200-299"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w">  </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"fallback_instruction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This happens when a state is missing"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Every bot starts it&rsquo;s execution in the &#39;initial&rsquo; state when it receives the first message. Then, the automata follows the flow from state to state assigned in the &#39;next_step&rsquo; field.</p>
+
+<h2 id="getting-started-2">Getting started 2</h2>
+
+<h1 id="top-level-properties">Top level properties</h1>
+
+<h2 id="input_retry">input_retry</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Specifies the number of input failures before the machine goes to the input_failure state. By default is set to 3.</p>
+
+<h2 id="name">name</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Weather Bot"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The name of the bot.</p>
+
+<h2 id="language-not-used">language <em>(not used)</em></h2>
+
+<p>Display languaje of the bot, languaje of output messages.</p>
+
+<h2 id="defaults">defaults</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"requests"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer mytoken"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"API_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Defines the default values that are used throughout the chatbot life in different features:</p>
+
+<ul>
+<li><strong>requests</strong></li>
+</ul>
+
+<p>Currently only supports default <code class="prettyprint">headers</code> to be used in every request.</p>
+
+<ul>
+<li><strong>context</strong></li>
+</ul>
+
+<p>Variables that will be always available at any state of the bot. They are recalculed in each state change.</p>
+
+<h2 id="triggers">triggers</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"^WATCH_VIDEO_(?P&lt;video_id&gt;[a-z0-9-]+)$"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"video_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"videos/{{video_id}}.mp4"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"watch_video"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"^(some|bad|words|to|ignore)$"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Commands that are available to the enduser at any point during the bot execution, regardless of its current state. Triggers are matched with regular expressions, if the regexp contains named groups, those will be added to the bot context with the corresponding matched value. Usually triggers are used to capture button clicks (what Facebook calls &#39;Postbacks&rsquo;) and general commands like &ldquo;help&rdquo;. When a user input is captured by a trigger, it is not consumed by the current state.</p>
+
+<p>Triggers must have a valid <code class="prettyprint">next_step</code> attribute. If next step is <code class="prettyprint">null</code> the bot will consume that input without any change, which is useful if we want to ignore some words. See <a href="#next_step">next_step</a> reference for more info.</p>
+
+<h2 id="definition">definition</h2>
+
+<p>The array of possible states of the bot. The first state should be named <strong>initial</strong> and should <strong>NOT</strong> have output. When the bot enters a state, the first thing it does is to update the context, then writting all the outputs (if any) and finally wait for a user input (if defined). Either <code class="prettyprint">output</code> or <code class="prettyprint">input</code> must be defined.</p>
+
+<h3 id="label">label</h3>
+
+<p>TODO</p>
+
+<h3 id="context">context</h3>
+
+<p><em>(Optional)</em></p>
+
+<p>TODO</p>
+
+<h3 id="output">output</h3>
+
+<p><em>(Optional)</em></p>
+
+<p>The bot will output the data defined here. It has different possible <a href="#output-types">data types</a>.</p>
+
+<h3 id="input">input</h3>
+
+<p><em>(Optional)</em></p>
+
+<p>Input from the user. The field &ldquo;actions&rdquo; specifies the expected <a href="#input-actions">type of input</a>.</p>
+
+<h3 id="next_step">next_step</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"another_state"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Next state of the bot.</p>
+
+<h1 id="output-types">Output types</h1>
+
+<h2 id="text">Text</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Echo!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="image">Image</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/image.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="video">Video</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/video.mp4"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="audio">Audio</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audio"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/audio.mp3"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="document">Document</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/document.pdf"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="location">Location</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">41.412255</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2079313</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Home"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hollywood Boulevard 32"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://any.url.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td style="text-align: center">&ldquo;location&rdquo;</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>latitude</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>longitude</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>title</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>optional</em><br><em>32 chars max</em></td>
+</tr>
+<tr>
+<td>address</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>optional</em></td>
+</tr>
+<tr>
+<td>url</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>optional</em></td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+IMPORTANT: The Location Output is not available on Facebook.
+</aside>
+
+<h2 id="contact">Contact</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">                   </span><span class="err">//Optional</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"678909909"</span><span class="p">,</span><span class="w">          </span><span class="err">//Optional</span><span class="w">
+  </span><span class="nt">"vcard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcard:data"</span><span class="w">                 </span><span class="err">//Optional</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="carrousel">Carrousel</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"elements"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title Element 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My description"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.cover.image.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Button"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXTRA_DATA"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title Element 2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Description"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.cover.image.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Darse de baja"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.some.web.com"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A rich interactive message that displays a horizontal scrollable carousel of items, each composed of an image attachment, short description and buttons to request input from the user.</p>
+
+<p><img width="300" src="images/carrousel.png"></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td style="text-align: center">&ldquo;carrousel&rdquo;</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>elements</td>
+<td style="text-align: center">Array of Elements</td>
+<td style="text-align: right"><em>10 elements max (will truncate)</em></td>
+</tr>
+</tbody></table>
+
+<h3 id="element">Element:</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>image_url</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>buttons</td>
+<td style="text-align: center">Array of Buttons</td>
+<td style="text-align: right"><em>3 elements max (will truncate)</em></td>
+</tr>
+</tbody></table>
+
+<h3 id="button">Button:</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td style="text-align: center">&ldquo;web_url&rdquo; or &ldquo;postback&rdquo;</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>title</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>url</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>mandatory if type is &ldquo;web_url&rdquo;</em></td>
+</tr>
+<tr>
+<td>payload</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>mandatory if type is &ldquo;postback&rdquo;</em></td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">postback</code>: this type of buttons act as if the end-user typed the title of the button.</p>
+
+<p><code class="prettyprint">web_url</code>: this type of buttons open the <code class="prettyprint">url</code> in a browser.</p>
+
+<aside class="warning">
+IMPORTANT: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
+</aside>
+
+<h2 id="quick-replies">Quick Replies</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you need?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option One"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option Two"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option Three"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_3"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the effort to type all words and let them navigate through options much faster.</p>
+
+<p>Any message type accepts a <code class="prettyprint">&quot;keyboard&quot;</code> field with an array of (<code class="prettyprint">&quot;label&quot;</code>, <code class="prettyprint">&quot;data&quot;</code>) pairs.</p>
+
+<h1 id="input-actions">Input actions</h1>
+
+<p>The data will be stored in the specified variable.</p>
+
+<h2 id="free-text">Free Text</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_var_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="get-integer">Get Integer</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name_of_int_var"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_int"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="get-in-set">Get in Set</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name_of_option"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_set"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"op1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"op2"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Only accepts these parameters as answer. It will ask at most <code class="prettyprint">input_retry</code> times.</p>
+
+<h2 id="get-in-set-fuzzy">Get in Set Fuzzy</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object_user_choice"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_set_fuzzy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"object1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"object2"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Same as get in set, but it does not require a perfect match.</p>
+
+<h2 id="get-yes-or-no">Get yes or no</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirm_var_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_yes_no"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="get-from-url">Get from url</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"var_name_to_save"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_from_url"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{BASE_URL}}path/search/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"param1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{_input}}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"param2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"val_2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO - it makes a call to the url and stores the response</p>
+
+<h2 id="get-name">Get name</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="get-email">Get email</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_email"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_email"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h2 id="get-age">Get age</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>TODO</p>
+
+<h1 id="templating">Templating</h1>
+
+<p>See <a href="http://jinja.pocoo.org/">Jinja</a>.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
