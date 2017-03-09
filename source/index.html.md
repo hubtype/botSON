@@ -11,22 +11,35 @@ search: true
 
 #Introduction
 
-botSON definitions for the bots created and mantained for hubtype.
+```json
+{
+  "states": [
+    {
+      "label": "initial",
+      "output": "Hello World!",
+      "next_step": "exit"
+    }
+  ]
+}
+```
 
-This folder contains several examples of chatbots defined in our JSON specification language (botSON). Here you'll 
-also find the bots we define for our real clients, for demos or for fun (consumer oriented).
+botSON is a JSON based programming language to create chatbots for the [Hubtype](https://hubtype.com) platform. The goal of botSON is to be a simple yet powerful tool to build conversational flows that the user navigates by feeding in text or media. In a simplified way, chatbots are defined as finite state machines, at each state the chatbot outputs some text and waits for the user input that makes the bot transition to another state. A [context](#context) is kept for every bot session (the extent of a user's conversation) which can be updated at every step with variables and external http calls.
 
-botSON is a JSON structure defined to create chatbots. Bots are finite states machines that are able to comunicate 
-with external resources and do some stuff defined by their transitions. It uses [Jinja](http://jinja.pocoo.org/) to 
-give flexible state interactions.
+Additionally, botSON supports [triggers](#triggers), which are high priority actions that the user can invoke regardless of the current state of the conversation.
+
+botSON is messenger agnostic, meaning that is not designed specifically for a single messaging app but it works with any messaging channel supported by Hubtype, however not all interactive elements are supported by all channels (like [carrousels](#carrousel)).
 
 #Getting Started
 
 ##Creating a state
 
+The definition of the bot is composed by states. Each one has a `label`, a `next_step` and at least one `output` or `input`. The state 'exit' indicates the end of execution. There are four additional obligatory states needed for the correct execution: 'initial', 'input_failure', 'external_request_failure' and 'fallback_instruction'.
+
+##First complete definition
+
 ```json
 {
-  "definition": [
+  "states": [
     {
       "label": "initial",
       "input": {
