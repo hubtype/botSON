@@ -313,6 +313,16 @@ depending of variables) see [templating](#templating).
 
 The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
+TODO: special variables
+
+* user
+* organization
+* bot
+
+* <span>_hubtype_action</span>
+* <span>_hubtype_case_typification</span>
+* <span>_hubtype_case_status</span>
+
 #Output types
 
 ##Text
@@ -800,31 +810,37 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 | trace | Approximate path to the error in the json. _Note: in states and trigger arrays it will use label/match value instead of index number_  |
 
 #AI integration
-You are able to use watson or api.ai bots to manage the botSON flow. 
-```json
-{
-  "ai_backends":{
-    "watson": {
-      "username": "(id)",
-      "password": "(pass)",
-      "workspace_id": "(w_id)"
-    },
-    "api_ai":{
-    "token":"(token)"
-  }
-}
-}
-```
-To start just configure the credentials
+
+> AI configuration
 
 ```json
 {
-  "input":{
-    "action":"get_intent",
-    "variable":"variable_name"
+  "ai_backends": {
+    "watson": {
+      "username": "<WATSON_USERNAME>",
+      "password": "<WTSON_PASSWORD>",
+      "workspace_id": "<WATSON_WORKSPACE_ID>"
+    },
+    "api_ai": {
+      "token": "<API.AI_TOKEN>"
+    }
   }
 }
 ```
+
+> Get the user intent using AI
+
+```json
+{
+  "input": {
+    "action": "get_intent",
+    "variable": "variable_name"
+  }
+}
+```
+
+> Manually invoke the AI backend with an arbitrary input
+
 ```json
 {
   "context": {
@@ -832,6 +848,11 @@ To start just configure the credentials
   }
 }
 ```
+
+You are able to use watson or api.ai bots to manage the botSON flow. 
+
+To start just configure the credentials
+
 Then you can call the ai in two different ways.
 <br><br>The object return has `intent`, `entities` and `raw`. Where raw is 
 the full API response. The object saved in the variable will have the following structure.
@@ -841,5 +862,6 @@ the full API response. The object saved in the variable will have the following 
 | intent      | String | |
 | entities    | String | |
 
-<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
--->
+#Hubtype DESK integration
+
+TODO
