@@ -409,6 +409,17 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 </span></code></pre>
 <p>The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state <code class="prettyprint">context</code> statement.</p>
 
+<p>TODO: special variables</p>
+
+<ul>
+<li>user</li>
+<li>organization</li>
+<li><p>bot</p></li>
+<li><p><span>_hubtype_action</span></p></li>
+<li><p><span>_hubtype_case_typification</span></p></li>
+<li><p><span>_hubtype_case_status</span></p></li>
+</ul>
+
 <h1 id="output-types">Output types</h1>
 
 <h2 id="text">Text</h2>
@@ -1124,34 +1135,45 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h1 id="ai-integration">AI integration</h1>
 
-<p>You are able to use watson or api.ai bots to manage the botSON flow. 
-<code class="prettyprint">json
-{
-  &quot;ai_backends&quot;:{
-    &quot;watson&quot;: {
-      &quot;username&quot;: &quot;(id)&quot;,
-      &quot;password&quot;: &quot;(pass)&quot;,
-      &quot;workspace_id&quot;: &quot;(w_id)&quot;
-    },
-    &quot;api_ai&quot;:{
-    &quot;token&quot;:&quot;(token)&quot;
-  }
-}
-}
-</code>
-To start just configure the credentials</p>
+<blockquote>
+<p>AI configuration</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"input"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"get_intent"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"variable_name"</span><span class="w">
+  </span><span class="nt">"ai_backends"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"watson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WATSON_USERNAME&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WTSON_PASSWORD&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"workspace_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WATSON_WORKSPACE_ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"api_ai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;API.AI_TOKEN&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Get the user intent using AI</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_intent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"variable_name"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Manually invoke the AI backend with an arbitrary input</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"ai_result_name_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_conversation(ai_backends, _input)"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>You are able to use watson or api.ai bots to manage the botSON flow. </p>
+
+<p>To start just configure the credentials</p>
+
 <p>Then you can call the ai in two different ways.
 <br><br>The object return has <code class="prettyprint">intent</code>, <code class="prettyprint">entities</code> and <code class="prettyprint">raw</code>. Where raw is 
 the full API response. The object saved in the variable will have the following structure.</p>
@@ -1175,8 +1197,9 @@ the full API response. The object saved in the variable will have the following 
 </tr>
 </tbody></table>
 
-<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
-&ndash;>
+<h1 id="hubtype-desk-integration">Hubtype DESK integration</h1>
+
+<p>TODO</p>
 
       </div>
       <div class="dark-box">
