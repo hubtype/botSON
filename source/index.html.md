@@ -113,7 +113,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
 
 A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of `input` and `output` other than simple text.
 
-In this case, after the first text of the user, this bot will show three quick replies: 'Red', 'Blue' and 'Green'. The user can click them or write itself the response. 
+In this case, after the first text of the user, this bot will show three quick replies: 'Red', 'Blue' and 'Green'. The user can click them or write the response herself. 
  
 Then, the bot expects an input string that can be 'RED', 'BLUE' or 'GREEN', store it in the variable `user_choice` and go to the next state `result`.
 
@@ -145,7 +145,7 @@ Finally, in the state `result` the bot sends a text message saying what was the 
 }
 ```
 
-Specifies the number of input failures before the machine goes to the `input_failure` state. By default is set to 3.
+Specifies the number of input failures before the machine goes to the 'input_failure' state. By default is set to 3.
 An input failure is given when the [type of input](#input-actions) doesn't match the required data. 
 
 ##name
@@ -170,8 +170,7 @@ Defines the default values that are used throughout the chatbot flow in differen
 
 * **context**
 
-  Variables that will be always available at any state of the bot. They are recalculed every time there is an input, 
-  so, if a bot definition is changed, previous conversations will have updated variables.
+  Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.
 
 ##triggers
 
@@ -207,13 +206,9 @@ Triggers are commands that are available at any point during the bot execution, 
 
 * `payload` triggers can not be fired by user messages. *(Higher priority than text triggers.)*
 
-Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables
-with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current
-state.
+Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.
 
-Triggers must have valid `next_step` and `match` attributes. If `next_step` is `null` the bot will consume that input 
-without any change, which is useful if you want to ignore some words. See [next_step](#next_step) reference for more 
-info.
+Triggers must have valid `next_step` and `match` attributes. If `next_step` is `null` the bot will consume that input without any change, which is useful if you want to ignore some words. See [next_step](#next_step) reference for more info.
 
 Usually triggers are used to capture button clicks (what Facebook calls 'Postbacks') and general commands like "help".
 
@@ -221,8 +216,7 @@ Usually triggers are used to capture button clicks (what Facebook calls 'Postbac
 
 This field contains an array of all the states of the bot.
 
-When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs
-(if any) and finally wait for a user input (if defined).
+When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs (if any) and finally wait for a user input (if defined). Finally, it jumps to the state defined in the `next_step` expression.
 
 ```json
 {
@@ -264,9 +258,11 @@ When the bot enters a state, the first thing it does is to update the context, t
 }
 ```
 
-It is required a state named `initial`, that is the first state in the execution flow. `initial` will only start 
-after the user sends it's first input. Then, it will update the context, write the outputs and go to `next_step`. It 
-is recomended that no state go to `initial`.
+It is required a state named 'initial', that is the first state in the conversation flow. 'initial' will only start after the user sends it's first input. Then, it will update the context, write the outputs and go to `next_step`.
+
+TODO: implicit states
+
+`input_failure`
 
 ###label
 
@@ -330,13 +326,13 @@ TODO: special variables
 ```json
 {
   "type": "text",
-  "data": "Done!"
+  "data": "Done! 😉"
 }
 ```
 | Field     | Value           |   |
 | --------- |:-------------:| -----:|
 | type      | "text" | |
-| data      | String      | *ASCII and emojis*|
+| data      | String      | *Any UTF-8 encoded string*|
 
 ##Image
 
@@ -818,7 +814,7 @@ There may be errors during the parsing and execution of a bot. They are of diffe
   "ai_backends": {
     "watson": {
       "username": "<WATSON_USERNAME>",
-      "password": "<WTSON_PASSWORD>",
+      "password": "<WATSON_PASSWORD>",
       "workspace_id": "<WATSON_WORKSPACE_ID>"
     },
     "api_ai": {
@@ -828,15 +824,36 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 }
 ```
 
-> Get the user intent using AI
+> Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: "search" and "buy", and 1 entity: "item".
 
 ```json
-{
-  "input": {
-    "action": "get_intent",
-    "variable": "variable_name"
-  }
-}
+[
+    {
+        "label": "search_menu",
+        "output": "What do you want to do?",
+        "input": {
+            "action": "get_intent",
+            "variable": "ai_result"
+        },
+        "next_step": "{{ai_result.intent}}"
+    },
+    {
+        "label": "search",
+        "context": {
+            "search_result": {
+                "url": "http://my-api.my-company.com/search",
+                "params": { "query": "{{ai_result.item}}" }
+            }
+        },
+        "output": "I've searched for {{ai_result.item}} and found {{search_result | length}} results.",
+        "next_step": "exit"
+    },
+    {
+        "label": "buy",
+        "output": "Are you sure you want to buy {{ai_result.item}}?",
+        "next_step": "exit"
+    }
+]
 ```
 
 > Manually invoke the AI backend with an arbitrary input
@@ -844,7 +861,7 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 ```json
 {
   "context": {
-    "ai_result_name_var": "ai_conversation(ai_backends, _input)"
+    "ai_result": "{{ai_conversation(ai_backends, 'hello world')}}"
   }
 }
 ```
@@ -854,13 +871,12 @@ You are able to use watson or api.ai bots to manage the botSON flow.
 To start just configure the credentials
 
 Then you can call the ai in two different ways.
-<br><br>The object return has `intent`, `entities` and `raw`. Where raw is 
-the full API response. The object saved in the variable will have the following structure.
+<br><br>The object return has `intent`, `entities`. The object saved in the variable will have the following fields:
 
 | Field     | Value           |   |
 | --------- |:-------------:| -----:|
 | intent      | String | |
-| entities    | String | |
+| entities    | Dictionary of {entity_name: entity_value} | |
 
 #Hubtype DESK integration
 
