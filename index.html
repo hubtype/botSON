@@ -90,6 +90,16 @@
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
     <link href="images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-67546366-5', 'auto');
+        ga('send', 'pageview');
+
+    </script>
   </head>
 
   <body class="index" data-languages="[]">
@@ -212,7 +222,7 @@
 </span></code></pre>
 <p>A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of <code class="prettyprint">input</code> and <code class="prettyprint">output</code> other than simple text.</p>
 
-<p>In this case, after the first text of the user, this bot will show three quick replies: &#39;Red&rsquo;, &#39;Blue&rsquo; and &#39;Green&rsquo;. The user can click them or write itself the response. </p>
+<p>In this case, after the first text of the user, this bot will show three quick replies: &#39;Red&rsquo;, &#39;Blue&rsquo; and &#39;Green&rsquo;. The user can click them or write the response herself. </p>
 
 <p>Then, the bot expects an input string that can be &#39;RED&rsquo;, &#39;BLUE&rsquo; or &#39;GREEN&rsquo;, store it in the variable <code class="prettyprint">user_choice</code> and go to the next state <code class="prettyprint">result</code>.</p>
 
@@ -243,7 +253,7 @@
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Specifies the number of input failures before the machine goes to the <code class="prettyprint">input_failure</code> state. By default is set to 3.
+<p>Specifies the number of input failures before the machine goes to the &#39;input_failure&rsquo; state. By default is set to 3.
 An input failure is given when the <a href="#input-actions">type of input</a> doesn&rsquo;t match the required data. </p>
 
 <h2 id="name">name</h2>
@@ -272,8 +282,7 @@ Currently this field is not used.
 <li><strong>context</strong></li>
 </ul>
 
-<p>Variables that will be always available at any state of the bot. They are recalculed every time there is an input, 
-  so, if a bot definition is changed, previous conversations will have updated variables.</p>
+<p>Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.</p>
 
 <h2 id="triggers">triggers</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -307,13 +316,9 @@ Currently this field is not used.
 <li><p><code class="prettyprint">payload</code> triggers can not be fired by user messages. <em>(Higher priority than text triggers.)</em></p></li>
 </ul>
 
-<p>Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables
-with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current
-state.</p>
+<p>Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.</p>
 
-<p>Triggers must have valid <code class="prettyprint">next_step</code> and <code class="prettyprint">match</code> attributes. If <code class="prettyprint">next_step</code> is <code class="prettyprint">null</code> the bot will consume that input 
-without any change, which is useful if you want to ignore some words. See <a href="#next_step">next_step</a> reference for more 
-info.</p>
+<p>Triggers must have valid <code class="prettyprint">next_step</code> and <code class="prettyprint">match</code> attributes. If <code class="prettyprint">next_step</code> is <code class="prettyprint">null</code> the bot will consume that input without any change, which is useful if you want to ignore some words. See <a href="#next_step">next_step</a> reference for more info.</p>
 
 <p>Usually triggers are used to capture button clicks (what Facebook calls &#39;Postbacks&rsquo;) and general commands like &ldquo;help&rdquo;.</p>
 
@@ -321,8 +326,7 @@ info.</p>
 
 <p>This field contains an array of all the states of the bot.</p>
 
-<p>When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs
-(if any) and finally wait for a user input (if defined).</p>
+<p>When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs (if any) and finally wait for a user input (if defined). Finally, it jumps to the state defined in the <code class="prettyprint">next_step</code> expression.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -361,9 +365,11 @@ info.</p>
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>It is required a state named <code class="prettyprint">initial</code>, that is the first state in the execution flow. <code class="prettyprint">initial</code> will only start 
-after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>. It 
-is recomended that no state go to <code class="prettyprint">initial</code>.</p>
+<p>It is required a state named &#39;initial&rsquo;, that is the first state in the conversation flow. &#39;initial&rsquo; will only start after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>.</p>
+
+<p>TODO: implicit states</p>
+
+<p><code class="prettyprint">input_failure</code></p>
 
 <h3 id="label">label</h3>
 
@@ -425,7 +431,7 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 <h2 id="text">Text</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Done!"</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Done! 😉"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -443,7 +449,7 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 <tr>
 <td>data</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>ASCII and emojis</em></td>
+<td style="text-align: right"><em>Any UTF-8 encoded string</em></td>
 </tr>
 </tbody></table>
 
@@ -1142,7 +1148,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
   </span><span class="nt">"ai_backends"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"watson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WATSON_USERNAME&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WTSON_PASSWORD&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WATSON_PASSWORD&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"workspace_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;WATSON_WORKSPACE_ID&gt;"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"api_ai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1152,21 +1158,42 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Get the user intent using AI</p>
+<p>Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: &ldquo;search&rdquo; and &ldquo;buy&rdquo;, and 1 entity: &ldquo;item&rdquo;.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_intent"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"variable_name"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search_menu"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you want to do?"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_intent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_result"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.intent}}"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"search_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-api.my-company.com/search"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.item}}"</span><span class="w"> </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I've searched for {{ai_result.item}} and found {{search_result | length}} results."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Are you sure you want to buy {{ai_result.item}}?"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Manually invoke the AI backend with an arbitrary input</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"ai_result_name_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_conversation(ai_backends, _input)"</span><span class="w">
+    </span><span class="nt">"ai_result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_conversation(ai_backends, 'hello world')}}"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1175,8 +1202,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <p>To start just configure the credentials</p>
 
 <p>Then you can call the ai in two different ways.
-<br><br>The object return has <code class="prettyprint">intent</code>, <code class="prettyprint">entities</code> and <code class="prettyprint">raw</code>. Where raw is 
-the full API response. The object saved in the variable will have the following structure.</p>
+<br><br>The object return has <code class="prettyprint">intent</code>, <code class="prettyprint">entities</code>. The object saved in the variable will have the following fields:</p>
 
 <table><thead>
 <tr>
@@ -1192,7 +1218,7 @@ the full API response. The object saved in the variable will have the following 
 </tr>
 <tr>
 <td>entities</td>
-<td style="text-align: center">String</td>
+<td style="text-align: center">Dictionary of {entity_name: entity_value}</td>
 <td style="text-align: right"></td>
 </tr>
 </tbody></table>
