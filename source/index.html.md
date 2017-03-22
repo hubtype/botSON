@@ -615,6 +615,142 @@ Any message type accepts a `"keyboard"` field with an array of (`"label"`, `"dat
 NOTE: Telegram only uses 'label', not 'data'.
 </aside>
 
+##Receipt
+
+```json
+{
+  "type": "receipt",
+  "recipient_name": "{{user.name}}",
+  "order_number": "123",
+  "currency": "EUR",
+  "payment_method": "Visa",
+  "summary": {
+    "total_cost": 10.0
+  }
+}
+```
+
+```json
+{
+  "type": "receipt",
+  "recipient_name": "{{user.name}}",
+  "order_number": "1010101010",
+  "currency": "EUR",
+  "payment_method": "MasterCard",
+  "summary": {
+    "total_cost": 30.96,
+    "subtotal": 27.4,
+    "total_tax": 3.56,
+    "shipping_cost": 0
+  },
+  "merchant_name": "Hubtype",
+  "timestamp": "10/3/17",
+  "order_url": "https://hubtype.com/",
+  "elements": [
+    {
+      "title": "item1",
+      "price": 3,
+      "quantity": 2
+    },
+    {
+      "title": "item2",
+      "price": 1,
+      "subtitle": "this is a subtitle",
+      "currency": "USD"
+    },
+    {
+      "title": "kitten",
+      "subtitle": "adorable",
+      "quantity": 1,
+      "price": 10,
+      "currency": "EUR",
+      "image_url": "http://i.telegraph.co.uk/multimedia/archive/02830/cat_2830677b.jpg"
+    }
+  ],
+  "address": {
+    "street_1": "Street1",
+    "city": "city",
+    "postal_code": "010101",
+    "state": "state",
+    "country": "country",
+    "street_2": "Street2"
+  },
+  "adjustments": [
+    {
+      "name": "Special discount",
+      "amount": 10
+    }
+  ]
+}
+```
+
+This output is used to send receipts to users. It can be simple with not much information or very detailed. The user 
+will see a summarised version that will be expanded with all the information when the user click it.
+
+<img width="300" src="/images/receipt.png">
+
+Simple receipt, with minimum information. (code example produces this receipt)
+
+<img width="300" src="/images/receipt2.png">
+
+Detailed receipt that uses all possible fields.
+
+<img width="300" src="/images/receipt2_expanded.png">
+
+Previous receipt expanded when clicked by the user.
+
+| Field          | Value  ||
+| -------------  |:------:| -----:|
+| recipient_name | String ||
+| merchant_name  | String | *Optional* |
+| order_number   | String ||
+| currency       | String ||
+| payment_method | String ||
+| timestamp      | String | *Optional* |
+| order_url      | String | *Optional* |
+| elements       | Array of ReceiptElement | *Optional<br>Facebook doesn't<br>guarantee the order* |
+| address        | Address | *Optional* |
+| summary        | Summary ||
+| adjustments    | Array of Adjustment | *Optional* |
+
+###ReceiptElement
+| Field    | Value  |   |
+| -------- |:------:| -----:|
+| title    | String ||
+| subtitle | String | *Optional* |
+| quantity | Number | *Optional* |
+| price    | Number | *Can be 0* |
+| currency | String | *Optional* |
+| image_url | Link  | *Optional* |
+
+###Address
+| Field   | Value  |   |
+| ------- |:------:| -----:|
+| street1 | String ||
+| street2 | String | *Optional* |
+| city    | String ||
+| postal_code | String ||
+| state   | String ||
+| country | String ||
+
+###Summary
+| Field         | Value  |            |
+| ------------- |:------:| ----------:|
+| subtotal      | Number | *Optional* |
+| shipping_cost | Number | *Optional* |
+| total_tax     | Number | *Optional* |
+| total_cost    | Number ||
+
+###Adjustment
+| Field  | Value  |   |
+| ------ |:------:| -----:|
+| name   | String ||
+| amount | Number ||
+
+<aside class="softwarn">
+NOTE: The receipt output is only available on Facebook. Currently other platforms will ignore that output.
+</aside>
+
 #Input actions
 
 `"Action"` specifies what is the expected action and `"data"` will be stored in the specified variable. To access the 
