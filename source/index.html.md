@@ -477,13 +477,14 @@ A collection of at most 4 buttons displayed vertically.
 
 | Field     | Value           |   |
 | --------- |:-------------:| -----:|
-| type      | "web_url", "postback" or "phone_number" | |
-| title  | String  |   |
+| type                 | "web_url", "postback" or "phone_number" | |
+| title                | String  |   |
 | webview_height_ratio | String | *Possible in web_url* |
 | messenger_extensions | String | *Possible in web_url* |
 | fallback_url         | String | *Possible in web_url* | 
-| url  | String  | *mandatory if type is "web_url"*  |
-| payload  | String  | *mandatory if type is "postback" or "phone_number"* |
+| url                  | String | *mandatory if type is "web_url"*  |
+| payload              | String | *mandatory if type is "postback" or "phone_number"* |
+| next_step            | String | *optional substitute of payload when type is "postback"* |
 
 <aside class="softwarn">
 NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is 
@@ -613,6 +614,11 @@ Any message type accepts a `"keyboard"` field with an array of (`"label"`, `"dat
 
 <aside class="softwarn">
 NOTE: Telegram only uses 'label', not 'data'.
+</aside>
+
+<aside class="notice">
+Note that using get_in_keyboard input type you can access both 'label' and 'data' from the selected key, even if the 
+bot is on Telegram. 
 </aside>
 
 ##Receipt
@@ -806,9 +812,35 @@ Only accepts these parameters as answer. It will ask at most `input_retry` times
 
 Same as get in set, but it does not require a perfect match.
 
-| Field     | Value           |
-| --------- |:-------------:|
+| Field             | Value            |
+| ----------------- |:----------------:|
 | action_parameters | Array of strings |
+
+##Get in keyboard
+
+```json
+{
+  "label": "get_in_keyboard_example",
+  "output": {
+    "type": "text",
+    "data": "Select one option:",
+    "keyboard": [
+      {"label": "Item 1", "data": "1"},
+      {"label": "Item 2", "data": "2"}
+    ]
+  },
+  "input": {
+    "action": "get_in_keyboard",
+    "variable": "key_user_choice"
+  },
+  "next_step": "another_state"
+}
+```
+
+Puts in the variable the key object (*label, data*) of the key pressed by the user. There must be a 
+[keyboard](#quick-replies) present.
+
+You can access both variables using jinja: `{{key_user_choice.label}}` and `{{key_user_choice.data}}`
 
 ##Get yes or no
 
