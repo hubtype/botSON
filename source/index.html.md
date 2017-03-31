@@ -121,6 +121,19 @@ Then, the bot expects an input string that can be 'RED', 'BLUE' or 'GREEN', stor
 
 Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the `choice` state.
 
+##botSON code
+```json
+{
+  "something":"this is a multiline
+    line because
+    botSON is cooler than JSON"
+}
+```
+botSON and JSON are slightly different, botSON allows multiline strings while JSON don't. 
+<aside class="softwarn">
+Please keep in mind that if there is some error in those lines the bug report will point to the first line.
+</aside>
+
 #Top level properties
 
 ##input_retry
@@ -1044,8 +1057,8 @@ Then you can call the ai in two different ways.
 | Field     | Value           |   |
 | --------- |:-------------:| -----:|
 | intent      | String | |
-| entities    | Dictionary of {entity_name: entity_value} | |
+| entities    | String | |
+| output_text | String | |
 
-#Hubtype DESK integration
-
-TODO
+<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
+-->
