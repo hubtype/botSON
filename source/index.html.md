@@ -988,7 +988,7 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 
 #AI integration
 
-> AI configuration
+You are able to use watson or api.ai bots to manage the botSON flow.
 
 ```json
 {
@@ -1058,7 +1058,7 @@ Then you can call the ai in two different ways.
 | --------- |:-------------:| -----:|
 | intent      | String | |
 | entities    | String | |
-| output_text | String | |
+| output_text | String | Verbose response of the AI in that intent|
 
 <!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
 -->
