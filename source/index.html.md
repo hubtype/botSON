@@ -990,6 +990,8 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 
 You are able to use watson or api.ai bots to manage the botSON flow.
 
+##Configuration
+
 ```json
 {
   "ai_backends": {
@@ -1006,6 +1008,8 @@ You are able to use watson or api.ai bots to manage the botSON flow.
 ```
 
 > Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: "search" and "buy", and 1 entity: "item".
+
+##AI calls
 
 ```json
 [
