@@ -20,7 +20,7 @@ search: true
       "label": "initial",
       "input": {
         "variable": "first_text_from_user",
-        "action": "free_text"
+        "type": "free_text"
       },
       "output": "Hello World!",
       "next_step": "exit"
@@ -46,7 +46,7 @@ botSON is messenger agnostic, meaning that it's not designed specifically for a 
       "label": "initial",
       "input": {
         "variable": "first_text_from_user",
-        "action": "free_text"
+        "type": "free_text"
       },
       "next_step": "helloworld"
     },
@@ -75,7 +75,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
             "label": "initial",
             "input": {
                 "variable": "first_text_from_user",
-                "action": "free_text"
+                "type": "free_text"
             },
             "next_step": "choice"
         },
@@ -91,7 +91,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
                 ]
             },
             "input": {
-                "action": "get_in_set",
+                "type": "in_set",
                 "action_parameters": ["RED", "BLUE", "GREEN"],
                 "variable": "user_choice"
             },
@@ -237,7 +237,7 @@ When the bot enters a state, the first thing it does is to update the context, t
     {
       "label": "initial",
       "input": {
-        "action": "free-text",
+        "type": "free-text",
         "variable": "first_input_from_user"
       },
       "output": {
@@ -772,14 +772,14 @@ NOTE: The receipt output is only available on Facebook. Currently other platform
 
 #Input actions
 
-`"Action"` specifies what is the expected action and `"data"` will be stored in the specified variable. To access the 
+`"type"` specifies what is the expected action and `"data"` will be stored in the specified variable. To access the
 variable see [Templating](#templating).
 
 ##Free Text
 
 ```json
 {
-  "action": "free_text",
+  "type": "free_text",
   "variable": "text_var_name"
 }
 ```
@@ -790,7 +790,7 @@ Accepts any text from the user and stores it in the variable.
 
 ```json
 {
-  "action": "get_int",
+  "type": "int",
   "variable": "name_of_int_var"
 }
 ```
@@ -801,7 +801,7 @@ Accepts any integer as input , other kinds of inputs are rejected.
 
 ```json
 {
-  "action": "get_in_set",
+  "type": "in_set",
   "variable": "name_of_option",
   "action_parameters": ["op1", "op2"]
 }
@@ -817,7 +817,7 @@ Only accepts these parameters as answer. It will ask at most `input_retry` times
 
 ```json
 {
-  "action": "get_in_set_fuzzy",
+  "type": "in_set_fuzzy",
   "variable": "object_user_choice",
   "action_parameters": ["object1", "object2"]
 }
@@ -833,7 +833,7 @@ Same as get in set, but it does not require a perfect match.
 
 ```json
 {
-  "label": "get_in_keyboard_example",
+  "label": "in_keyboard_example",
   "output": {
     "type": "text",
     "data": "Select one option:",
@@ -843,7 +843,7 @@ Same as get in set, but it does not require a perfect match.
     ]
   },
   "input": {
-    "action": "get_in_keyboard",
+    "type": "in_keyboard",
     "variable": "key_user_choice"
   },
   "next_step": "another_state"
@@ -859,7 +859,7 @@ You can access both variables using jinja: `{{key_user_choice.label}}` and `{{ke
 
 ```json
 {
-  "action": "get_yes_no",
+  "type": "yes_no",
   "variable": "confirm_var_name"
 }
 ```
@@ -870,7 +870,7 @@ The accepted outputs are `yes`, `si`, `sí` and `no` in lowercase or uppercase.
 
 ```json
 {
-  "action": "get_from_url",
+  "type": "from_url",
   "variable": "var_name_to_save",
   "action_parameters": {
     "url": "{{BASE_URL}}path/search/",
@@ -893,7 +893,7 @@ It makes a call to the url and stores the response json object in the variable n
 
 ```json
 {
-  "action":"get_name",
+  "type":"name",
   "variables":"confirm_get_name"
 }
 ```
@@ -904,7 +904,7 @@ The user input should be a text with at most 3 words.
 
 ```json
 {
-  "action": "get_email",
+  "type": "email",
   "variable": "user_email"
 }
 ```
@@ -915,7 +915,7 @@ Gets the email and check if it is well writed. **something@someother**
 
 ```json
 {
-  "action":"get_age",
+  "type":"age",
   "variable":"age"
 }
 ```
@@ -926,7 +926,7 @@ Saves a number representing the age. Age should match 1 <= age < 120.
 
 ```json
 {
-  "action":"get_location",
+  "type":"location",
   "variable":"location"
 }
 ```
@@ -941,7 +941,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 ##Get image
 ```json
 {
-  "action": "get_image",
+  "type": "image",
   "variable": "the_image_url"
 }
 ```
@@ -1017,7 +1017,7 @@ You are able to use watson or api.ai bots to manage the botSON flow.
         "label": "search_menu",
         "output": "What do you want to do?",
         "input": {
-            "action": "get_intent",
+            "type": "intent",
             "variable": "ai_result"
         },
         "next_step": "{{ai_result.intent}}"
