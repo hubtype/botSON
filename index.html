@@ -136,7 +136,7 @@
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
@@ -159,7 +159,7 @@
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -185,7 +185,7 @@
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -201,7 +201,7 @@
                 </span><span class="p">]</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_set"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_set"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"RED"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BLUE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GREEN"</span><span class="p">],</span><span class="w">
                 </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
             </span><span class="p">},</span><span class="w">
@@ -231,6 +231,18 @@
 </ul>
 
 <p>Finally, in the state <code class="prettyprint">result</code> the bot sends a text message saying what was the pick of the user and returns to the <code class="prettyprint">choice</code> state.</p>
+
+<h2 id="botson-code">botSON code</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"something"</span><span class="p">:</span><span class="s2">"this is a multiline
+    line because
+    botSON is cooler than JSON"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>botSON and JSON are slightly different, botSON allows multiline strings while JSON don&rsquo;t. 
+<aside class="softwarn">
+Please keep in mind that if there is some error in those lines the bug report will point to the first line.
+</aside></p>
 
 <h1 id="top-level-properties">Top level properties</h1>
 
@@ -332,7 +344,7 @@ Currently this field is not used.
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free-text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free-text"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_input_from_user"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -737,6 +749,11 @@ NOTE: The Location Output is not available on Facebook.
 <td style="text-align: center">String</td>
 <td style="text-align: right"><em>mandatory if type is &ldquo;postback&rdquo; or &ldquo;phone_number&rdquo;</em></td>
 </tr>
+<tr>
+<td>next_step</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>optional substitute of payload when type is &ldquo;postback&rdquo;</em></td>
+</tr>
 </tbody></table>
 
 <aside class="softwarn">
@@ -907,14 +924,299 @@ effort to type all words and let them navigate through options much faster.</p>
 NOTE: Telegram only uses 'label&rsquo;, not 'data&rsquo;.
 </aside>
 
+<aside class="notice">
+Note that using get_in_keyboard input type you can access both 'label&rsquo; and 'data&rsquo; from the selected key, even if the 
+bot is on Telegram. 
+</aside>
+
+<h2 id="receipt">Receipt</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"receipt"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"recipient_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user.name}}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"order_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"total_cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"receipt"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"recipient_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user.name}}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"order_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1010101010"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MasterCard"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"total_cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.96</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subtotal"</span><span class="p">:</span><span class="w"> </span><span class="mf">27.4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_tax"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.56</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"merchant_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubtype"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10/3/17"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"order_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://hubtype.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"item1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"item2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a subtitle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kitten"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adorable"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://i.telegraph.co.uk/multimedia/archive/02830/cat_2830677b.jpg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"street_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"010101"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"country"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street2"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Special discount"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This output is used to send receipts to users. It can be simple with not much information or very detailed. The user 
+will see a summarised version that will be expanded with all the information when the user click it.</p>
+
+<p><img width="300" src="images/receipt.png"></p>
+
+<p>Simple receipt, with minimum information. (code example produces this receipt)</p>
+
+<p><img width="300" src="images/receipt2.png"></p>
+
+<p>Detailed receipt that uses all possible fields.</p>
+
+<p><img width="300" src="images/receipt2_expanded.png"></p>
+
+<p>Previous receipt expanded when clicked by the user.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>recipient_name</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>merchant_name</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>order_number</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>currency</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>order_url</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>elements</td>
+<td style="text-align: center">Array of ReceiptElement</td>
+<td style="text-align: right"><em>Optional<br>Facebook doesn&rsquo;t<br>guarantee the order</em></td>
+</tr>
+<tr>
+<td>address</td>
+<td style="text-align: center">Address</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>summary</td>
+<td style="text-align: center">Summary</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>adjustments</td>
+<td style="text-align: center">Array of Adjustment</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+</tbody></table>
+
+<h3 id="receiptelement">ReceiptElement</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>price</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"><em>Can be 0</em></td>
+</tr>
+<tr>
+<td>currency</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>image_url</td>
+<td style="text-align: center">Link</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+</tbody></table>
+
+<h3 id="address">Address</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>street1</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>street2</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>city</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>state</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>country</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+</tbody></table>
+
+<h3 id="summary">Summary</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subtotal</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>shipping_cost</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>total_tax</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"><em>Optional</em></td>
+</tr>
+<tr>
+<td>total_cost</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"></td>
+</tr>
+</tbody></table>
+
+<h3 id="adjustment">Adjustment</h3>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>amount</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right"></td>
+</tr>
+</tbody></table>
+
+<aside class="softwarn">
+NOTE: The receipt output is only available on Facebook. Currently other platforms will ignore that output.
+</aside>
+
 <h1 id="input-actions">Input actions</h1>
 
-<p><code class="prettyprint">&quot;Action&quot;</code> specifies what is the expected action and <code class="prettyprint">&quot;data&quot;</code> will be stored in the specified variable. To access the 
+<p><code class="prettyprint">&quot;type&quot;</code> specifies what is the expected action and <code class="prettyprint">&quot;data&quot;</code> will be stored in the specified variable. To access the
 variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="free-text">Free Text</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_var_name"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -922,7 +1224,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-integer">Get Integer</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_int"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name_of_int_var"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -930,7 +1232,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-in-set">Get in Set</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_set"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_set"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name_of_option"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"op1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"op2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -951,7 +1253,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-in-set-fuzzy">Get in Set Fuzzy</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_set_fuzzy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_set_fuzzy"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object_user_choice"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"object1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"object2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -970,9 +1272,32 @@ variable see <a href="#templating">Templating</a>.</p>
 </tr>
 </tbody></table>
 
+<h2 id="get-in-keyboard">Get in keyboard</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard_example"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one option:"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"key_user_choice"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"another_state"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Puts in the variable the key object (<em>label, data</em>) of the key pressed by the user. There must be a 
+<a href="#quick-replies">keyboard</a> present.</p>
+
+<p>You can access both variables using jinja: <code class="prettyprint">{{key_user_choice.label}}</code> and <code class="prettyprint">{{key_user_choice.data}}</code></p>
+
 <h2 id="get-yes-or-no">Get yes or no</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_yes_no"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes_no"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirm_var_name"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -980,7 +1305,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-from-url">Get from url</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_from_url"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"from_url"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"var_name_to_save"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{BASE_URL}}path/search/"</span><span class="p">,</span><span class="w">
@@ -1011,7 +1336,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-name">Get name</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"get_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"name"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variables"</span><span class="p">:</span><span class="s2">"confirm_get_name"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1019,7 +1344,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-email">Get email</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_email"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_email"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1027,7 +1352,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-age">Get age</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"get_age"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"age"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"age"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1035,7 +1360,7 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-location">Get location</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"get_location"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"location"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"location"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1048,7 +1373,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h2 id="get-image">Get image</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"the_image_url"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1141,9 +1466,9 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h1 id="ai-integration">AI integration</h1>
 
-<blockquote>
-<p>AI configuration</p>
-</blockquote>
+<p>You are able to use watson or api.ai bots to manage the botSON flow.</p>
+
+<h2 id="configuration">Configuration</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ai_backends"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"watson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1160,12 +1485,14 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <blockquote>
 <p>Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: &ldquo;search&rdquo; and &ldquo;buy&rdquo;, and 1 entity: &ldquo;item&rdquo;.</p>
 </blockquote>
+
+<h2 id="ai-calls">AI calls</h2>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search_menu"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you want to do?"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_intent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intent"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_result"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.intent}}"</span><span class="w">
@@ -1218,14 +1545,18 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 </tr>
 <tr>
 <td>entities</td>
-<td style="text-align: center">Dictionary of {entity_name: entity_value}</td>
+<td style="text-align: center">String</td>
 <td style="text-align: right"></td>
+</tr>
+<tr>
+<td>output_text</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right">Verbose response of the AI in that intent</td>
 </tr>
 </tbody></table>
 
-<h1 id="hubtype-desk-integration">Hubtype DESK integration</h1>
-
-<p>TODO</p>
+<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
+&ndash;>
 
       </div>
       <div class="dark-box">
