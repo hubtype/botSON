@@ -1,15 +1,15 @@
-#Survey Template
+# Survey Template
 
-##An example of how to integrate with IBM Watson and use the intents to navigate the conversation flow
+## An example of how to integrate with IBM Watson and use the intents to navigate the conversation flow
 
-###Description:
+### Description:
 
 This is a basic template for integrating Watson to botSON. First, Watson account details have to be specified for the
 bot to connect.
  
 In the bot is shown how to do a call to Watson and decide the next state with the response.
 
-###States:
+### States:
 
 - `initial`: State where the bot is initialized when a user talks to it.
 

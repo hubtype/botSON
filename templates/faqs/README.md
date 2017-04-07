@@ -1,14 +1,14 @@
-#FAQs Template
+# FAQs Template
 
-##A chatbot that answers simple questions from users
+## A chatbot that answers simple questions from users
 
-###Description:
+### Description:
 
 This bot shows how to set up a simple FAQ bot that shows a `carrousel` with a few relevant cases and a link in a button.
 
 Also tells how the `input_failure` state works.
 
-###States:
+### States:
 
 - `initial`: State where the bot is initialized when a user talks to it.
 

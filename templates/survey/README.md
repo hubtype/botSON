@@ -1,15 +1,15 @@
-#Survey Template
+# Survey Template
 
-##A sequence of questions with different ways to get the answers
+## A sequence of questions with different ways to get the answers
 
-###Description:
+### Description:
 
 This bot shows diverse ways to display inputs to the user. These are `quick replies`, `message buttons`, `buttons in 
 lists` _(facebook)_ and a succesion of `message buttons` _(placeholder for other messaging apps)_. 
 
 Also, in the end is shown how to access variables inside the bot using [Jinja](http://jinja.pocoo.org/).
 
-###States:
+### States:
 
 - `initial`: State where the bot is initialized when a user talks to it.
 
