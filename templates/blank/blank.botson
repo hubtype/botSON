@@ -1,0 +1,19 @@
+{
+    "name": "New Bot",
+    "input_retry": 3,
+    "triggers": {},
+    "states": [
+        {
+            "label": "initial",
+            "input": {
+                "action": "free_text",
+                "variable": "first_text"
+            },
+            "output": {
+                "type": "text",
+                "data": "Hello world!"
+            },
+            "next_step": "exit"
+        }
+    ]
+}

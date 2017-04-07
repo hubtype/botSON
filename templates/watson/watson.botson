@@ -1,0 +1,52 @@
+{
+    "name": "Watson integration",
+    "input_retry": 3,
+    "language": "english",
+    "defaults": {
+        "context": {
+            "ai_backends": {
+                "watson": {
+                    "username": "<WATSON_USERNAME>",
+                    "password": "<WATSON_PASSWORD>",
+                    "workspace_id": "<WATSON_WORKSPACE_ID>"
+                }
+            }
+        }
+    },
+    "triggers": {},
+    "states": [
+        {
+            "label": "initial",
+            "input": {
+                "action": "free_text",
+                "variable": "first_text"
+            },
+            "output": "Hello, this is the watson template sample. In this example I'm assuming you have a Watson instance with a #search intent and a #category entity.",
+            "next_step": "get_an_intent"
+        },
+        {
+            "label": "get_an_intent",
+            "input": {
+                "action": "get_intent",
+                "variable": "response"
+            },
+            "next_step": [
+                "{% if response.watson.intent == 'search' %}",
+                "search_products",
+                "{% else %}",
+                "dont_understand",
+                "{% endif %}"
+            ]
+        },
+        {
+            "label": "search_products",
+            "output": "Sorry but we have no products yet...",
+            "next_step": "get_an_intent"
+        },
+        {
+            "label": "dont_understand",
+            "output": "I did not understand =(",
+            "next_step": "get_an_intent"
+        }
+    ]
+}

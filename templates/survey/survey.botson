@@ -1,0 +1,245 @@
+{
+    "triggers": {
+        "text": [
+            {
+                "match": "reset",
+                "next_step": "initial"
+            }
+        ],
+        "payload": [
+            {
+                "match": "PAYLOAD_A2a",
+                "context": {
+                    "answer2": "change_Answer2a"
+                },
+                "next_step": "survey_alternative_list"
+            },
+            {
+                "match": "PAYLOAD_A2b",
+                "context": {
+                    "answer2": "change_Answer2b"
+                },
+                "next_step": [
+                    "{% if user and user.provider == 'facebook'%}",
+                    "survey_facebook_list",
+                    "{% else %}",
+                    "survey_alternative_list",
+                    "{% endif %}"
+                ]
+            },
+            {
+                "match": "PAYLOAD_A2c",
+                "context": {
+                    "answer2": "change_Answer2c"
+                },
+                "next_step": [
+                    "{% if user and user.provider == 'facebook' %}",
+                    "survey_facebook_list",
+                    "{% else %}",
+                    "survey_alternative_list",
+                    "{% endif %}"
+                ]
+            },
+            {
+                "match": "PAYLOAD_A3a",
+                "context": {
+                    "answer3": "change_Answer3a"
+                },
+                "next_step": [
+                    "survey_results"
+                ]
+            },
+            {
+                "match": "PAYLOAD_A3b",
+                "context": {
+                    "answer3": "change_Answer3b"
+                },
+                "next_step": [
+                    "survey_results"
+                ]
+            },
+            {
+                "match": "PAYLOAD_A3c",
+                "context": {
+                    "answer3": "change_Answer3c"
+                },
+                "next_step": [
+                    "survey_results"
+                ]
+            }
+        ]
+    },
+    "states": [
+        {
+            "label": "initial",
+            "input": {
+                "action": "free_text",
+                "variable": "first_text_from_user"
+            },
+            "next_step": "survey_quick_replies"
+        },
+        {
+            "label": "null",
+            "input": {
+                "action": "free_text",
+                "variable": "null_input"
+            },
+            "next_step": "null"
+        },
+        {
+            "label": "survey_quick_replies",
+            "output": {
+                "type": "text",
+                "data": "change_Question1",
+                "keyboard": [
+                    {
+                        "label": "change_Answer1a",
+                        "data": "change_Payload1a"
+                    },
+                    {
+                        "label": "change_Answer1b",
+                        "data": "change_Payload1b"
+                    },
+                    {
+                        "label": "change_Answer1c",
+                        "data": "change_Payload1c"
+                    }
+                ]
+            },
+            "input": {
+                "action": "get_in_set_fuzzy",
+                "action_parameters": [
+                    "change_Answer1a",
+                    "change_Answer1b",
+                    "change_Answer1c"
+                ],
+                "variable": "answer1"
+            },
+            "next_step": "survey_buttons"
+        },
+        {
+            "label": "survey_buttons",
+            "output": {
+                "type": "buttonmessage",
+                "text": "change_Question2",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "change_Answer2a",
+                        "payload": "PAYLOAD_A2a"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "change_Answer2b",
+                        "payload": "PAYLOAD_A2b"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "change_Answer2c",
+                        "payload": "PAYLOAD_A2c"
+                    }
+                ]
+            },
+            "next_step": "null"
+        },
+        {
+            "label": "survey_facebook_list",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "This is the 3rd question"
+                },
+                {
+                    "type": "list",
+                    "elements": [
+                        {
+                            "title": "Answer A",
+                            "subtitle": "change_OptionalText3a",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "A",
+                                    "payload": "PAYLOAD_A3a"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "change_Answer3b",
+                            "subtitle": "change_OptionalText3b",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "B",
+                                    "payload": "PAYLOAD_A3b"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "change_Answer3c",
+                            "subtitle": "change_OptionalText3c",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "C",
+                                    "payload": "PAYLOAD_A3c"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "next_step": "null"
+        },
+        {
+            "label": "survey_alternative_list",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "change_Question3"
+                },
+                {
+                    "type": "buttonmessage",
+                    "text": "change_Answer3a",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "A",
+                            "payload": "PAYLOAD_A3a"
+                        }
+                    ]
+                },
+                {
+                    "type": "buttonmessage",
+                    "text": "change_Answer3b",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "B",
+                            "payload": "PAYLOAD_A3b"
+                        }
+                    ]
+                },
+                {
+                    "type": "buttonmessage",
+                    "text": "change_Answer3c",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "C",
+                            "payload": "PAYLOAD_A3c"
+                        }
+                    ]
+                }
+            ],
+            "next_step": "null"
+        },
+        {
+            "label": "survey_results",
+            "output": {
+                "type": "text",
+                "data": "Answers:\n  Q1: {{answer1}}\n  Q2: {{answer2}}\n  Q3: {{answer3}}"
+            },
+            "next_step": "exit"
+        }
+    ]
+}

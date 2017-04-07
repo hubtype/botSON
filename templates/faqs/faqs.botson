@@ -1,0 +1,294 @@
+{
+    "name": "FAQs Sample Bot",
+    "input_retry": 1,
+    "triggers": {
+        "text": [
+            {
+                "match": "reset|Reset",
+                "next_step": "initial"
+            }
+        ]
+    },
+    "defaults": {
+        "context": {
+            "lang": "en_EN",
+            "common": {
+                "copys": {
+                },
+                "keyboards": {
+                    "main": {
+                        "actions": {
+                            "en_EN": [
+                                "faqs",
+                                "human_agent"
+                            ],
+                            "es_ES": []
+                        },
+                        "labels": {
+                            "en_EN": [
+                                {
+                                    "label": "FAQs",
+                                    "data": "faqs"
+                                },
+                                {
+                                    "label": "Human Agent",
+                                    "data": "human_agent"
+                                }
+                            ],
+                            "es_ES": [
+                            ]
+                        }
+                    }
+                }
+            },
+            "main_menu": {
+                "copys": {
+                    "welcome": {
+                        "en_EN": [
+                            "Hi! Welcome to sample bot where you can set up your FAQs in 10 minutes 😎"
+                        ],
+                        "es_ES": [
+                        ]
+                    },
+                    "initial": {
+                        "en_EN": [
+                            "One of the nice things about Hubtype is that at any moment a human agent could take over if you want. This helps to manage expectations of your customers.\nPlease select one of the following options so I can explain more 😉"
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                }
+            },
+            "faqs": {
+                "copys": {
+                    "pre": {
+                        "en_EN": [
+                            "Here you have a carrousel with the FAQs you want to show to your customers. Easy huh 🙃 !?"
+                        ],
+                        "es_ES": [
+                        ]
+                    },
+                    "post": {
+                        "en_EN": [
+                            "Just edit each of the elements with your Title, Subtitle, Image and URL and you are ready to GO ✌. Bear in mind that you can have max 10 elements for carrousel 😉"
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                },
+                "keyboard": {
+                    "actions": {
+                        "en_EN": [
+                            "main_menu"
+                        ],
+                        "es_ES": []
+                    },
+                    "labels": {
+                        "en_EN": [
+                            {
+                                "label": "Main Menu",
+                                "data": "main_menu"
+                            }
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                }
+            },
+            "human_agent": {
+                "copys": {
+                    "main": {
+                        "en_EN": [
+                            "In this state a human agent will take over. Right now it is not configured so you don't have to resolve the case manually every time you press the button.\n\nIf you want to configure it yourself please check: https://hubtype.github.io/botSON/#hubtype-desk-integration"
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                },
+                "keyboard": {
+                    "actions": {
+                        "en_EN": [
+                            "main_menu"
+                        ],
+                        "es_ES": []
+                    },
+                    "labels": {
+                        "en_EN": [
+                            {
+                                "label": "Main Menu",
+                                "data": "main_menu"
+                            }
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                }
+            },
+            "input_failure": {
+                "copys": {
+                    "main": {
+                        "en_EN": [
+                            "State 'Input Failure': You can define this state in all your Hubtype chatbots. The aim of it is to manage what happens when user input entry does not match any of your controlled cases."
+                        ],
+                        "es_ES": [
+                        ]
+                    },
+                    "close": {
+                        "en_EN": [
+                            "Just show the message you want to tell your user in this case.\nPropose him to speak with human agent always is a good way to go 😉"
+                        ],
+                        "es_ES": [
+                        ]
+                    }
+                },
+                "keyboard": {
+                }
+            }
+        }
+    },
+    "states": [
+        {
+            "label": "initial",
+            "input": {
+                "action": "free_text",
+                "variable": "first_text_from_user"
+            },
+            "next_step": "main_menu"
+        },
+        {
+            "label": "main_menu",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "{{main_menu.copys.welcome[lang] | random}}"
+                },
+                {
+                    "type": "text",
+                    "data": "{{main_menu.copys.initial[lang] | random}}",
+                    "keyboard": "{{common.keyboards.main.labels[lang]}}"
+                }
+            ],
+            "input": {
+                "variable": "main_menu_choice",
+                "action": "get_in_set_fuzzy",
+                "action_parameters": "{{common.keyboards.main.actions[lang]}}"
+            },
+            "next_step": "{{main_menu_choice}}"
+        },
+        {
+            "label": "human_agent",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "{{human_agent.copys.main[lang] | random}}",
+                    "keyboard": "{{common.keyboards.main.labels[lang]}}"
+                }
+            ],
+            "next_step": "show_main_menu"
+        },
+        {
+            "label": "faqs",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "{{faqs.copys.pre[lang] | random}}"
+                },
+                {
+                    "type": "carrousel",
+                    "elements": [
+                        {
+                            "title": "FAQ 1 (max 80 chars)",
+                            "subtitle": "Description FAQ 1 (max 80 chars). Change the 'image_url' and 'url' fields",
+                            "image_url": "http://www.drodd.com/images15/number1-7.jpg",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "title": "Your FAQ 1 URL",
+                                    "url": "http://www.google.com"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "FAQ 2 (max 80 chars)",
+                            "subtitle": "Description FAQ 2 (max 80 chars). Change the 'image_url' and 'url' fields",
+                            "image_url": "https://blognumbers.files.wordpress.com/2010/09/2.jpg",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "title": "Your FAQ 2 URL",
+                                    "url": "http://www.google.com"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "FAQ 3 (max 80 chars)",
+                            "subtitle": "Description FAQ 3 (max 80 chars). Change the 'image_url' and 'url' fields",
+                            "image_url": "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/rounded-glossy-black-icons-alphanumeric/074172-rounded-glossy-black-icon-alphanumeric-number-3.png",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "title": "Your FAQ 3 URL",
+                                    "url": "http://www.google.com"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "FAQ 4 (max 80 chars)",
+                            "subtitle": "Description FAQ 4 (max 80 chars). Change the 'image_url' and 'url' fields",
+                            "image_url": "https://tyrannyoftradition.files.wordpress.com/2012/01/41.jpg",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "title": "Your FAQ 4 URL",
+                                    "url": "http://www.google.com"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "FAQ 5 (max 80 chars)",
+                            "subtitle": "Description FAQ 5 (max 80 chars). Change the 'image_url' and 'url' fields",
+                            "image_url": "http://www.ourdesigns.com//v/vspfiles/photos/REX00NB25-2T.jpg",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "title": "Your FAQ 5 URL",
+                                    "url": "http://www.google.com"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "data": "{{faqs.copys.post[lang] | random}}",
+                    "keyboard": "{{common.keyboards.main.labels[lang]}}"
+                }
+            ],
+            "next_step": "show_main_menu"
+        },
+        {
+            "label": "show_main_menu",
+            "input": {
+                "variable": "main_menu_choice",
+                "action": "get_in_set_fuzzy",
+                "action_parameters": "{{common.keyboards.main.actions[lang]}}"
+            },
+            "next_step": "{{main_menu_choice}}"
+        },
+        {
+            "label": "input_failure",
+            "output": [
+                {
+                    "type": "text",
+                    "data": "{{input_failure.copys.main[lang] | random}}"
+                },
+                {
+                    "type": "text",
+                    "data": "{{input_failure.copys.close[lang] | random}}",
+                    "keyboard": "{{common.keyboards.main.labels[lang]}}"
+                }
+            ],
+            "next_step": "show_main_menu"
+        }
+    ]
+}
