@@ -6,7 +6,7 @@
         {
             "label": "initial",
             "input": {
-                "action": "free_text",
+                "type": "free_text",
                 "variable": "first_text"
             },
             "output": {

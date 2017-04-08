@@ -18,16 +18,18 @@
         {
             "label": "initial",
             "input": {
-                "action": "free_text",
+                "type": "free_text",
                 "variable": "first_text"
             },
-            "output": "Hello, this is the watson template sample. In this example I'm assuming you have a Watson instance with a #search intent and a #category entity.",
+            "output": "Hello, this is the watson template
+              sample. In this example I'm assuming you have a
+              Watson instance with a #search intent and a #category entity.",
             "next_step": "get_an_intent"
         },
         {
             "label": "get_an_intent",
             "input": {
-                "action": "get_intent",
+                "type": "intent",
                 "variable": "response"
             },
             "next_step": [
@@ -40,7 +42,8 @@
         },
         {
             "label": "search_products",
-            "output": "Sorry but we have no products yet...",
+            "output": "{% if response.watson.output_text %}Your configured watson response:{{ response.watson.output_text }}
+              {% else %}You have no response configured in your watson instance , so change this message.{% endif %}",
             "next_step": "get_an_intent"
         },
         {

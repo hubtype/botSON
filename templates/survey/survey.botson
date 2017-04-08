@@ -73,7 +73,7 @@
         {
             "label": "initial",
             "input": {
-                "action": "free_text",
+                "type": "free_text",
                 "variable": "first_text_from_user"
             },
             "next_step": "survey_quick_replies"
@@ -81,7 +81,7 @@
         {
             "label": "null",
             "input": {
-                "action": "free_text",
+                "type": "free_text",
                 "variable": "null_input"
             },
             "next_step": "null"
@@ -107,7 +107,7 @@
                 ]
             },
             "input": {
-                "action": "get_in_set_fuzzy",
+                "type": "in_set_fuzzy",
                 "action_parameters": [
                     "change_Answer1a",
                     "change_Answer1b",

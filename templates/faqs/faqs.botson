@@ -150,7 +150,7 @@
         {
             "label": "initial",
             "input": {
-                "action": "free_text",
+                "type": "free_text",
                 "variable": "first_text_from_user"
             },
             "next_step": "main_menu"
@@ -170,7 +170,7 @@
             ],
             "input": {
                 "variable": "main_menu_choice",
-                "action": "get_in_set_fuzzy",
+                "type": "in_set_fuzzy",
                 "action_parameters": "{{common.keyboards.main.actions[lang]}}"
             },
             "next_step": "{{main_menu_choice}}"
@@ -270,7 +270,7 @@
             "label": "show_main_menu",
             "input": {
                 "variable": "main_menu_choice",
-                "action": "get_in_set_fuzzy",
+                "type": "in_set_fuzzy",
                 "action_parameters": "{{common.keyboards.main.actions[lang]}}"
             },
             "next_step": "{{main_menu_choice}}"
