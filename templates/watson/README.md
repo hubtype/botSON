@@ -1,4 +1,4 @@
-# Survey Template
+# IBM Watson Template
 
 ## An example of how to integrate with IBM Watson and use the intents to navigate the conversation flow
 
