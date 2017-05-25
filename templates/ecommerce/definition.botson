@@ -1,0 +1,249 @@
+{
+   "name": "Ecomerce_template",
+   "triggers": {
+       "text":[
+           {
+               "match":"(?i).*browse.*",
+               "next_step":"browse"
+           },
+           {
+               "match":"(?i).*(cart|basket).*",
+               "next_step":"basket"
+           },
+           {
+               "match":"(?i).*female.*",
+               "next_step":"browse_female"
+           },
+           {
+               "match":"(?i).*male.*",
+               "next_step":"browse_male"
+           }
+       ],
+       "payload":[
+            {
+                "match":"SEE_EXTRA",
+                "next_step":"browse_extra"
+            },
+            {
+                "match":"SEE_WHEAT",
+                "next_step":"browse_wheat"
+            },
+            {
+                "match":"ADD_TO_BASKET_(?P<product_id>\\S+)",
+                "context":[
+                    {
+                        "product_download":{
+                            "url":"https://api.punkapi.com/v2/beers/?ids={{product_id}}",
+                            "method":"GET"
+                        }
+                    },
+                    {
+                        "products_basket":"{{products_basket + product_download}}"
+                    }
+                ],
+                "next_step":"basket"
+            }
+       ]
+   },
+   "defaults":{
+       "context":{
+           "random_prices":["5.65","3.76","6.55","7.34","3.33","7.35","5.87","4.65","9.89","7.8","3.45"]
+       }
+       
+   },
+   "states": [
+        {
+            "label":"initial",
+            "input":{
+                "type":"text",
+                "variable":"first_text"
+            },
+            "context": {
+                "products_basket":[]
+            },
+            "output":"Welcome to beer bot!",
+            "next_step":"greeting"
+        },
+        {
+            "label": "greeting",
+            "output":"Here you will find the best beers in the world. 🍻",
+            "next_step":"action_select"
+            
+        },
+        {
+            "label":"action_select",
+            "output":{
+                "type":"text",
+                "data":"What do you want to do?",
+                "keyboard":[
+                    {
+                        "label": "Categories 🍺",
+                        "data": "browse"
+                    },
+                    {
+                        "label": "Check your order",
+                        "data": "basket"
+                    },
+                    {
+                        "label":"My receipt",
+                        "data": "final_receipt"
+                    }
+                ]
+            },
+            "input": {
+                "action": "in_keyboard",
+                "variable": "choice"
+            },
+            "next_step": [
+                "{% if choice.data == 'browse' %}",
+                    "browse",
+                "{% elif choice.data == 'basket' %}",
+                    "basket",
+                "{% elif choice.data == 'final_receipt' %}",
+                    "final_receipt",
+                "{% else %}",
+                    "null",
+                "{% endif %}"
+            ]
+        },
+        {
+            "label": "browse",
+            "output": [
+                "Please, let us know which kind of malt are you looking for",
+                {
+                    "type": "carrousel",
+                    "elements": [
+                        {
+                            "title": "Extra Pale",
+                            "subtitle": "Lower colour pale ale malt, often sold in the UK as 'lager malt' and used for golden ales or lagers.",
+                            "image_url": "https://beerhop.files.wordpress.com/2015/10/kneecitra2.jpg",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "Show me more",
+                                    "payload": "SEE_EXTRA"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Wheat",
+                            "subtitle": "Creamy,sweet,malty. Simply PERFECT ",
+                            "image_url": "https://www.cdn.sierranevada.com/sites/www.sierranevada.com/files/content/beers/hoppy-wheat-ipa/hoppywheat-fallpack2016-bottle-pint.png",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "Show me more",
+                                    "payload": "SEE_WHEAT"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "input": {
+                "action": "text",
+                "variable": "continue"
+            },
+            "next_step": "null"
+        },
+        {
+            "label": "browse_extra",
+            "context":{
+                "api_result":{
+                    "url": "https://api.punkapi.com/v2/beers/?malt=Extra_Pale&page=1&per_page=10",
+                    "method": "GET"
+                },
+                "beer_name":"extra pale"
+            },
+            "next_step": "browse_beer"
+        },
+        {
+            "label": "browse_wheat",
+            "context":{
+                "api_result":{
+                    "url": "https://api.punkapi.com/v2/beers/?malt=Wheat&page=1&per_page=10",
+                    "method": "GET"
+                },
+                "beer_name":"wheat"
+            },
+            "next_step": "browse_beer"
+        },
+        {
+            "label":"browse_beer",
+            "output":[
+                "This are the most flavored {{beer_name}} beers",
+                {
+                    "type": "carrousel",
+                    "elements": "[
+                        {% for product in api_result %}
+                            {
+                                'title': '{{product.name}}({{product.abv}}º)', 
+                                'subtitle': '{{product.description | escape_quotes}}', 
+                                'image_url': '{{product.image_url}}', 
+                                'buttons':[
+                                    { 
+                                        'type': 'postback',
+                                        'title': 'Shop it! ( $ {{ random_prices | random }} )',
+                                        'payload': 'ADD_TO_BASKET_{{product.id}}'
+                                    }
+                                ]
+                            }
+                            {% if not loop.last %}
+                            ,
+                            {% endif %}
+                        {% endfor %}
+                    ]"
+                }
+            ],
+            "input":{
+                "type":"text",
+                "variable":"continue"
+            },
+            "next_step":"greeting"
+        },
+        {
+            "label": "basket",
+            "output": [
+                "Here you could check all the products you have selected already",
+                {
+                    "type": "carrousel",
+                    "elements": "[
+                        {% for product in products_basket %}
+                            {
+                                'title': '{{product.name}}({{product.abv}}º)', 
+                                'subtitle': '{{product.description | escape_quotes}}', 
+                                'image_url': '{{product.image_url}}', 
+                                'buttons':[
+                                ]
+                            }
+                            {% if not loop.last %}
+                            ,
+                            {% endif %}
+                        {% endfor %}
+                    ]"
+                }
+                
+            ],
+            "next_step": "action_select"
+        },
+        {
+            "label":"final_receipt",
+            "output":{
+              "type": "receipt",
+              "recipient_name": "{{user.name}}",
+              "order_number": "123",
+              "currency": "EUR",
+              "payment_method": "Visa",
+              "summary": {
+                "total_cost": 10.0
+              }
+            },
+            "next_step":"exit"
+        },
+        {
+            "label":"fallback_instruction",
+            "output":"I didn't get that. You are too smart for me :(",
+            "next_step":"greeting"
+        }
+   ]
+}
