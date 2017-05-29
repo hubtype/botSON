@@ -150,6 +150,12 @@
 
 <p>botSON is messenger agnostic, meaning that it&rsquo;s not designed specifically for a single messaging app but it works with any messaging channel supported by Hubtype, however not all interactive elements are supported by all channels (like <a href="#carrousel">carrousels</a>).</p>
 
+<p>We encourage you to watch the screencasts:</p>
+
+<ul>
+<li>Part 1: <a href="https://www.youtube.com/watch?v=h53SjVGMwos">Scaffolding and publishing</a></li>
+</ul>
+
 <h1 id="getting-started">Getting Started</h1>
 
 <h2 id="creating-a-state">Creating a state</h2>
@@ -201,20 +207,19 @@
                 </span><span class="p">]</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_set"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"action_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"RED"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BLUE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GREEN"</span><span class="p">],</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You're choice was {{user_choice}}"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You're choice was {{user_choice.dara}}"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have put an unexpected input 3 times!"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I don't understand what you're trying to tell me, it seems I'm not smart enough for you =("</span><span class="p">,</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -222,13 +227,11 @@
 </span></code></pre>
 <p>A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of <code class="prettyprint">input</code> and <code class="prettyprint">output</code> other than simple text.</p>
 
-<p>In this case, after the first text of the user, this bot will show three quick replies: &#39;Red&rsquo;, &#39;Blue&rsquo; and &#39;Green&rsquo;. The user can click them or write the response herself. </p>
+<p>In this case, after the first text of the user, this bot will show three quick replies: &#39;Red&rsquo;, &#39;Blue&rsquo; and &#39;Green&rsquo;.</p>
 
-<p>Then, the bot expects an input string that can be &#39;RED&rsquo;, &#39;BLUE&rsquo; or &#39;GREEN&rsquo;, store it in the variable <code class="prettyprint">user_choice</code> and go to the next state <code class="prettyprint">result</code>.</p>
+<p>The bot will wait for the user to click on one of these quick replies and then it will store the key pressed in the context variable <code class="prettyprint">user_choice</code>. For example, if the user clicks on &ldquo;Red&rdquo;, the bot will set <code class="prettyprint">user_choice</code> to <code class="prettyprint">{&quot;label&quot;: &quot;Red&quot;, &quot;data&quot;: &quot;RED&quot;}</code> and then jump to the next state <code class="prettyprint">result</code>.</p>
 
-<ul>
-<li>If the user wrote anything else, the chatbot would reply with the possible options in a message like &ldquo;Please, choose one of the following values: RED, BLUE&rdquo; at most <code class="prettyprint">input_retry</code> times. If it fails all 3 times it will go to the state <code class="prettyprint">input_failure</code>.</li>
-</ul>
+<p>If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the <code class="prettyprint">input_retry</code> setting) it will go to the state <code class="prettyprint">input_failure</code> which is defined under the hood by default but it can be overriden.</p>
 
 <p>Finally, in the state <code class="prettyprint">result</code> the bot sends a text message saying what was the pick of the user and returns to the <code class="prettyprint">choice</code> state.</p>
 
@@ -377,11 +380,43 @@ Currently this field is not used.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<blockquote>
+<p>Default input_failure</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Default external_request_failure</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Default fallback_instruction</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Default loop_overflow</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>It is required a state named &#39;initial&rsquo;, that is the first state in the conversation flow. &#39;initial&rsquo; will only start after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>.</p>
-
-<p>TODO: implicit states</p>
-
-<p><code class="prettyprint">input_failure</code></p>
 
 <h3 id="label">label</h3>
 
@@ -411,6 +446,17 @@ Currently this field is not used.
 <p>Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states 
 depending of variables) see <a href="#templating">templating</a>.</p>
 
+<h3 id="implicit-states">Implicit states</h3>
+
+<p>There are some implicit states that are always defined under the hood. You can always redefine these states in your code in order to customize their default behaviour.</p>
+
+<ul>
+<li><p><code class="prettyprint">input_failure</code>: The chatbot jumps to this state when the user fails to give an appropiate answer after N attempts. This can be controlled using the global setting <code class="prettyprint">input_retry</code>.</p></li>
+<li><p><code class="prettyprint">external_request_failure</code>: The chatbot jumps to this state when it fails to make an http request. This can be triggered for a variety of reasons, for example, if the request took too long or the response code was ouside the 2XX range.</p></li>
+<li><p><code class="prettyprint">fallback_instruction</code>: The chatbot jumps to this state when it encounters a <code class="prettyprint">next_step</code> statement that points to a label that doesn&rsquo;t exist. This can happen when you define a dynamic <code class="prettyprint">next_step</code> using some templating expression like <code class="prettyprint">my_state_{{option}}</code> and the variable <code class="prettyprint">option</code> is not defined.</p></li>
+<li><p><code class="prettyprint">loop_overflow</code>: The chatbot jumps to this state when it&rsquo;s been jumping from state to state N times without finding any &ldquo;input&rdquo; statement which makes the bot to pause and wait for user input. This is needed in order to prevent infinite loops where state A has a next_step to state B and vice versa. You can set the max number of iterations using the global setting <code class="prettyprint">max_loop</code>, but it can&rsquo;t be higher than 50.</p></li>
+</ul>
+
 <h1 id="context">Context</h1>
 
 <blockquote>
@@ -425,9 +471,23 @@ depending of variables) see <a href="#templating">templating</a>.</p>
   </span><span class="nt">"is_customer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<blockquote>
+<p>You can also make external http calls. In this example, &#39;new_user&rsquo; will contain the json response of the call.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"new_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-api.example.com/new_user"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"my_param"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state <code class="prettyprint">context</code> statement.</p>
 
-<p>TODO: special variables</p>
+<p>TODO: special variables, ordered variables, url</p>
 
 <ul>
 <li>user</li>
