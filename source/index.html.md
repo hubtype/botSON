@@ -35,6 +35,10 @@ Additionally, botSON supports [triggers](#triggers), which are high priority act
 
 botSON is messenger agnostic, meaning that it's not designed specifically for a single messaging app but it works with any messaging channel supported by Hubtype, however not all interactive elements are supported by all channels (like [carrousels](#carrousel)).
 
+We encourage you to watch the screencasts:
+
+* Part 1: [Scaffolding and publishing](https://www.youtube.com/watch?v=h53SjVGMwos)
+
 #Getting Started
 
 ##Creating a state
@@ -91,20 +95,19 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
                 ]
             },
             "input": {
-                "type": "in_set",
-                "action_parameters": ["RED", "BLUE", "GREEN"],
+                "type": "in_keyboard",
                 "variable": "user_choice"
             },
             "next_step": "result"
         },
         {
             "label": "result",
-            "output": "You're choice was {{user_choice}}",
+            "output": "You're choice was {{user_choice.dara}}",
             "next_step": "choice"
         },
         {
             "label": "input_failure",
-            "output": "You have put an unexpected input 3 times!",
+            "output": "I don't understand what you're trying to tell me, it seems I'm not smart enough for you =(",
             "next_step": "choice"
         }
     ]
@@ -113,11 +116,11 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
 
 A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of `input` and `output` other than simple text.
 
-In this case, after the first text of the user, this bot will show three quick replies: 'Red', 'Blue' and 'Green'. The user can click them or write the response herself. 
- 
-Then, the bot expects an input string that can be 'RED', 'BLUE' or 'GREEN', store it in the variable `user_choice` and go to the next state `result`.
+In this case, after the first text of the user, this bot will show three quick replies: 'Red', 'Blue' and 'Green'.
 
-* If the user wrote anything else, the chatbot would reply with the possible options in a message like "Please, choose one of the following values: RED, BLUE" at most `input_retry` times. If it fails all 3 times it will go to the state `input_failure`.
+The bot will wait for the user to click on one of these quick replies and then it will store the key pressed in the context variable `user_choice`. For example, if the user clicks on "Red", the bot will set `user_choice` to `{"label": "Red", "data": "RED"}` and then jump to the next state `result`.
+
+If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the `input_retry` setting) it will go to the state `input_failure` which is defined under the hood by default but it can be overriden.
 
 Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the `choice` state.
 
@@ -271,11 +274,47 @@ When the bot enters a state, the first thing it does is to update the context, t
 }
 ```
 
+> Default input_failure
+
+```json
+{
+    "label": "input_failure",
+    "output": "input_failure",
+    "next_step": "exit"
+}
+```
+
+> Default external_request_failure
+
+```json
+{
+    "label": "external_request_failure",
+    "output": "external_request_failure",
+    "next_step": "exit"
+}
+```
+
+> Default fallback_instruction
+
+```json
+{
+    "label": "fallback_instruction",
+    "output": "fallback_instruction",
+    "next_step": "exit"
+}
+```
+
+> Default loop_overflow
+
+```json
+{
+    "label": "loop_overflow",
+    "output": "loop_overflow",
+    "next_step": "exit"
+}
+```
+
 It is required a state named 'initial', that is the first state in the conversation flow. 'initial' will only start after the user sends it's first input. Then, it will update the context, write the outputs and go to `next_step`.
-
-TODO: implicit states
-
-`input_failure`
 
 ###label
 
@@ -305,6 +344,20 @@ Input of the bot. It can come from the user or as a response to url calls. The f
 Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states 
 depending of variables) see [templating](#templating).
 
+
+### Implicit states
+
+There are some implicit states that are always defined under the hood. You can always redefine these states in your code in order to customize their default behaviour.
+
+* `input_failure`: The chatbot jumps to this state when the user fails to give an appropiate answer after N attempts. This can be controlled using the global setting `input_retry`.
+
+* `external_request_failure`: The chatbot jumps to this state when it fails to make an http request. This can be triggered for a variety of reasons, for example, if the request took too long or the response code was ouside the 2XX range.
+
+* `fallback_instruction`: The chatbot jumps to this state when it encounters a `next_step` statement that points to a label that doesn't exist. This can happen when you define a dynamic `next_step` using some templating expression like `my_state_{{option}}` and the variable `option` is not defined.
+
+* `loop_overflow`: The chatbot jumps to this state when it's been jumping from state to state N times without finding any "input" statement which makes the bot to pause and wait for user input. This is needed in order to prevent infinite loops where state A has a next_step to state B and vice versa. You can set the max number of iterations using the global setting `max_loop`, but it can't be higher than 50.
+
+
 #Context
 
 > The context is just a set of variables that can contain any JSON type
@@ -320,9 +373,24 @@ depending of variables) see [templating](#templating).
 }
 ```
 
+> You can also make external http calls. In this example, 'new_user' will contain the json response of the call.
+
+```json
+
+{
+  "new_user": {
+    "url": "http://my-api.example.com/new_user",
+    "method": "POST",
+    "params": {
+        "my_param": 1234
+    }
+  }
+}
+```
+
 The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
-TODO: special variables
+TODO: special variables, ordered variables, url
 
 * user
 * organization
