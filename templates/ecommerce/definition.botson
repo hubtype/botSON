@@ -95,15 +95,15 @@
                 "variable": "choice"
             },
             "next_step": [
-                "{% if choice.data == 'browse' %}",
-                    "browse",
-                "{% elif choice.data == 'basket' %}",
-                    "basket",
-                "{% elif choice.data == 'final_receipt' %}",
-                    "final_receipt",
-                "{% else %}",
-                    "null",
-                "{% endif %}"
+                "{% if choice.data == 'browse' %}
+                    browse
+                {% elif choice.data == 'basket' %}
+                    basket
+                {% elif choice.data == 'final_receipt' %}
+                    final_receipt
+                {% else %}
+                    null
+                {% endif %}"
             ]
         },
         {

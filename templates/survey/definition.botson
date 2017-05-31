@@ -20,11 +20,11 @@
                     "answer2": "change_Answer2b"
                 },
                 "next_step": [
-                    "{% if user and user.provider == 'facebook'%}",
-                    "survey_facebook_list",
-                    "{% else %}",
-                    "survey_alternative_list",
-                    "{% endif %}"
+                    "{% if user and user.provider == 'facebook'%}
+                        survey_facebook_list
+                    {% else %}
+                        survey_alternative_list
+                    {% endif %}"
                 ]
             },
             {
@@ -33,11 +33,11 @@
                     "answer2": "change_Answer2c"
                 },
                 "next_step": [
-                    "{% if user and user.provider == 'facebook' %}",
-                    "survey_facebook_list",
-                    "{% else %}",
-                    "survey_alternative_list",
-                    "{% endif %}"
+                    "{% if user and user.provider == 'facebook' %}
+                        survey_facebook_list
+                    {% else %}
+                        survey_alternative_list
+                    {% endif %}"
                 ]
             },
             {

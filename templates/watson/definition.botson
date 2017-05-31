@@ -33,11 +33,11 @@
                 "variable": "response"
             },
             "next_step": [
-                "{% if response.watson.intent == 'search' %}",
-                "search_products",
-                "{% else %}",
-                "dont_understand",
-                "{% endif %}"
+                 "{% if response.watson.intent == 'search' %}
+                    search_products
+                 {% else %}
+                    dont_understand
+                 {% endif %}"
             ]
         },
         {
