@@ -1,0 +1,127 @@
+{
+   "name": "Hybrid chatbot: BOTS + DESK",
+   "input_retry": 1,
+   "triggers": {
+      "text": [
+         {
+            "match": "reset|Reset",
+            "next_step": "human"
+         },
+         {
+            "match": "human agent|agent|Agent",
+            "next_step": "human_agent"
+         }
+      ]
+   },
+   "defaults": {
+      "context": {
+      }
+   },
+   "states": [
+      {
+         "label": "initial",
+         "input": {
+            "action": "free_text",
+            "variable": "first_text_from_user"
+         },
+         "next_step": "main_menu"
+      },
+      {
+         "label": "main_menu",
+         "output": [
+            {
+               "type": "text",
+               "data": "Hello!! Nowadays chatbots can deal with a lot of repetitive stuff but human agents are still needed when chatbots can not provide a succesful answer.\nThis template will show you how to handover a case from a Chatbot (Hubtype BOTS) to human Agent (Hubtype DESK)."
+            },
+            {
+               "type": "text",
+               "data": "There are many ways to trigger the handover between a chatbot and human agent. It could be using the button, ensuring that if the input of the user contains certain keywords or detecting when user is frustrated.\n"
+            },
+            {
+               "type": "text",
+               "data": "To see how this work, please integrate a messaging channel in the tab 'Channels' of Hubtype BOTS. Once this is done, click the button below 'Human Agent' or type 'agent' for example",
+               "keyboard": [
+                     {"label": "Chatbot workflow", "data": "your_chatbot"},
+                     {"label": "Human Agent", "data": "human_agent"}
+               ]
+            }
+         ],
+         "input": {
+            "variable": "main_menu_choice",
+            "action": "get_in_keyboard"
+         },
+         "next_step": "{{main_menu_choice.data}}"
+      },
+      {
+         "label": "your_chatbot",
+         "output": {
+             "type": "text",
+             "data": "Here you would implement all the logic of your chatbot defining the workflow and integrating with your systems and AI providers if needed.\n\nIf you want to see how Hubtype BOTS works seamlessly with Hubtype DESK, please click the button below 'Human Agent' or type 'agent' for example",
+             "keyboard": [
+                     {"label": "Chatbot workflow", "data": "your_chatbot"},
+                     {"label": "Human Agent", "data": "human_agent"}
+               ]
+         },                        
+         "next_step": "show_main_menu"
+      },
+      {
+         "label": "human_agent",
+         "context": {
+             "_hubtype_action": "create_case"
+         },
+         "output": {
+             "type": "text",
+             "data": "A human agent will take over right away. Thanks for contacting us!"
+         },                        
+         "input": {
+             "variable": "trash",
+             "action": "free_text"
+         },
+         "next_step": "test_satisfaccion"
+      },
+      {
+         "label": "test_satisfaccion",
+         "output": {
+             "type": "text",
+             "data": "Hope we have solved your problem. Please, could you rate the service received?",
+             "keyboard": [
+                 {"label": "⭐", "data" : "1"},
+                 {"label": "⭐⭐⭐", "data" : "3"},
+                 {"label": "⭐⭐⭐⭐⭐", "data" : "5"}
+             ]
+         },
+         "input": {
+             "variable": "valoracion",
+             "action": "free_text"
+         },
+         "next_step": "feedback"
+      },
+      {
+         "label": "feedback",
+         "output": "Thanks for contacting us.",
+         "next_step": "initial"
+      },
+      {
+         "label": "show_main_menu",
+         "input": {
+            "variable": "main_menu_choice",
+            "action": "get_in_keyboard"
+         },
+         "next_step": "{{main_menu_choice.data}}"
+      },
+      {
+         "label": "input_failure",
+         "output": [
+            {
+               "type": "text",
+               "data": "State 'Input Failure': You can define this state in all your Hubtype chatbots. The aim of it is to manage what happens when user input entry does not match any of your controlled cases.",
+               "keyboard": [
+                     {"label": "Chatbot workflow", "data": "your_chatbot"},
+                     {"label": "Human Agent", "data": "human_agent"}
+               ]
+            }
+         ],
+         "next_step": "initial"
+      }
+   ]
+}
