@@ -390,15 +390,106 @@ There are some implicit states that are always defined under the hood. You can a
 
 The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
-TODO: special variables, ordered variables, url
+The bot provides some usefull variables by default.
+##User
+```json
+{
+  "user":{
+    "id":"<unique_identifier>",
+    "name":"<name_obtained_by_provider>",
+    "provider":"<twitter/facebook/..>",
+    "username":"<username_obtained_by_provider>",
+    "provider_id":"<concrete_provider_identifier>"
+  }
+}
+```
+This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some king of output tha is not supported on specifics providers.
 
-* user
-* organization
-* bot
+##Organization
+```json
+{
+  "organization":"<organization_string_name>"
+}
+```
+This is the name you set under organization->configuration on hubtype.com
+
+##Bot
+```json
+{
+  "bot":{
+    "id":"<unique_identifier>",
+    "name":"Ecomerce_template"
+  }
+}
+```
+Contains a unique identifier set when you created the bot. Also the name of the bot stated in the "name" attribute.
+
+##Trace
+```json
+{
+  "_trace":["<state_name>"]
+}
+```
+List of states for which the user has passed. It can be usefull to retrieve behaviour data about your users.
+
+##Choice
+```json
+{
+  "choice":{
+    "data":"<last_keyboard_response_data>",
+    "label":"<last_keyboard_response_label>"
+  }
+}
+```
+
+Information about the last reply as "quickreply" from the user.
+
+##First text
+
+```json
+{
+  "first_text":"<first_text_message>"
+}
+```
+
+First text message from the user
+
+##Last session
+```json
+{
+  "last_session":{
+    "last_state":"<last_state_before_session_finished>",
+    "created_at":"<when_last_session_was>",
+    "last_interaction":{
+      "created_at":"<when_last_interaction_occur>",
+      "_input":"<last_input_from_user>"
+    }
+  }
+}
+```
+
+All information you need about the last time this user contacts the bot.
+
+##Last keyboard
+```json
+{
+  "_last_keyboard":[
+    {"data":"<data_option_of_last_keyboard>","label":"label_option_of_last_keyboard"}
+  ]
+}
+```
+
+Array with the different options of last shown keyboard
+
+
+
+TODO: special variables, ordered variables, url
 
 * <span>_hubtype_action</span>
 * <span>_hubtype_case_typification</span>
 * <span>_hubtype_case_status</span>
+
+TODO: Define what is a session
 
 #Output types
 
