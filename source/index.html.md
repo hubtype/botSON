@@ -15,13 +15,11 @@ search: true
 
 ```json
 {
+  "version":"1.0",
+  "initial_state":"first_state",
   "states": [
     {
-      "label": "initial",
-      "input": {
-        "variable": "first_text_from_user",
-        "type": "free_text"
-      },
+      "label": "first_state",
       "output": "Hello World!",
       "next_step": "exit"
     }
@@ -45,13 +43,11 @@ We encourage you to watch the screencasts:
 
 ```json
 {
+  "version":"1.0",
+  "initial_state":"first_state",
   "states": [
     {
-      "label": "initial",
-      "input": {
-        "variable": "first_text_from_user",
-        "type": "free_text"
-      },
+      "label": "first_state",
       "next_step": "helloworld"
     },
     {
@@ -63,9 +59,7 @@ We encourage you to watch the screencasts:
 }
 ```
 
-A bot is composed by states. Each state has a `label`, a `next_step` and usually an `output` or `input` (or both). When the bot enters a state, the first thing it does is to send the `output` (if there's one) to the user, then awaits for the user input if there's an `input` section. Finally it jumps to the state defined in the expression `next_step`. The state 'exit' indicates the end of the session, if the user talks again then a new session will start from the 'initial' state.
-
-There's only one mandatory state: 'initial', which indicates the beginning of the conversation flow. The initial state must have an `input` section that captures the first interaction from user. The 'initial' state is different from the other states as the `input` statement is evaluated before the `output`, while the usual execution is `output` first, then `input`.
+A bot is composed by states. Each state has a `label`, a `next_step` and usually an `output` or `input` (or both). When the bot enters a state, the first thing it does is to send the `output` (if there's one) to the user, then awaits for the user input if there's an `input` section. Finally it jumps to the state defined in the expression `next_step`. The state 'exit' indicates the end of the session, if the user talks again then a new session will start from the state defined in 'initial_state'.
 
 When the bot enters a state with no `input`, it just sends the `output` (if any) and jumps to `next_state` immediatelly. It is possible to chain several state jumps without any `input`, the bot will just send all the outputs consecutively until it reaches a state with an `input` statement, then it will pause until the user sends a new message.
 
@@ -74,13 +68,11 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
 ```json
 {
     "input_retry": 3,
+    "version":"1.0",
+    "initial_state":"first_state",
     "states": [
         {
-            "label": "initial",
-            "input": {
-                "variable": "first_text_from_user",
-                "type": "free_text"
-            },
+            "label": "first_state",
             "next_step": "choice"
         },
         {
@@ -236,9 +228,11 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
+  "version":"1.0",
+  "initial_state":"first_state",
   "states": [
     {
-      "label": "initial",
+      "label": "first_state",
       "input": {
         "type": "free-text",
         "variable": "first_input_from_user"
@@ -314,7 +308,7 @@ When the bot enters a state, the first thing it does is to update the context, t
 }
 ```
 
-It is required a state named 'initial', that is the first state in the conversation flow. 'initial' will only start after the user sends it's first input. Then, it will update the context, write the outputs and go to `next_step`.
+It is required to set some 'initial_state', that is the first state in the conversation flow. 'initial_state' will only start after the user sends it's first input. Then, it will update the context, write the outputs and go to `next_step`.
 
 ###label
 
