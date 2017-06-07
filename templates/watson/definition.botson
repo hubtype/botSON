@@ -2,6 +2,8 @@
     "name": "Watson integration",
     "input_retry": 3,
     "language": "english",
+    "version":"1.0",
+    "initial_state":"greetings",
     "defaults": {
         "context": {
             "ai_backends": {
@@ -16,11 +18,7 @@
     "triggers": {},
     "states": [
         {
-            "label": "initial",
-            "input": {
-                "type": "free_text",
-                "variable": "first_text"
-            },
+            "label": "greetings",
             "output": "Hello, this is the watson template
               sample. In this example I'm assuming you have a
               Watson instance with a #search intent and a #category entity.",
@@ -50,6 +48,11 @@
             "label": "dont_understand",
             "output": "I did not understand =(",
             "next_step": "get_an_intent"
+        },
+        {
+            "label":"fallback_instruction",
+            "output":"You should configure your watson keys and change this message :)",
+            "next_step":"greetings"
         }
     ]
 }

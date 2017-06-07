@@ -1,11 +1,13 @@
 {
     "name": "FAQs Sample Bot",
     "input_retry": 1,
+    "version":"1.0",
+    "initial_state":"first_state",
     "triggers": {
         "text": [
             {
                 "match": "reset|Reset",
-                "next_step": "initial"
+                "next_step": "first_state"
             }
         ]
     },
@@ -50,7 +52,7 @@
                         "es_ES": [
                         ]
                     },
-                    "initial": {
+                    "first_state": {
                         "en_EN": [
                             "One of the nice things about Hubtype is that at any moment a human agent could take over if you want. This helps to manage expectations of your customers.\nPlease select one of the following options so I can explain more 😉"
                         ],
@@ -148,11 +150,7 @@
     },
     "states": [
         {
-            "label": "initial",
-            "input": {
-                "type": "free_text",
-                "variable": "first_text_from_user"
-            },
+            "label": "first_state",
             "next_step": "main_menu"
         },
         {
@@ -164,7 +162,7 @@
                 },
                 {
                     "type": "text",
-                    "data": "{{main_menu.copys.initial[lang] | random}}",
+                    "data": "{{main_menu.copys.first_state[lang] | random}}",
                     "keyboard": "{{common.keyboards.main.labels[lang]}}"
                 }
             ],

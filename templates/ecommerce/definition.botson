@@ -1,5 +1,7 @@
 {
    "name": "Ecomerce_template",
+   "version":"1.0",
+   "initial_state":"first_state",
    "triggers": {
        "text":[
            {
@@ -53,11 +55,7 @@
    },
    "states": [
         {
-            "label":"initial",
-            "input":{
-                "type":"text",
-                "variable":"first_text"
-            },
+            "label":"first_state",
             "context": {
                 "products_basket":[]
             },

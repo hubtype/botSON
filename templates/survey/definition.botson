@@ -1,9 +1,11 @@
 {
+   "version":"1.0",
+   "initial_state":"first_state",
     "triggers": {
         "text": [
             {
                 "match": "reset",
-                "next_step": "initial"
+                "next_step": "first_state"
             }
         ],
         "payload": [
@@ -71,11 +73,7 @@
     },
     "states": [
         {
-            "label": "initial",
-            "input": {
-                "type": "free_text",
-                "variable": "first_text_from_user"
-            },
+            "label": "first_state",
             "next_step": "survey_quick_replies"
         },
         {
