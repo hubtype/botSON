@@ -64,7 +64,7 @@
         },
         {
             "label": "greeting",
-            "output":"Here you will find the best beers in the world. 🍻",
+            "output":"Here you will find the best beers in the world.",
             "next_step":"action_select"
             
         },
@@ -75,7 +75,7 @@
                 "data":"What do you want to do?",
                 "keyboard":[
                     {
-                        "label": "Categories 🍺",
+                        "label": "Categories",
                         "data": "browse"
                     },
                     {
