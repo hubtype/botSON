@@ -1,4 +1,4 @@
-# Blank Template
+# Hello World!
 
 ## The minimal bot so you can start from scratch
 
