@@ -47,14 +47,14 @@
                 "copys": {
                     "welcome": {
                         "en_EN": [
-                            "Hi! Welcome to sample bot where you can set up your FAQs in 10 minutes 😎"
+                            "Hi! Welcome to sample bot where you can set up your FAQs in 10 minutes"
                         ],
                         "es_ES": [
                         ]
                     },
                     "first_state": {
                         "en_EN": [
-                            "One of the nice things about Hubtype is that at any moment a human agent could take over if you want. This helps to manage expectations of your customers.\nPlease select one of the following options so I can explain more 😉"
+                            "One of the nice things about Hubtype is that at any moment a human agent could take over if you want. This helps to manage expectations of your customers.\nPlease select one of the following options so I can explain more"
                         ],
                         "es_ES": [
                         ]
@@ -65,14 +65,14 @@
                 "copys": {
                     "pre": {
                         "en_EN": [
-                            "Here you have a carrousel with the FAQs you want to show to your customers. Easy huh 🙃 !?"
+                            "Here you have a carrousel with the FAQs you want to show to your customers. Easy huh!?"
                         ],
                         "es_ES": [
                         ]
                     },
                     "post": {
                         "en_EN": [
-                            "Just edit each of the elements with your Title, Subtitle, Image and URL and you are ready to GO ✌. Bear in mind that you can have max 10 elements for carrousel 😉"
+                            "Just edit each of the elements with your Title, Subtitle, Image and URL and you are ready to GO. Bear in mind that you can have max 10 elements for carrousel"
                         ],
                         "es_ES": [
                         ]
@@ -137,7 +137,7 @@
                     },
                     "close": {
                         "en_EN": [
-                            "Just show the message you want to tell your user in this case.\nPropose him to speak with human agent always is a good way to go 😉"
+                            "Just show the message you want to tell your user in this case.\nPropose him to speak with human agent always is a good way to go"
                         ],
                         "es_ES": [
                         ]
