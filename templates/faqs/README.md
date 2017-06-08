@@ -1,4 +1,4 @@
-# FAQs Template
+# FAQs
 
 ## A chatbot that answers simple questions from users
 

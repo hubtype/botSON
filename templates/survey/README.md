@@ -1,4 +1,4 @@
-# Survey Template
+# Survey
 
 ## A sequence of questions with different ways to get the answers
 
