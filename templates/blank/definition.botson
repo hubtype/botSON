@@ -1,12 +1,11 @@
 {
-    "name": "New Bot",
+    "name": "Hello World",
     "input_retry": 3,
     "triggers": {},
-    "version":"1.0",
-    "initial_state":"hello_state",
+    "version": "1.0",
     "states": [
         {
-            "label": "hello_state",
+            "label": "initial",
             "output": {
                 "type": "text",
                 "data": "Hello world!"
