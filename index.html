@@ -131,13 +131,11 @@
 <p>This is the simplest possible bot in botSON.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -160,13 +158,11 @@
 
 <h2 id="creating-a-state">Creating a state</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -177,22 +173,18 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>A bot is composed by states. Each state has a <code class="prettyprint">label</code>, a <code class="prettyprint">next_step</code> and usually an <code class="prettyprint">output</code> or <code class="prettyprint">input</code> (or both). When the bot enters a state, the first thing it does is to send the <code class="prettyprint">output</code> (if there&rsquo;s one) to the user, then awaits for the user input if there&rsquo;s an <code class="prettyprint">input</code> section. Finally it jumps to the state defined in the expression <code class="prettyprint">next_step</code>. The state &lsquo;exit&rsquo; indicates the end of the session, if the user talks again then a new session will start from the &#39;initial&rsquo; state.</p>
-
-<p>There&rsquo;s only one mandatory state: &#39;initial&rsquo;, which indicates the beginning of the conversation flow. The initial state must have an <code class="prettyprint">input</code> section that captures the first interaction from user. The &#39;initial&rsquo; state is different from the other states as the <code class="prettyprint">input</code> statement is evaluated before the <code class="prettyprint">output</code>, while the usual execution is <code class="prettyprint">output</code> first, then <code class="prettyprint">input</code>.</p>
+<p>A bot is composed by states. Each state has a <code class="prettyprint">label</code>, a <code class="prettyprint">next_step</code> and usually an <code class="prettyprint">output</code> or <code class="prettyprint">input</code> (or both). When the bot enters a state, the first thing it does is to send the <code class="prettyprint">output</code> (if there&rsquo;s one) to the user, then awaits for the user input if there&rsquo;s an <code class="prettyprint">input</code> section. Finally it jumps to the state defined in the expression <code class="prettyprint">next_step</code>. The state &lsquo;exit&rsquo; indicates the end of the session, if the user talks again then a new session will start from the state defined in &#39;initial_state&rsquo;.</p>
 
 <p>When the bot enters a state with no <code class="prettyprint">input</code>, it just sends the <code class="prettyprint">output</code> (if any) and jumps to <code class="prettyprint">next_state</code> immediatelly. It is possible to chain several state jumps without any <code class="prettyprint">input</code>, the bot will just send all the outputs consecutively until it reaches a state with an <code class="prettyprint">input</code> statement, then it will pause until the user sends a new message.</p>
 
 <h2 id="basic-bot">Basic bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_text_from_user"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -343,9 +335,11 @@ Currently this field is not used.
 
 <p>When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs (if any) and finally wait for a user input (if defined). Finally, it jumps to the state defined in the <code class="prettyprint">next_step</code> expression.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free-text"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_input_from_user"</span><span class="w">
@@ -416,7 +410,7 @@ Currently this field is not used.
     </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>It is required a state named &#39;initial&rsquo;, that is the first state in the conversation flow. &#39;initial&rsquo; will only start after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>.</p>
+<p>It is required to set some &#39;initial_state&rsquo;, that is the first state in the conversation flow. &#39;initial_state&rsquo; will only start after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>.</p>
 
 <h3 id="label">label</h3>
 
@@ -487,16 +481,94 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 </span></code></pre>
 <p>The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state <code class="prettyprint">context</code> statement.</p>
 
+<p>The bot provides some usefull variables by default.</p>
+
+<h2 id="user">User</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"&lt;unique_identifier&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"&lt;name_obtained_by_provider&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"&lt;twitter/facebook/..&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"&lt;username_obtained_by_provider&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider_id"</span><span class="p">:</span><span class="s2">"&lt;concrete_provider_identifier&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some king of output tha is not supported on specifics providers.</p>
+
+<h2 id="organization">Organization</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"organization"</span><span class="p">:</span><span class="s2">"&lt;organization_string_name&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is the name you set under organization-&gt;configuration on hubtype.com</p>
+
+<h2 id="bot">Bot</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bot"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"&lt;unique_identifier&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Ecomerce_template"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Contains a unique identifier set when you created the bot. Also the name of the bot stated in the &ldquo;name&rdquo; attribute.</p>
+
+<h2 id="trace">Trace</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_trace"</span><span class="p">:[</span><span class="s2">"&lt;state_name&gt;"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>List of states for which the user has passed. It can be usefull to retrieve behaviour data about your users.</p>
+
+<h2 id="choice">Choice</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"choice"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"&lt;last_keyboard_response_data&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"&lt;last_keyboard_response_label&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Information about the last reply as &ldquo;quickreply&rdquo; from the user.</p>
+
+<h2 id="first-text">First text</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"first_text"</span><span class="p">:</span><span class="s2">"&lt;first_text_message&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>First text message from the user</p>
+
+<h2 id="last-session">Last session</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"last_session"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"last_state"</span><span class="p">:</span><span class="s2">"&lt;last_state_before_session_finished&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"&lt;when_last_session_was&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_interaction"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"&lt;when_last_interaction_occur&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_input"</span><span class="p">:</span><span class="s2">"&lt;last_input_from_user&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>All information you need about the last time this user contacts the bot.</p>
+
+<h2 id="last-keyboard">Last keyboard</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_last_keyboard"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"&lt;data_option_of_last_keyboard&gt;"</span><span class="p">,</span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"label_option_of_last_keyboard"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Array with the different options of last shown keyboard</p>
+
 <p>TODO: special variables, ordered variables, url</p>
 
 <ul>
-<li>user</li>
-<li>organization</li>
-<li><p>bot</p></li>
-<li><p><span>_hubtype_action</span></p></li>
-<li><p><span>_hubtype_case_typification</span></p></li>
-<li><p><span>_hubtype_case_status</span></p></li>
+<li><span>_hubtype_action</span></li>
+<li><span>_hubtype_case_typification</span></li>
+<li><span>_hubtype_case_status</span></li>
 </ul>
+
+<p>TODO: Define what is a session</p>
 
 <h1 id="output-types">Output types</h1>
 
