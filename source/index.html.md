@@ -366,13 +366,19 @@ There are some implicit states that are always defined under the hood. You can a
   "is_customer": true
 }
 ```
+The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
-> You can also make external http calls. In this example, 'new_user' will contain the json response of the call.
+The bot provides some usefull variables by default.
+
+##Context actions
+
+> In this example, 'new_user' will contain the json response of the call.
 
 ```json
 
 {
   "new_user": {
+    "action":"from_url",
     "url": "http://my-api.example.com/new_user",
     "method": "POST",
     "params": {
@@ -382,9 +388,29 @@ There are some implicit states that are always defined under the hood. You can a
 }
 ```
 
-The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
+> In this example, 'open_quques' will contain the array of queues that are nor closed in Hubtype DESK
 
-The bot provides some usefull variables by default.
+```json
+
+{
+  "open_quques": {
+    "action":"active_queues"
+  }
+}
+```
+
+Context actions are usefull to retrive information from your API's or about our system, and save it in some variable.
+This are the actions availables:
+
+| Action     | Type           |   |
+| --------- |:-------------:| -----:|
+| from_url      | JSON          | *Call some external endpoint and save the result in required variable* |
+| active_queues | Array         | *Obtains the list of queues where the case can be transferred* |
+
+<aside class="softwarn">
+NOTE: active_queues are the **only ones** that some user can be transferred
+</aside>
+
 ##User
 ```json
 {
