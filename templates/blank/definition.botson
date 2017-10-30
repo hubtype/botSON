@@ -3,9 +3,10 @@
     "input_retry": 3,
     "triggers": {},
     "version": "1.0",
+    "initial_state": "first_state",
     "states": [
         {
-            "label": "initial",
+            "label": "first_state",
             "output": {
                 "type": "text",
                 "data": "Hello world!"

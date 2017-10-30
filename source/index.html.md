@@ -15,11 +15,10 @@ search: true
 
 ```json
 {
-  "version":"1.0",
-  "initial_state":"first_state",
+  "version": "1.0",
   "states": [
     {
-      "label": "first_state",
+      "label": "initial",
       "output": "Hello World!",
       "next_step": "exit"
     }
@@ -27,7 +26,7 @@ search: true
 }
 ```
 
-botSON is a JSON based programming language to create chatbots for the [Hubtype](https://hubtype.com) platform. The goal of botSON is to be a simple yet powerful tool to build conversational flows that the user navigates by feeding in text or media. In a simplified way, chatbots are defined as finite state machines, at each state the chatbot outputs some text and waits for the user input that makes the bot transition to another state. A [context](#context) is kept for every bot session (the extent of a user's conversation) which can be updated at every step with variables and external http calls.
+botSON is a JSON based programming language to create chatbots for the [Hubtype](https://hubtype.com) platform. The goal of botSON is to be a simple yet powerful tool to build conversational flows that the user navigates by feeding in text or media. In a simplified way, chatbots are defined as finite state machines, at each state the chatbot outputs some text and waits for the user input that makes the bot transition to another state. You can optionally incorporate Natural Language Understanding to your bot by integrating services like IBM Watson or API.ai. A [context](#context) is kept for every bot session (the extent of a user's conversation) which can be updated at every step with variables and external http calls.
 
 Additionally, botSON supports [triggers](#triggers), which are high priority actions that the user can invoke regardless of the current state of the conversation.
 
@@ -43,11 +42,10 @@ We encourage you to watch the screencasts:
 
 ```json
 {
-  "version":"1.0",
-  "initial_state":"first_state",
+  "version": "1.0",
   "states": [
     {
-      "label": "first_state",
+      "label": "initial",
       "next_step": "helloworld"
     },
     {
@@ -68,8 +66,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
 ```json
 {
     "input_retry": 3,
-    "version":"1.0",
-    "initial_state":"first_state",
+    "version": "1.0",
     "states": [
         {
             "label": "first_state",
@@ -94,7 +91,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
         },
         {
             "label": "result",
-            "output": "You're choice was {{user_choice.dara}}",
+            "output": "You're choice was {{user_choice.data}}",
             "next_step": "choice"
         },
         {
@@ -112,14 +109,14 @@ In this case, after the first text of the user, this bot will show three quick r
 
 The bot will wait for the user to click on one of these quick replies and then it will store the key pressed in the context variable `user_choice`. For example, if the user clicks on "Red", the bot will set `user_choice` to `{"label": "Red", "data": "RED"}` and then jump to the next state `result`.
 
-If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the `input_retry` setting) it will go to the state `input_failure` which is defined under the hood by default but it can be overriden.
+If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the `input_retry` setting) it will go to the state `input_failure` which is defined under the hood by default but it can be overridden.
 
 Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the `choice` state.
 
 ##botSON code
 ```json
 {
-  "something":"this is a multiline
+  "something": "this is a multiline
     line because
     botSON is cooler than JSON"
 }
@@ -160,13 +157,21 @@ An input failure is given when the [type of input](#input-actions) doesn't match
 
 The name of the bot.
 
+##version
+
+Version of the BotSON language. We encourage you to explicitly set this setting to "1.0" as it's the version this documentation refers to. If not set, the default value in "0.1", a version that is NOT compatible with "1.0".
+
 ##language
 
-Indicates the language the bot will use. Currently this field is not used.
+Indicates the language the bot will use.
 
 <aside class="softwarn">
 Currently this field is not used.
 </aside>
+
+##initial_state
+
+Label of the first state of the bot. Defaults to "initial".
 
 ##defaults
 
@@ -176,9 +181,41 @@ Defines the default values that are used throughout the chatbot flow in differen
 
   Currently only supports default `headers` to be used in every url request.
 
+* **delay**:
+
+  Time (in seconds) to delay sending any outputs. It can be a decimal number. This parameter can be overridden in each output. Defaults to 0.
+
+* **typing**
+
+  Time (in seconds) that the bot will display the "typing..." effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. This parameter can be overridden in each output. Defaults to 0.
+
 * **context**
 
   Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.
+
+##literals
+
+TODO
+
+##session_timeout
+
+Time (in minutes) after the last user interaction to wait before the session is closed automatically. The default is `null` which means the session will never be closed automatically, only if a state with `"next_step": "exit"` is reached.
+
+##keep_session
+
+TODO
+
+##keep_trace
+
+TODO
+
+##early_typing
+
+TODO
+
+##analytics
+
+TODO
 
 ##triggers
 
@@ -377,38 +414,67 @@ The bot provides some usefull variables by default.
 ```json
 
 {
-  "new_user": {
-    "action":"from_url",
-    "url": "http://my-api.example.com/new_user",
-    "method": "POST",
-    "params": {
-        "my_param": 1234
-    }
-  }
+  "new_user": "{{http('http://my-api.example.com/new_user', params={'q': 'apples'})}}"
 }
 ```
 
-> In this example, 'open_quques' will contain the array of queues that are nor closed in Hubtype DESK
+> In this example, 'available_queues' will contain an array of IDs: the queues that are open in Hubtype DESK.
 
 ```json
 
 {
-  "open_quques": {
-    "action":"active_queues"
-  }
+  "available_queues": "{{active_queues()}}"
 }
 ```
 
-Context actions are usefull to retrive information from your API's or about our system, and save it in some variable.
-This are the actions availables:
+> Here we create a note so the human agent that is going to attend the conversation can quickly see a summary of the customer.
+
+```json
+
+{
+  "content": "User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}.",
+  "note": "{{add_note(content)}}"
+}
+```
+
+> Finally, we create a case in one of the available queues or in the default one if there are none available.
+
+```json
+
+{
+  "case": "{{create_case(available_queues[0] if len(available_queues) else 'Default queue')}}"
+}
+```
+
+Context actions are used to interact with the outside world. Probably the most handy action is `http`, which allows you to make calls to any standard JSON API. Here's a complete list of available actions:
+
+* **http**: Makes a starndard http request to a url and retrieves the response in json. The expected parameters are:
 
 | Action     | Type           |   |
 | --------- |:-------------:| -----:|
-| from_url      | JSON          | *Call some external endpoint and save the result in required variable* |
-| active_queues | Array         | *Obtains the list of queues where the case can be transferred* |
+| url      | String          |  |
+| method | String (GET, POST, PUT, PATCH, DELETE, HEAD)        | Optional. Defaults to GET |
+| headers | Object        | Optional |
+| params | Object        | Optional. Query parameters (GET params) |
+| data | Object        | Optional. Form data to send along with the request |
+| json | Object        | Optional. JSON data to send in the body of the request |
+
+* **active_queues**: Returns the IDs of the queues in status "Open" from your organization at Hubtype DESK. Useful when your chatbot has qualified a lead and has to handover the conversation to a human agent.
+
+* **add_note**: It creates a note in the conversation. You can use this to make a summary of the user details before a human agent handover.
+
+| Action     | Type           |   |
+| --------- |:-------------:| -----:|
+| text      | String          | Content of the note |
+
+* **create_case**: It creates a case in Hubtype DESK so that a human agent gets over the conversation. While the case is open, the chatbot won't respond to any user input. Only when the agent resolves the case the chatbot will continue its flow.
+
+| Action     | Type           |   |
+| --------- |:-------------:| -----:|
+| queue      | String          | ID or name of the queue that the case will be created on |
 
 <aside class="softwarn">
-NOTE: active_queues are the **only ones** that some user can be transferred
+NOTE: active_queues are the only ones that some user can be transferred
 </aside>
 
 ##User
@@ -512,6 +578,17 @@ TODO: special variables, ordered variables, url
 TODO: Define what is a session
 
 #Output types
+
+TODO: Many outputs
+
+All outputs accept the following parameters:
+
+| Field     | Value           |   |
+| --------- |:-------------:| -----:|
+| delay      | Number | Time (in seconds) to delay sending this output. It can be a decimal number. |
+| typing      | Number | Time (in seconds) that the bot will display the "typing..." effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. |
+
+This parameters override the settings in the default section.
 
 ##Text
 
@@ -1164,6 +1241,10 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 | --------- | ------------- |
 | message | Explanation of the error |
 | trace | Approximate path to the error in the json. _Note: in states and trigger arrays it will use label/match value instead of index number_  |
+
+#Jobs
+
+TODO
 
 #AI integration
 
