@@ -131,18 +131,17 @@
 <p>This is the simplest possible bot in botSON.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>botSON is a JSON based programming language to create chatbots for the <a href="https://hubtype.com">Hubtype</a> platform. The goal of botSON is to be a simple yet powerful tool to build conversational flows that the user navigates by feeding in text or media. In a simplified way, chatbots are defined as finite state machines, at each state the chatbot outputs some text and waits for the user input that makes the bot transition to another state. A <a href="#context">context</a> is kept for every bot session (the extent of a user&rsquo;s conversation) which can be updated at every step with variables and external http calls.</p>
+<p>botSON is a JSON based programming language to create chatbots for the <a href="https://hubtype.com">Hubtype</a> platform. The goal of botSON is to be a simple yet powerful tool to build conversational flows that the user navigates by feeding in text or media. In a simplified way, chatbots are defined as finite state machines, at each state the chatbot outputs some text and waits for the user input that makes the bot transition to another state. You can optionally incorporate Natural Language Understanding to your bot by integrating services like IBM Watson or API.ai. A <a href="#context">context</a> is kept for every bot session (the extent of a user&rsquo;s conversation) which can be updated at every step with variables and external http calls.</p>
 
 <p>Additionally, botSON supports <a href="#triggers">triggers</a>, which are high priority actions that the user can invoke regardless of the current state of the conversation.</p>
 
@@ -158,11 +157,10 @@
 
 <h2 id="creating-a-state">Creating a state</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -180,8 +178,7 @@
 <h2 id="basic-bot">Basic bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
@@ -206,7 +203,7 @@
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You're choice was {{user_choice.dara}}"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You're choice was {{user_choice.data}}"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -223,13 +220,13 @@
 
 <p>The bot will wait for the user to click on one of these quick replies and then it will store the key pressed in the context variable <code class="prettyprint">user_choice</code>. For example, if the user clicks on &ldquo;Red&rdquo;, the bot will set <code class="prettyprint">user_choice</code> to <code class="prettyprint">{&quot;label&quot;: &quot;Red&quot;, &quot;data&quot;: &quot;RED&quot;}</code> and then jump to the next state <code class="prettyprint">result</code>.</p>
 
-<p>If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the <code class="prettyprint">input_retry</code> setting) it will go to the state <code class="prettyprint">input_failure</code> which is defined under the hood by default but it can be overriden.</p>
+<p>If the user wrote any random sentence, the chatbot would ignore that input and prompt the keyboard again. If the user fails to give an apropiate answer 3 times (this can be configured using the <code class="prettyprint">input_retry</code> setting) it will go to the state <code class="prettyprint">input_failure</code> which is defined under the hood by default but it can be overridden.</p>
 
 <p>Finally, in the state <code class="prettyprint">result</code> the bot sends a text message saying what was the pick of the user and returns to the <code class="prettyprint">choice</code> state.</p>
 
 <h2 id="botson-code">botSON code</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"something"</span><span class="p">:</span><span class="s2">"this is a multiline
+  </span><span class="nt">"something"</span><span class="p">:</span><span class="w"> </span><span class="s2">"this is a multiline
     line because
     botSON is cooler than JSON"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -267,13 +264,21 @@ An input failure is given when the <a href="#input-actions">type of input</a> do
 
 <p>The name of the bot.</p>
 
+<h2 id="version">version</h2>
+
+<p>Version of the BotSON language. We encourage you to explicitly set this setting to &ldquo;1.0&rdquo; as it&rsquo;s the version this documentation refers to. If not set, the default value in &ldquo;0.1&rdquo;, a version that is NOT compatible with &ldquo;1.0&rdquo;.</p>
+
 <h2 id="language">language</h2>
 
-<p>Indicates the language the bot will use. Currently this field is not used.</p>
+<p>Indicates the language the bot will use.</p>
 
 <aside class="softwarn">
 Currently this field is not used.
 </aside>
+
+<h2 id="initial_state">initial_state</h2>
+
+<p>Label of the first state of the bot. Defaults to &ldquo;initial&rdquo;.</p>
 
 <h2 id="defaults">defaults</h2>
 
@@ -286,10 +291,46 @@ Currently this field is not used.
 <p>Currently only supports default <code class="prettyprint">headers</code> to be used in every url request.</p>
 
 <ul>
+<li><strong>delay</strong>:</li>
+</ul>
+
+<p>Time (in seconds) to delay sending any outputs. It can be a decimal number. This parameter can be overridden in each output. Defaults to 0.</p>
+
+<ul>
+<li><strong>typing</strong></li>
+</ul>
+
+<p>Time (in seconds) that the bot will display the &ldquo;typing&hellip;&rdquo; effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. This parameter can be overridden in each output. Defaults to 0.</p>
+
+<ul>
 <li><strong>context</strong></li>
 </ul>
 
 <p>Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.</p>
+
+<h2 id="literals">literals</h2>
+
+<p>TODO</p>
+
+<h2 id="session_timeout">session_timeout</h2>
+
+<p>Time (in minutes) after the last user interaction to wait before the session is closed automatically. The default is <code class="prettyprint">null</code> which means the session will never be closed automatically, only if a state with <code class="prettyprint">&quot;next_step&quot;: &quot;exit&quot;</code> is reached.</p>
+
+<h2 id="keep_session">keep_session</h2>
+
+<p>TODO</p>
+
+<h2 id="keep_trace">keep_trace</h2>
+
+<p>TODO</p>
+
+<h2 id="early_typing">early_typing</h2>
+
+<p>TODO</p>
+
+<h2 id="analytics">analytics</h2>
+
+<p>TODO</p>
 
 <h2 id="triggers">triggers</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -456,121 +497,283 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 <blockquote>
 <p>The context is just a set of variables that can contain any JSON type</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
-  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"is_customer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"is_customer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>You can also make external http calls. In this example, &#39;new_user&rsquo; will contain the json response of the call.</p>
+<p>Context with a forced order of execution</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"first_var"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"second_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This depends on the {{first_var}}"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state <code class="prettyprint">context</code> statement. Context variables can then be used to build the outputs dynamically and in other places by using the <a href="#templating">templating syntax</a>.</p>
+
+<aside class="softwarn">
+NOTE: JSON objects have no ordering by definition. So if you define a set of variables in the context, we can&rsquo;t guarantee they&rsquo;ll be set in the order you write them. If you need to force a predefined order you can use the array notation (see example on the right).
+</aside>
+
+<h2 id="context-actions">Context actions</h2>
+
+<blockquote>
+<p>In this example, &#39;new_user&rsquo; will contain the json response of the call.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"new_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-api.example.com/new_user"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"my_param"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"new_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{http('http://my-api.example.com/new_user', params={'q': 'apples'})}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state <code class="prettyprint">context</code> statement.</p>
+<blockquote>
+<p>In this example, &#39;available_queues&rsquo; will contain an array of IDs: the queues that are open in Hubtype DESK.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"available_queues"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{active_queues()}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Here we create a note so the human agent that is going to attend the conversation can quickly see a summary of the customer.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{add_note(content)}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Finally, we create a case in one of the available queues or in the default one if there are none available.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{create_case(available_queues[0] if len(available_queues) else 'Default queue')}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Context actions are used to interact with the outside world. Probably the most handy action is <code class="prettyprint">http</code>, which allows you to make calls to any standard JSON API. Here&rsquo;s a complete list of available actions:</p>
 
-<p>The bot provides some usefull variables by default.</p>
+<ul>
+<li><strong>http</strong>: Makes a starndard http request to a url and retrieves the response in json. The expected parameters are:</li>
+</ul>
 
-<h2 id="user">User</h2>
+<table><thead>
+<tr>
+<th>Action</th>
+<th style="text-align: center">Type</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td>method</td>
+<td style="text-align: center">String (GET, POST, PUT, PATCH, DELETE, HEAD)</td>
+<td style="text-align: right">Optional. Defaults to GET</td>
+</tr>
+<tr>
+<td>headers</td>
+<td style="text-align: center">Object</td>
+<td style="text-align: right">Optional</td>
+</tr>
+<tr>
+<td>params</td>
+<td style="text-align: center">Object</td>
+<td style="text-align: right">Optional. Query parameters (GET params)</td>
+</tr>
+<tr>
+<td>data</td>
+<td style="text-align: center">Object</td>
+<td style="text-align: right">Optional. Form data to send along with the request</td>
+</tr>
+<tr>
+<td>json</td>
+<td style="text-align: center">Object</td>
+<td style="text-align: right">Optional. JSON data to send in the body of the request</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p><strong>active_queues</strong>: Returns the IDs of the queues in status &ldquo;Open&rdquo; from your organization at Hubtype DESK. Useful when your chatbot has qualified a lead and has to handover the conversation to a human agent.</p></li>
+<li><p><strong>add_note</strong>: It creates a note in the conversation. You can use this to make a summary of the user details before a human agent handover.</p></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Action</th>
+<th style="text-align: center">Type</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>text</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right">Content of the note</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><strong>create_case</strong>: It creates a case in Hubtype DESK so that a human agent gets over the conversation. While the case is open, the chatbot won&rsquo;t respond to any user input. Only when the agent resolves the case the chatbot will continue its flow.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Action</th>
+<th style="text-align: center">Type</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>queue</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right">ID or name of the queue that the case will be created on</td>
+</tr>
+</tbody></table>
+
+<aside class="softwarn">
+NOTE: active_queues are the only ones that some user can be transferred
+</aside>
+
+<h2 id="special-context-variables">Special context variables</h2>
+
+<p>There are some special variables in the context that the bot populates automatically when a new session starts or when certain events occur:</p>
+
+<h3 id="user">User</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"&lt;unique_identifier&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"&lt;name_obtained_by_provider&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"&lt;twitter/facebook/..&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"username"</span><span class="p">:</span><span class="s2">"&lt;username_obtained_by_provider&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"provider_id"</span><span class="p">:</span><span class="s2">"&lt;concrete_provider_identifier&gt;"</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"facebook | telegram | twitter..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345677"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some king of output tha is not supported on specifics providers.</p>
+<p>This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some kind of output that is not supported on specifics providers.</p>
 
-<h2 id="organization">Organization</h2>
+<h3 id="organization">Organization</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"organization"</span><span class="p">:</span><span class="s2">"&lt;organization_string_name&gt;"</span><span class="w">
+  </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACME"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This is the name you set under organization-&gt;configuration on hubtype.com</p>
+<p>This is the name of your organization at Hubtype.</p>
 
-<h2 id="bot">Bot</h2>
+<h3 id="bot">Bot</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"bot"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"&lt;unique_identifier&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Ecomerce_template"</span><span class="w">
+  </span><span class="nt">"bot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charlie Bot"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Contains a unique identifier set when you created the bot. Also the name of the bot stated in the &ldquo;name&rdquo; attribute.</p>
 
-<h2 id="trace">Trace</h2>
+<h3 id="trace">Trace</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_trace"</span><span class="p">:[</span><span class="s2">"&lt;state_name&gt;"</span><span class="p">]</span><span class="w">
+  </span><span class="nt">"_trace"</span><span class="p">:[</span><span class="s2">"initial"</span><span class="p">,</span><span class="w"> </span><span class="s2">"welcome_message"</span><span class="p">,</span><span class="w"> </span><span class="s2">"show_products"</span><span class="p">,</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>List of states for which the user has passed. It can be usefull to retrieve behaviour data about your users.</p>
+<p>List of states for which the user has passed. It can be useful to retrieve behaviour data about your users.</p>
 
-<h2 id="choice">Choice</h2>
+<h3 id="first-text">First text</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"choice"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"&lt;last_keyboard_response_data&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"&lt;last_keyboard_response_label&gt;"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Information about the last reply as &ldquo;quickreply&rdquo; from the user.</p>
-
-<h2 id="first-text">First text</h2>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"first_text"</span><span class="p">:</span><span class="s2">"&lt;first_text_message&gt;"</span><span class="w">
+  </span><span class="nt">"first_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey there!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>First text message from the user</p>
 
-<h2 id="last-session">Last session</h2>
+<h3 id="last-session">Last session</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"last_session"</span><span class="p">:{</span><span class="w">
-    </span><span class="nt">"last_state"</span><span class="p">:</span><span class="s2">"&lt;last_state_before_session_finished&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"&lt;when_last_session_was&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_interaction"</span><span class="p">:{</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"&lt;when_last_interaction_occur&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"_input"</span><span class="p">:</span><span class="s2">"&lt;last_input_from_user&gt;"</span><span class="w">
+    </span><span class="nt">"last_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-24T15:05:31.949553Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_interaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T16:05:31.949553Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bye bye!"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>All information you need about the last time this user contacts the bot.</p>
 
-<h2 id="last-keyboard">Last keyboard</h2>
+<h3 id="last-keyboard">Last keyboard</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_last_keyboard"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="nt">"data"</span><span class="p">:</span><span class="s2">"&lt;data_option_of_last_keyboard&gt;"</span><span class="p">,</span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"label_option_of_last_keyboard"</span><span class="p">}</span><span class="w">
+  </span><span class="nt">"_last_keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yeah"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nope"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Array with the different options of last shown keyboard</p>
 
-<p>TODO: special variables, ordered variables, url</p>
+<h3 id="hubtype-case-typification-and-status">Hubtype case typification and status</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_hubtype_case_typification"</span><span class="p">:</span><span class="w"> </span><span class="s2">"timetable"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_hubtype_case_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result_ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The typification and status of a case originated from this bot given by the human agent that resolved the case.</p>
 
-<ul>
-<li><span>_hubtype_action</span></li>
-<li><span>_hubtype_case_typification</span></li>
-<li><span>_hubtype_case_status</span></li>
-</ul>
+<h1 id="outputs">Outputs</h1>
 
-<p>TODO: Define what is a session</p>
+<blockquote>
+<p>Valid output expressions</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a simple text"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"This"</span><span class="p">,</span><span class="w"> </span><span class="s2">"is"</span><span class="p">,</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sequence"</span><span class="p">,</span><span class="w"> </span><span class="s2">"of"</span><span class="p">,</span><span class="w"> </span><span class="s2">"messages"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"typing"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a text in its expanded form"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Outputs are the messages that the bot sends to the user when it reaches the current state. Outputs can be defined in a variety of different ways: a simple text string, an object representing the expanded message format (see types of messages in the next section) or an array of messages (either in the simple text format or the expanded object).</p>
 
-<h1 id="output-types">Output types</h1>
+<p>All outputs accept the following parameters:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>delay</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right">Time (in seconds) to delay sending this output. It can be a decimal number. Defaults to 0.</td>
+</tr>
+<tr>
+<td>typing</td>
+<td style="text-align: center">Number</td>
+<td style="text-align: right">Time (in seconds) that the bot will display the &ldquo;typing&hellip;&rdquo; effect. It can be a decimal number. Defaults to 0.</td>
+</tr>
+</tbody></table>
+
+<aside class="softwarn">
+NOTE: If the typing effect is not supported by the messenger it will result in extra delay time.
+</aside>
+
+<p><code class="prettyprint">delay</code> and <code class="prettyprint">typing</code> defined in the output will override the global settings in the <code class="prettyprint">defaults</code> section.</p>
+
+<p>Next, we will define all the available output types:</p>
 
 <h2 id="text">Text</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -1517,7 +1720,30 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h1 id="templating">Templating</h1>
 
-<p>See <a href="http://jinja.pocoo.org/">Jinja</a>.</p>
+<blockquote>
+<p>Basic templating</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good morning {{user.name}}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Templating with array expansion</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[{% for t in toppings %}
+      {
+        'type': 'text',
+        'data': 'Topping {{loop.index}}: {{t.name}}',
+      },
+    {% endfor %}]"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Variables stored in the context can be used to construct outputs dynamically, to define new context variables or to determine the <code class="prettyprint">next_step</code> on runtime.</p>
+
+<p>We use <a href="http://jinja.pocoo.org/">Jinja</a> templating framework under the hood, we encourage you to check out their docs to learn all its features.</p>
+
+<p>Usually, templating engines transform text strings into new text strings, however, BotSON templating engine is able to expland strings into more complex structures like arrays or objects.</p>
 
 <h1 id="error-types">Error types</h1>
 
@@ -1595,6 +1821,10 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <td>Approximate path to the error in the json. <em>Note: in states and trigger arrays it will use label/match value instead of index number</em></td>
 </tr>
 </tbody></table>
+
+<h1 id="jobs">Jobs</h1>
+
+<p>TODO</p>
 
 <h1 id="ai-integration">AI integration</h1>
 
