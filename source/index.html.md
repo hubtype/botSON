@@ -394,18 +394,32 @@ There are some implicit states that are always defined under the hood. You can a
 > The context is just a set of variables that can contain any JSON type
 
 ```json
-
 {
-  "user": {
-    "name": "John",
-    "last_name": "Doe"
-  },
-  "is_customer": true
+  "context": {
+    "user": {
+      "name": "John",
+      "last_name": "Doe"
+    },
+    "is_customer": true
+  }
 }
 ```
-The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement.
 
-The bot provides some usefull variables by default.
+> Context with a forced order of execution
+
+```json
+{
+  "context": [
+    {"first_var": 1},
+    {"second_var": "This depends on the {{first_var}}"}
+  ]
+}
+```
+The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement. Context variables can then be used to build the outputs dynamically and in other places by using the [templating syntax](#templating).
+
+<aside class="softwarn">
+NOTE: JSON objects have no ordering by definition. So if you define a set of variables in the context, we can't guarantee they'll be set in the order you write them. If you need to force a predefined order you can use the array notation (see example on the right).
+</aside>
 
 ##Context actions
 
@@ -477,78 +491,70 @@ Context actions are used to interact with the outside world. Probably the most h
 NOTE: active_queues are the only ones that some user can be transferred
 </aside>
 
-##User
+##Special context variables
+
+There are some special variables in the context that the bot populates automatically when a new session starts or when certain events occur:
+
+###User
 ```json
 {
   "user":{
-    "id":"<unique_identifier>",
-    "name":"<name_obtained_by_provider>",
-    "provider":"<twitter/facebook/..>",
-    "username":"<username_obtained_by_provider>",
-    "provider_id":"<concrete_provider_identifier>"
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "John Doe",
+    "provider": "facebook | telegram | twitter...",
+    "username": "j_doe",
+    "provider_id": "12345677"
   }
 }
 ```
-This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some king of output tha is not supported on specifics providers.
+This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some kind of output that is not supported on specifics providers.
 
-##Organization
+###Organization
 ```json
 {
-  "organization":"<organization_string_name>"
+  "organization": "ACME"
 }
 ```
-This is the name you set under organization->configuration on hubtype.com
+This is the name of your organization at Hubtype.
 
-##Bot
+###Bot
 ```json
 {
-  "bot":{
-    "id":"<unique_identifier>",
-    "name":"Ecomerce_template"
+  "bot": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Charlie Bot"
   }
 }
 ```
 Contains a unique identifier set when you created the bot. Also the name of the bot stated in the "name" attribute.
 
-##Trace
+###Trace
 ```json
 {
-  "_trace":["<state_name>"]
+  "_trace":["initial", "welcome_message", "show_products", "buy_item"]
 }
 ```
-List of states for which the user has passed. It can be usefull to retrieve behaviour data about your users.
+List of states for which the user has passed. It can be useful to retrieve behaviour data about your users.
 
-##Choice
-```json
-{
-  "choice":{
-    "data":"<last_keyboard_response_data>",
-    "label":"<last_keyboard_response_label>"
-  }
-}
-```
-
-Information about the last reply as "quickreply" from the user.
-
-##First text
+###First text
 
 ```json
 {
-  "first_text":"<first_text_message>"
+  "first_text": "Hey there!"
 }
 ```
 
 First text message from the user
 
-##Last session
+###Last session
 ```json
 {
   "last_session":{
-    "last_state":"<last_state_before_session_finished>",
-    "created_at":"<when_last_session_was>",
-    "last_interaction":{
-      "created_at":"<when_last_interaction_occur>",
-      "_input":"<last_input_from_user>"
+    "last_state": "buy_item",
+    "created_at": "2017-10-24T15:05:31.949553Z",
+    "last_interaction": {
+      "created_at": "2017-01-24T16:05:31.949553Z",
+      "_input": "Bye bye!"
     }
   }
 }
@@ -556,39 +562,65 @@ First text message from the user
 
 All information you need about the last time this user contacts the bot.
 
-##Last keyboard
+###Last keyboard
 ```json
 {
-  "_last_keyboard":[
-    {"data":"<data_option_of_last_keyboard>","label":"label_option_of_last_keyboard"}
+  "_last_keyboard": [
+    {"label": "Yeah", "data": "yes"},
+    {"label": "Nope", "data": "no"}
   ]
 }
 ```
 
 Array with the different options of last shown keyboard
 
+###Hubtype case typification and status
+```json
+{
+  "_hubtype_case_typification": "timetable",
+  "_hubtype_case_status": "result_ok"
+}
+```
 
+The typification and status of a case originated from this bot given by the human agent that resolved the case.
 
-TODO: special variables, ordered variables, url
+#Outputs
 
-* <span>_hubtype_action</span>
-* <span>_hubtype_case_typification</span>
-* <span>_hubtype_case_status</span>
+> Valid output expressions
 
-TODO: Define what is a session
+```json
+{
+    "output": "This is a simple text"
+}
+{
+    "output": ["This", "is", "a", "sequence", "of", "messages"]
+}
+{
+    "output": {
+        "type": "text",
+        "delay": 0.5,
+        "typing": 1,
+        "data": "This is a text in its expanded form"
+    }
+}
+```
 
-#Output types
-
-TODO: Many outputs
+Outputs are the messages that the bot sends to the user when it reaches the current state. Outputs can be defined in a variety of different ways: a simple text string, an object representing the expanded message format (see types of messages in the next section) or an array of messages (either in the simple text format or the expanded object).
 
 All outputs accept the following parameters:
 
 | Field     | Value           |   |
 | --------- |:-------------:| -----:|
-| delay      | Number | Time (in seconds) to delay sending this output. It can be a decimal number. |
-| typing      | Number | Time (in seconds) that the bot will display the "typing..." effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. |
+| delay      | Number | Time (in seconds) to delay sending this output. It can be a decimal number. Defaults to 0. |
+| typing      | Number | Time (in seconds) that the bot will display the "typing..." effect. It can be a decimal number. Defaults to 0. |
 
-This parameters override the settings in the default section.
+<aside class="softwarn">
+NOTE: If the typing effect is not supported by the messenger it will result in extra delay time.
+</aside>
+
+`delay` and `typing` defined in the output will override the global settings in the `defaults` section.
+
+Next, we will define all the available output types:
 
 ##Text
 
@@ -1209,7 +1241,32 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 #Templating
 
-See [Jinja](http://jinja.pocoo.org/).
+> Basic templating
+
+```json
+{
+  "output": "Good morning {{user.name}}"
+}
+```
+
+> Templating with array expansion
+
+```json
+{
+  "output": "[{% for t in toppings %}
+      {
+        'type': 'text',
+        'data': 'Topping {{loop.index}}: {{t.name}}',
+      },
+    {% endfor %}]"
+}
+```
+
+Variables stored in the context can be used to construct outputs dynamically, to define new context variables or to determine the `next_step` on runtime.
+
+We use [Jinja](http://jinja.pocoo.org/) templating framework under the hood, we encourage you to check out their docs to learn all its features.
+
+Usually, templating engines transform text strings into new text strings, however, BotSON templating engine is able to expland strings into more complex structures like arrays or objects.
 
 #Error types
 
