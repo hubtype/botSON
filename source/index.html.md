@@ -355,7 +355,7 @@ The state name.
 
 *(Optional)*
 
-Variables to be assigned when entering the state. See context.
+Variables to be assigned when entering the state. See [context](#context).
 
 ###output 
 
@@ -1267,6 +1267,55 @@ Variables stored in the context can be used to construct outputs dynamically, to
 We use [Jinja](http://jinja.pocoo.org/) templating framework under the hood, we encourage you to check out their docs to learn all its features.
 
 Usually, templating engines transform text strings into new text strings, however, BotSON templating engine is able to expland strings into more complex structures like arrays or objects.
+
+## Filters
+
+
+```json
+{
+  "context": {
+    "quote": "Ceci n'est pas une pipe. Les Deux Mystères."
+  },
+  "output": [
+    "{{quote | slugify}} == ceci-nest-pas-une-pipe-les-deux-mysteres",
+    "{{quote | type}} == <class 'str'>",
+    "{{quote | escape_quotes}} == Ceci n\\'est pas une pipe. Les Deux Mystères.",
+    "{{quote | ascii}} == Ceci n'est pas une pipe."
+  ]
+}
+```
+
+Filters are used to modify the variables inside your template and are expressed with a pipe symbol (|). Multiple filters can be chained, the output of one filter is applied to the next. You can use all the builtin filters supported by Jinja like `join`, `length` or `random`. Checkout the full list [here](http://jinja.pocoo.org/docs/2.10/templates/#builtin-filters).
+
+Additionally, BotSON defines the following custom filters:
+
+| Filter |  |
+| --------- | ------------- |
+| slugify | Returns the slug of any string  |
+| type | Returns the type of a variable |
+| escape_quotes | Escapes single quotes |
+| ascii | Returns the closest ascii codification of any unicode string |
+
+## Dates
+
+```json
+{
+    "context": {
+        "a1": "{{date()}}",
+        "a2": "{{date('tomorrow')}}",
+        "a3": "{{date('1984/05/05')}}",
+        "a4": "{{date('Europe/Paris')}}"
+    },
+    "output": [
+        "{{date(a1) - date() < date_interval(minutes=1)}} == True",
+        "{{date(a2).start_of('week') < date()}} == True",
+        "{{date(a3).year}} == 1984",
+        "{{date(_input).to_datetime_string()}} == 2000-08-25 12:00:00"
+    ]
+}
+```
+
+It's possible to get the current time and operate with dates and time intervals using the functions `date` and `date_interval`. Under the hood we use the [Pendulum](https://pendulum.eustace.io/) library, we encourage you to check out their documentation to learn all the options available.
 
 #Error types
 
