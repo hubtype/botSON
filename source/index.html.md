@@ -746,33 +746,33 @@ NOTE: The Location Output is not available on Facebook.
 ```json
 {
   "type": "buttonmessage",
-  "text": "Pick one option",
+  "text": "How can I help you?",
   "buttons": [
     {
-      "type":"postback",
-      "title":"Option 1",
-      "payload":"POSTBACK_1"
+      "type": "postback",
+      "title": "Buy pizza",
+      "next_step": "buy_pizza"
     },
     {
-      "type":"postback",
-      "title":"Option 2",
-      "payload":"POSTBACK_2"
+      "type": "postback",
+      "title": "See menu",
+      "payload": "SHOW_MENU"
     },
     {
-      "type":"web_url",
-      "title":"Web url",
-      "url":"https://www.google.es/"
+      "type": "web_url",
+      "title": "Visit website",
+      "url": "https://www.google.es/"
     },
     {
-      "type" : "phone_number",
-      "title" : "Call",
-      "payload" : "{% raw %}+44 7700 900200{% endraw %}"
+      "type": "phone_number",
+      "title": "Call us",
+      "payload": "{% raw %}+44 7700 900200{% endraw %}"
     }
   ]
 }
 ```
 
-A collection of at most 4 buttons displayed vertically.
+A text message followed by a collection of at most 4 buttons displayed vertically.
 
 ###Button:
 
@@ -788,8 +788,7 @@ A collection of at most 4 buttons displayed vertically.
 | next_step            | String | *optional substitute of payload when type is "postback"* |
 
 <aside class="softwarn">
-NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is 
-available on Facebook. Currently other platforms will ignore that output.
+NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
 ##Carrousel
@@ -799,26 +798,26 @@ available on Facebook. Currently other platforms will ignore that output.
   "type": "carrousel",
   "elements":[
     {
-      "title": "Title Element 1",
-      "subtitle": "My description",
+      "title": "Pepperoni",
+      "subtitle": "Authentic soft New York style dough topped with tasty pepperoni",
       "image_url": "https://www.cover.image.jpg",
-      "buttons":[
+      "buttons": [
         {
           "type": "postback",
-          "title": "My Button",
-          "payload": "EXTRA_DATA"
+          "title": "Add to cart",
+          "payload": "ADD_CART_PEPPERONI"
         }
       ]
     },
     {
-      "title": "Title Element 2",
-      "subtitle": "My Description",
+      "title": "Tandoori Chicken",
+      "subtitle": "Succulent chicken, Tandoori spices, fresh tomato and red onion",
       "image_url": "https://www.cover.image.jpg",
-      "buttons":[
+      "buttons": [
         {
-          "type": "web_url",
-          "title": "Darse de baja",
-          "url": "https://www.some.web.com"
+          "type": "postback",
+          "title": "Add to cart",
+          "payload": "ADD_CART_TANDOORI"
         }
       ]
     }
@@ -826,8 +825,11 @@ available on Facebook. Currently other platforms will ignore that output.
 }
 ```
 
-A rich interactive message that displays a horizontal scrollable carousel of items, each composed of an image 
-attachment, short description and buttons to request input from the user.
+A rich interactive message that displays a horizontal scrollable carousel of items, each composed of an image, short description and buttons to request input from the user.
+
+<aside class="softwarn">
+If you want the bot to stop and wait for the user to tap on a button, then you must add an "input" statement after the "output" where the carrousel is defined, otherwise the bot will just jump to the next step.
+</aside>
 
 <img width="300" src="/images/carrousel.png">
 
@@ -885,41 +887,64 @@ NOTE: The carrousel output is only available on Facebook. Currently other platfo
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
-##Quick Replies
+##Keyboard (Quick Replies)
 
 ```json
 {
-  "type": "text",
-  "data": "What do you need?",
-  "keyboard": [
-    {
-      "label": "Option One",
-      "data": "option_1"
+    "label": "select_restaurant_type",
+    "output": {
+        "type": "text",
+        "data": "What's your budget for dinner?",
+        "keyboard": [
+            {
+              "label": "$10 or less",
+              "data": "cheap"
+            },
+            {
+              "label": "$15 - $25",
+              "data": "medium"
+            },
+            {
+              "label": "$25 or more",
+              "data": "expensive"
+            }
+        ]
     },
-    {
-      "label": "Option Two",
-      "data": "option_2"
+    "input": {
+        "type": "in_keyboard",
+        "variable": "budget"
     },
-    {
-      "label": "Option Three",
-      "data": "option_3"
-    }
-  ]
+    "next_step": "show_{{budget.data}}"
 }
 ```
 
-Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the 
-effort to type all words and let them navigate through options much faster.
+> Location keyboard
 
-Any message type accepts a `"keyboard"` field with an array of (`"label"`, `"data"`) pairs.
+```json
+{
+    "label": "ask_location",
+    "output": {
+        "data": "Please, share your location with me",
+        "keyboard": [
+            {
+                "location": ""
+            }
+        ]
+    },
+    "input": {
+        "type": "location",
+        "variable": "location"
+    },
+    "next_step": "show_nearby_shops"
+}
+```
 
-<aside class="softwarn">
-NOTE: Telegram only uses 'label', not 'data'.
-</aside>
+Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the effort to type all words and let them navigate through options much faster.
+
+Any message type accepts a `"keyboard"` field that typically consists of an array of (`"label"`, `"data"`) pairs. There's a special type of keyboard that allows you to request the user for a location. It will display a special button that, when tapped, will prompt a maps view so that the user can share her location.
 
 <aside class="notice">
-Note that using get_in_keyboard input type you can access both 'label' and 'data' from the selected key, even if the 
-bot is on Telegram. 
+The "location" keyboard only works on Facebook Messenger.
 </aside>
 
 ##Receipt
@@ -1304,13 +1329,13 @@ Additionally, BotSON defines the following custom filters:
         "a1": "{{date()}}",
         "a2": "{{date('tomorrow')}}",
         "a3": "{{date('1984/05/05')}}",
-        "a4": "{{date('Europe/Paris')}}"
+        "a4": "{{date('now', 'Europe/Paris')}}"
     },
     "output": [
         "{{date(a1) - date() < date_interval(minutes=1)}} == True",
         "{{date(a2).start_of('week') < date()}} == True",
         "{{date(a3).year}} == 1984",
-        "{{date(_input).to_datetime_string()}} == 2000-08-25 12:00:00"
+        "{{date(a4).to_datetime_string()}} == current time in Paris"
     ]
 }
 ```
