@@ -461,7 +461,7 @@ Currently this field is not used.
 
 <p><em>(Optional)</em></p>
 
-<p>Variables to be assigned when entering the state. See context.</p>
+<p>Variables to be assigned when entering the state. See <a href="#context">context</a>.</p>
 
 <h3 id="output">output</h3>
 
@@ -1013,32 +1013,32 @@ NOTE: The Location Output is not available on Facebook.
 <h2 id="buttonmessage">Buttonmessage</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buttonmessage"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick one option"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How can I help you?"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Option 1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"payload"</span><span class="p">:</span><span class="s2">"POSTBACK_1"</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy pizza"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy_pizza"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Option 2"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"payload"</span><span class="p">:</span><span class="s2">"POSTBACK_2"</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"See menu"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHOW_MENU"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Web url"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://www.google.es/"</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visit website"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.google.es/"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Call"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"payload"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"{% raw %}+44 7700 900200{% endraw %}"</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Call us"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{% raw %}+44 7700 900200{% endraw %}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>A collection of at most 4 buttons displayed vertically.</p>
+<p>A text message followed by a collection of at most 4 buttons displayed vertically.</p>
 
 <h3 id="button">Button:</h3>
 
@@ -1092,8 +1092,7 @@ NOTE: The Location Output is not available on Facebook.
 </tbody></table>
 
 <aside class="softwarn">
-NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is 
-available on Facebook. Currently other platforms will ignore that output.
+NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
 <h2 id="carrousel">Carrousel</h2>
@@ -1101,34 +1100,37 @@ available on Facebook. Currently other platforms will ignore that output.
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"elements"</span><span class="p">:[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title Element 1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My description"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pepperoni"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentic soft New York style dough topped with tasty pepperoni"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.cover.image.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"buttons"</span><span class="p">:[</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Button"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXTRA_DATA"</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add to cart"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADD_CART_PEPPERONI"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title Element 2"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Description"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tandoori Chicken"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Succulent chicken, Tandoori spices, fresh tomato and red onion"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.cover.image.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"buttons"</span><span class="p">:[</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Darse de baja"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.some.web.com"</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postback"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add to cart"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADD_CART_TANDOORI"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>A rich interactive message that displays a horizontal scrollable carousel of items, each composed of an image 
-attachment, short description and buttons to request input from the user.</p>
+<p>A rich interactive message that displays a horizontal scrollable carousel of items, each composed of an image, short description and buttons to request input from the user.</p>
+
+<aside class="softwarn">
+If you want the bot to stop and wait for the user to tap on a button, then you must add an &ldquo;input&rdquo; statement after the &ldquo;output&rdquo; where the carrousel is defined, otherwise the bot will just jump to the next step.
+</aside>
 
 <p><img width="300" src="images/carrousel.png"></p>
 
@@ -1230,38 +1232,60 @@ NOTE: The carrousel output is only available on Facebook. Currently other platfo
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
-<h2 id="quick-replies">Quick Replies</h2>
+<h2 id="keyboard-quick-replies">Keyboard (Quick Replies)</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you need?"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option One"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_1"</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select_restaurant_type"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What's your budget for dinner?"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$10 or less"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheap"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15 - $25"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25 or more"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expensive"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option Two"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_2"</span><span class="w">
+    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"budget"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option Three"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option_3"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_{{budget.data}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the 
-effort to type all words and let them navigate through options much faster.</p>
+<blockquote>
+<p>Location keyboard</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ask_location"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please, share your location with me"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_nearby_shops"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the effort to type all words and let them navigate through options much faster.</p>
 
-<p>Any message type accepts a <code class="prettyprint">&quot;keyboard&quot;</code> field with an array of (<code class="prettyprint">&quot;label&quot;</code>, <code class="prettyprint">&quot;data&quot;</code>) pairs.</p>
-
-<aside class="softwarn">
-NOTE: Telegram only uses 'label&rsquo;, not 'data&rsquo;.
-</aside>
+<p>Any message type accepts a <code class="prettyprint">&quot;keyboard&quot;</code> field that typically consists of an array of (<code class="prettyprint">&quot;label&quot;</code>, <code class="prettyprint">&quot;data&quot;</code>) pairs. There&rsquo;s a special type of keyboard that allows you to request the user for a location. It will display a special button that, when tapped, will prompt a maps view so that the user can share her location.</p>
 
 <aside class="notice">
-Note that using get_in_keyboard input type you can access both 'label&rsquo; and 'data&rsquo; from the selected key, even if the 
-bot is on Telegram. 
+The &ldquo;location&rdquo; keyboard only works on Facebook Messenger.
 </aside>
 
 <h2 id="receipt">Receipt</h2>
@@ -1744,6 +1768,65 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <p>We use <a href="http://jinja.pocoo.org/">Jinja</a> templating framework under the hood, we encourage you to check out their docs to learn all its features.</p>
 
 <p>Usually, templating engines transform text strings into new text strings, however, BotSON templating engine is able to expland strings into more complex structures like arrays or objects.</p>
+
+<h2 id="filters">Filters</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ceci n'est pas une pipe. Les Deux Mystères."</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"{{quote | slugify}} == ceci-nest-pas-une-pipe-les-deux-mysteres"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{quote | type}} == &lt;class 'str'&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{quote | escape_quotes}} == Ceci n\\'est pas une pipe. Les Deux Mystères."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{quote | ascii}} == Ceci n'est pas une pipe."</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Filters are used to modify the variables inside your template and are expressed with a pipe symbol (|). Multiple filters can be chained, the output of one filter is applied to the next. You can use all the builtin filters supported by Jinja like <code class="prettyprint">join</code>, <code class="prettyprint">length</code> or <code class="prettyprint">random</code>. Checkout the full list <a href="http://jinja.pocoo.org/docs/2.10/templates/#builtin-filters">here</a>.</p>
+
+<p>Additionally, BotSON defines the following custom filters:</p>
+
+<table><thead>
+<tr>
+<th>Filter</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>slugify</td>
+<td>Returns the slug of any string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Returns the type of a variable</td>
+</tr>
+<tr>
+<td>escape_quotes</td>
+<td>Escapes single quotes</td>
+</tr>
+<tr>
+<td>ascii</td>
+<td>Returns the closest ascii codification of any unicode string</td>
+</tr>
+</tbody></table>
+
+<h2 id="dates">Dates</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"a1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date()}}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"a2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('tomorrow')}}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"a3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('1984/05/05')}}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"a4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('now', 'Europe/Paris')}}"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"{{date(a1) - date() &lt; date_interval(minutes=1)}} == True"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"{{date(a2).start_of('week') &lt; date()}} == True"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"{{date(a3).year}} == 1984"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"{{date(a4).to_datetime_string()}} == current time in Paris"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>It&rsquo;s possible to get the current time and operate with dates and time intervals using the functions <code class="prettyprint">date</code> and <code class="prettyprint">date_interval</code>. Under the hood we use the <a href="https://pendulum.eustace.io/">Pendulum</a> library, we encourage you to check out their documentation to learn all the options available.</p>
 
 <h1 id="error-types">Error types</h1>
 
