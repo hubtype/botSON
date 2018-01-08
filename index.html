@@ -153,6 +153,210 @@
 <li>Part 1: <a href="https://www.youtube.com/watch?v=h53SjVGMwos">Scaffolding and publishing</a></li>
 </ul>
 
+<h1 id="examples">Examples</h1>
+
+<h2 id="dynamic-carrousel">Dynamic carrousel</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clothes Bot"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;API_KEY&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey, what clothes are you interested in?"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mens-shirts"</span><span class="p">},</span><span class="w">
+                  </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Womens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"womens-tops"</span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_response"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_keyboard"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"context"</span><span class="p">:[</span><span class="w">
+                </span><span class="p">{</span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.shopstyle.com/api/v2/products?pid={{api_key}}&amp;fts={{user_response.data}}&amp;offset=0&amp;limit=5"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nt">"full_items"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
+                    {% for item in items.products %}
+                        {{http('http://api.shopstyle.com/api/v2/products/' + 
+                            item.id|string +
+                            '?pid=' +
+                            api_key|string
+                        )}},
+                    {% endfor %}
+                ]"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
+                        {% for item in full_items %}
+                            {
+                                'title': '{{item.name}}',
+                                'subtitle': '{{item.priceLabel}}',
+                                'image_url': '{{item.image.sizes.Best.url}}', 
+                                'buttons':[
+                                    {
+                                        'type': 'web_url', 
+                                        'title':'Open product',
+                                        'url': '{{item.clickUrl}}'
+                                    }
+                                ]
+                            },
+                        {% endfor %}
+                    ]"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the information from the Shopstyle API. </p>
+
+<p>First of all, we ask what are the user interests. When we get it, we generate the <a href="#carrousel">carrousel</a> of the products.</p>
+
+<p>When we want to make REST API request, we create the <code class="prettyprint">context</code>, and we put all the logic in there.
+In order to get all the information, we store all the items making a request with the user prefence and our API_KEY.</p>
+
+<p>The request it&rsquo;s make into an <code class="prettyprint">url</code>, the specific <code class="prettyprint">method</code>, and if necessary with <code class="prettyprint">params</code>.</p>
+
+<p>For getting all the information of every product, we need to make a call to the API with the shirt id. The id of a product, it&rsquo;s in JSON format, and we can do <code class="prettyprint">item.id</code> or <code class="prettyprint">item[&#39;id&#39;]</code> to access it. </p>
+
+<p>When we have all the product information, we can display the <a href="#carrousel">carrousel</a>.</p>
+
+<p>The <a href="#carrousel">carrousel</a> can have at most ten elements, where each element will represent one product and will have his name, the price, an image and a link to the product page.</p>
+
+<p>For access to this values, we do <code class="prettyprint">item.name</code> , <code class="prettyprint">item.priceLabel</code>, etc.</p>
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/dynamic_carrousel.mp4" type="video/mp4">
+</video>
+
+<h2 id="location-bot">Location Bot</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Location bot"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"output"</span><span class="p">:</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey, where I have to pick you up?"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"input"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="s2">"get_location"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"location"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localizacion_obtenida"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localizacion_obtenida"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Okai, I will pick up right now: \nLocation = long: {{location.latitude}} , lat: {{location.longitude}}"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Being able to manage location is a powerfull tool nowadays.</p>
+
+<p>This bot ask for your location, and with a simple click, the user can send his location to the bot. 
+In the state <code class="prettyprint">initial</code>, we ask to the user where is he, and with the option <code class="prettyprint">location</code> in the <code class="prettyprint">keyboard</code>, we create a <code class="prettyprint">keyboard</code> that will get the user location.</p>
+
+<p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.</p>
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/bot_location.mp4" type="video/mp4">
+</video>
+
+<h2 id="handover-bot">Handover Bot</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Handover bot"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^reset$"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="w">
+          </span><span class="p">}</span><span class="w">    
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey, how can I help you?"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"input"</span><span class="p">:{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"response"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_case"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_case"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"_hubtype_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case:Customer Service"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An agent will immediately take care of your case"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>As bots aren&rsquo;t perfects, we can transfer a case to an agent in an easy way, let&rsquo;s have a look how this bot works.</p>
+
+<p>This bot don&rsquo;t understand anything, so any input that we enter it will be redirected to an agent.
+In order to do that, in the state we want to transfer the case, we declare <code class="prettyprint">context</code>, and put a variable <code class="prettyprint">\_hubtype_acion</code> with <code class="prettyprint">create_case:QUEUE_OPTIONS</code>, and when the bot enters this state, a new case will be created in this specific queue, and the agent will take care of the conversation.</p>
+
+<p>When the case it&rsquo;s resolved by the agent, the bot will continue to the <code class="prettyprint">next_step</code> of the state.</p>
+
+<aside class="softwarn">
+QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
+</aside>
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/bot_handover.mp4">
+</video>
+
 <h1 id="getting-started">Getting Started</h1>
 
 <h2 id="creating-a-state">Creating a state</h2>
