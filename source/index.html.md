@@ -131,9 +131,9 @@ The [carrousel](#carrousel) can have at most ten elements, where each element wi
 
 For access to this values, we do `item.name` , `item.priceLabel`, etc.
 
-<video height="600px" width="600px" controls loop>
-  <source src="/videos/dynamic_carrousel.mp4" type="video/mp4">
-</video>
+<img src="/videos/dynamic_carrousel.gif" height="300px" width="600px" />
+
+
 
 ##Location Bot
 
@@ -184,9 +184,7 @@ In the state `initial`, we ask to the user where is he, and with the option `loc
 
 Then, in the `input`, we store the user location in the variable `location`.
 
-<video height="600px" width="600px" controls loop>
-  <source src="/videos/bot_location.mp4" type="video/mp4">
-</video>
+<img src="/videos/bot_location.gif" height="600" width="400px"/>
 
 ##Handover Bot
 
@@ -245,9 +243,7 @@ When the case it's resolved by the agent, the bot will continue to the `next_ste
 QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
 </aside>
 
-<video height="600px" width="600px" controls loop>
-  <source src="/videos/bot_handover.mp4">
-</video>
+<img src="/videos/bot_handover.gif" height="300px" width="600px"/>
 
 #Getting Started
 
