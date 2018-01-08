@@ -36,6 +36,219 @@ We encourage you to watch the screencasts:
 
 * Part 1: [Scaffolding and publishing](https://www.youtube.com/watch?v=h53SjVGMwos)
 
+#Examples
+
+##Dynamic carrousel
+
+```
+{
+    "name": "Clothes Bot",
+    "triggers": {},
+    "version": "1.0",
+    "literals": {
+        "api_key": "<API_KEY>"
+    },
+    "states": [
+        {
+            "label": "initial",
+            "output":
+            {
+                "type": "text",
+                "data": "Hey, what clothes are you interested in?",
+                "keyboard": [
+                  {"label": "Mens shirt", "data": "mens-shirts"},
+                  {"label": "Womens shirt", "data": "womens-tops"}
+                ]
+            },
+            "input": {
+                "variable": "user_response",
+                "action": "get_in_keyboard"
+            },
+            "next_step": "create_carrousel"
+        },
+        {
+            "label": "create_carrousel",
+            "context":[
+                {"items": {
+                        "url": "http://api.shopstyle.com/api/v2/products?pid={{api_key}}&fts={{user_response.data}}&offset=0&limit=5",
+                        "method": "GET",
+                        "params": {
+                        }
+                    }
+                },
+                {"full_items": "[
+                    {% for item in items.products %}
+                        {{http('http://api.shopstyle.com/api/v2/products/' + 
+                            item.id|string +
+                            '?pid=' +
+                            api_key|string
+                        )}},
+                    {% endfor %}
+                ]"
+                }
+            ],
+            "output": [
+                {
+                    "type": "carrousel",
+                    "elements": "[
+                        {% for item in full_items %}
+                            {
+                                'title': '{{item.name}}',
+                                'subtitle': '{{item.priceLabel}}',
+                                'image_url': '{{item.image.sizes.Best.url}}', 
+                                'buttons':[
+                                    {
+                                        'type': 'web_url', 
+                                        'title':'Open product',
+                                        'url': '{{item.clickUrl}}'
+                                    }
+                                ]
+                            },
+                        {% endfor %}
+                    ]"
+                }
+            ],
+            "next_step": "exit"
+        }
+    ]
+}
+```
+
+This is a simple bot, that displays five men or woman shirts and its price, and we are getting the information from the Shopstyle API. 
+
+First of all, we ask what are the user interests. When we get it, we generate the [carrousel](#carrousel) of the products.
+
+When we want to make REST API request, we create the `context`, and we put all the logic in there.
+In order to get all the information, we store all the items making a request with the user prefence and our API_KEY.
+
+The request it's make into an `url`, the specific `method`, and if necessary with `params`.
+
+For getting all the information of every product, we need to make a call to the API with the shirt id. The id of a product, it's in JSON format, and we can do `item.id` or `item['id']` to access it. 
+
+When we have all the product information, we can display the [carrousel](#carrousel).
+
+The [carrousel](#carrousel) can have at most ten elements, where each element will represent one product and will have his name, the price, an image and a link to the product page.
+
+For access to this values, we do `item.name` , `item.priceLabel`, etc.
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/dynamic_carrousel.mp4" type="video/mp4">
+</video>
+
+##Location Bot
+
+```
+{
+  "name": "Location bot",
+  "input_retry": 3,
+  "triggers": {},
+  "version": "1.0",
+  "states": [
+      {
+        "label": "initial",
+        "output":
+        {
+            "type": "text",
+            "data": "Hey, where I have to pick you up?",
+            "keyboard": [
+                {
+                    "location": ""
+                }
+            ]
+        },
+        "input":{
+            "action":"get_location",
+            "variable":"location"
+        },
+        "next_step": "localizacion_obtenida"
+      },
+      {
+        "label": "localizacion_obtenida",
+        "output": [
+          {
+            "type": "text",
+            "data": "Okai, I will pick up right now: \nLocation = long: {{location.latitude}} , lat: {{location.longitude}}"
+          }
+        ],
+        "next_step": "initial"
+      }
+  ]
+}
+
+```
+
+Being able to manage location is a powerfull tool nowadays.
+
+This bot ask for your location, and with a simple click, the user can send his location to the bot. 
+In the state `initial`, we ask to the user where is he, and with the option `location` in the `keyboard`, we create a `keyboard` that will get the user location.
+
+Then, in the `input`, we store the user location in the variable `location`.
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/bot_location.mp4" type="video/mp4">
+</video>
+
+##Handover Bot
+
+```
+{
+  "name": "Handover bot",
+  "input_retry": 3,
+  "triggers": {
+      "text": [
+          {
+              "match": "^reset$",
+              "next_step": "initial"
+          }    
+      ]
+  },
+  "version": "1.0",
+  "states": [
+    {
+      "label": "initial",
+      "output":
+      {
+          "type": "text",
+          "data": "Hey, how can I help you?"
+      },
+      "input":{
+          "type":"text",
+          "variable":"response"
+      },
+      "next_step": "transfer_case"
+    },
+    {
+      "label": "transfer_case",
+      "context": {
+                "_hubtype_action": "create_case:Customer Service"
+            },
+      "output": [
+        {
+          "type": "text",
+          "data": "An agent will immediately take care of your case"
+        }
+      ],
+      "next_step": "exit"
+    }
+  ]
+}
+```
+
+As bots aren't perfects, we can transfer a case to an agent in an easy way, let's have a look how this bot works.
+
+This bot don't understand anything, so any input that we enter it will be redirected to an agent.
+In order to do that, in the state we want to transfer the case, we declare `context`, and put a variable `\_hubtype_acion` with `create_case:QUEUE_OPTIONS`, and when the bot enters this state, a new case will be created in this specific queue, and the agent will take care of the conversation.
+
+When the case it's resolved by the agent, the bot will continue to the `next_step` of the state.
+
+<aside class="softwarn">
+QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
+</aside>
+
+<video height="600px" width="600px" controls loop>
+  <source src="/videos/bot_handover.mp4">
+</video>
+
 #Getting Started
 
 ##Creating a state
