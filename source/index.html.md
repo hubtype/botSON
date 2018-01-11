@@ -1185,7 +1185,7 @@ The "location" keyboard only works on Facebook Messenger.
     "shipping_cost": 0
   },
   "merchant_name": "Hubtype",
-  "timestamp": "10/3/17",
+  "timestamp": "1515671650",
   "order_url": "https://hubtype.com/",
   "elements": [
     {
