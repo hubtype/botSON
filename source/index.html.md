@@ -131,7 +131,9 @@ The [carrousel](#carrousel) can have at most ten elements, where each element wi
 
 For access to this values, we do `item.name` , `item.priceLabel`, etc.
 
-<img src="/videos/dynamic_carrousel.gif" height="300px" width="600px" />
+<p style="text-align:center">
+  <img src="/videos/dynamic_carrousel.gif" align="middle" height="600px" width="400px"/>
+</p>
 
 
 
@@ -183,8 +185,9 @@ This bot ask for your location, and with a simple click, the user can send his l
 In the state `initial`, we ask to the user where is he, and with the option `location` in the `keyboard`, we create a `keyboard` that will get the user location.
 
 Then, in the `input`, we store the user location in the variable `location`.
-
-<img src="/videos/bot_location.gif" height="600" width="400px"/>
+<p style="text-align:center">
+  <img src="/videos/bot_location.gif" height="600px" width="400px"/>
+</p>
 
 ##Handover Bot
 
@@ -242,8 +245,101 @@ When the case it's resolved by the agent, the bot will continue to the `next_ste
 <aside class="softwarn">
 QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
 </aside>
+<p style="text-align:center">
+  <img src="/videos/bot_handover.gif" height="300px" width="600px"/>
+</p>
 
-<img src="/videos/bot_handover.gif" height="300px" width="600px"/>
+##Failure Bot
+
+```
+{
+  "name": "Failure bot",
+  "input_retry": 3,
+  "max_loop": 10,
+  "triggers": {},
+  "version": "1.0",
+  "states": [
+      {
+            "label": "initial",
+            "output": {
+                "type": "text",
+                "data": "Here you have to choose:",
+                "keyboard": [
+                    {"label": "State not defined", "data": "not_defined"},
+                    {"label": "HTTP_REQUEST", "data": "http_request"},
+                    {"label": "LOOP", "data": "loopA"}
+                ]
+            },
+            "input": {
+                "action": "get_in_keyboard",
+                "variable": "user_choice"
+            },
+            "next_step": "{{user_choice.data}}"
+        },
+        {
+            "label": "http_request",
+            "context":{
+                "image_test": {
+                    "url": "www.randomurl.com/randomimage.jpg",
+                    "method": "GET",
+                    "params": {}
+                }
+            },
+            "output": {
+                "type": "image",
+                "data": "{{url}}"
+            },
+            "next_step": "exit"
+        },
+        {
+            "label": "loopA",
+            "output": "A",
+            "next_step": "loopB"
+        },
+        {
+            "label": "loopB",
+            "output": "B",
+            "next_step": "loopA"
+        },
+        {
+            "label": "input_failure",
+            "output": "You have failed answering the bot",
+            "next_step": "exit"
+        },
+        {
+            "label": "fallback_instruction",
+            "output": "The bot don't recognize this state",
+            "next_step": "exit"
+        },
+        {
+            "label": "external_request_failure",
+            "output": "There were an error with some http request",
+            "next_step": "exit"
+        },
+        {
+            "label": "loop_overflow",
+            "output": "The bot enter to a loop",
+            "next_step": "exit"
+        }
+  ]
+}
+
+```
+
+In this bot, we can find all the possible states where the bot can be redirected when the bot gets lost or experience some error. In the first demo, we see how the user enters 3 times (defined in the `input_retry`) some input that the bot isn't expecting, and so it jumps to the `input_failure` state.
+
+The other demo, we can find the three types of failure states. 
+The first one, the `fallback_instruction`, it's reached when the bot tries to enter into the state `not_defined`, and don't find it.
+
+The second case is the `external_request_failure`, in this state we make a get request, and as we don't get any response, the bot jumps.
+
+And the last one, is reached when the user enters a loop. We are jumping from state `loopA` to `loopB` and vice versa, when it hits 10 times (defined at `max_loop`), the bot jumps to the state `loop_overflow`.
+
+<p style="text-align:center">
+  <img src="/videos/bot_input_failure.gif" height="600px" width="400px"/>
+  <br><br>
+  <img src="/videos/bot_failures.gif" height="600px" width="400px"/>
+</p>
 
 #Getting Started
 
