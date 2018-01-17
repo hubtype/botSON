@@ -245,7 +245,9 @@ In order to get all the information, we store all the items making a request wit
 
 <p>For access to this values, we do <code class="prettyprint">item.name</code> , <code class="prettyprint">item.priceLabel</code>, etc.</p>
 
-<p><img src="videos/dynamic_carrousel.gif" height="300px" width="600px" /></p>
+<p style="text-align:center">
+  <img src="videos/dynamic_carrousel.gif" align="middle" height="600px" width="400px"/>
+</p>
 
 <h2 id="location-bot">Location Bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -291,9 +293,10 @@ In order to get all the information, we store all the items making a request wit
 <p>This bot ask for your location, and with a simple click, the user can send his location to the bot. 
 In the state <code class="prettyprint">initial</code>, we ask to the user where is he, and with the option <code class="prettyprint">location</code> in the <code class="prettyprint">keyboard</code>, we create a <code class="prettyprint">keyboard</code> that will get the user location.</p>
 
-<p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.</p>
-
-<p><img src="videos/bot_location.gif" height="600" width="400px"/></p>
+<p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.
+<p style="text-align:center">
+  <img src="videos/bot_location.gif" height="600px" width="400px"/>
+</p></p>
 
 <h2 id="handover-bot">Handover Bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -349,7 +352,98 @@ In order to do that, in the state we want to transfer the case, we declare <code
 QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
 </aside>
 
-<p><img src="videos/bot_handover.gif" height="300px" width="600px"/></p>
+<p style="text-align:center">
+  <img src="videos/bot_handover.gif" height="300px" width="600px"/>
+</p>
+
+<h2 id="failure-bot">Failure Bot</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failure bot"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"max_loop"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Here you have to choose:"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"State not defined"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"not_defined"</span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP_REQUEST"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http_request"</span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOOP"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopA"</span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_keyboard"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user_choice.data}}"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http_request"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"context"</span><span class="p">:{</span><span class="w">
+                </span><span class="nt">"image_test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.randomurl.com/randomimage.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{url}}"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopB"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopB"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopA"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have failed answering the bot"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The bot don't recognize this state"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There were an error with some http request"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The bot enter to a loop"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>In this bot, we can find all the possible states where the bot can be redirected when the bot gets lost or experience some error. In the first demo, we see how the user enters 3 times (defined in the <code class="prettyprint">input_retry</code>) some input that the bot isn&rsquo;t expecting, and so it jumps to the <code class="prettyprint">input_failure</code> state.</p>
+
+<p>The other demo, we can find the three types of failure states. 
+The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsquo;s reached when the bot tries to enter into the state <code class="prettyprint">not_defined</code>, and don&rsquo;t find it.</p>
+
+<p>The second case is the <code class="prettyprint">external_request_failure</code>, in this state we make a get request, and as we don&rsquo;t get any response, the bot jumps.</p>
+
+<p>And the last one, is reached when the user enters a loop. We are jumping from state <code class="prettyprint">loopA</code> to <code class="prettyprint">loopB</code> and vice versa, when it hits 10 times (defined at <code class="prettyprint">max_loop</code>), the bot jumps to the state <code class="prettyprint">loop_overflow</code>.</p>
+
+<p style="text-align:center">
+  <img src="videos/bot_input_failure.gif" height="600px" width="400px"/>
+  <br><br>
+  <img src="videos/bot_failures.gif" height="600px" width="400px"/>
+</p>
 
 <h1 id="getting-started">Getting Started</h1>
 
@@ -732,11 +826,15 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>In this example, &#39;available_queues&rsquo; will contain an array of IDs: the queues that are open in Hubtype DESK.</p>
+<p>In this example, the variable &#39;queues&rsquo; will contain an array of names: the queues that are open in Hubtype DESK.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"available_queues"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{active_queues()}}"</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"queues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_queues"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -744,8 +842,12 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 </blockquote>
 <pre class="highlight json"><code><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{add_note(content)}}"</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"add_note"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -753,7 +855,12 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 </blockquote>
 <pre class="highlight json"><code><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{create_case(available_queues[0] if len(available_queues) else 'Default queue')}}"</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"queue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{available_queues[0] if available_queues | length &gt; 0 else 'Default queue'}}"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Context actions are used to interact with the outside world. Probably the most handy action is <code class="prettyprint">http</code>, which allows you to make calls to any standard JSON API. Here&rsquo;s a complete list of available actions:</p>
