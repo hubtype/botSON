@@ -737,12 +737,16 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 }
 ```
 
-> In this example, 'available_queues' will contain an array of IDs: the queues that are open in Hubtype DESK.
+> In this example, the variable 'queues' will contain an array of names: the queues that are open in Hubtype DESK.
 
 ```json
 
 {
-  "available_queues": "{{active_queues()}}"
+  "context": {
+    "queues": {
+      "action": "active_queues"
+    }
+  }
 }
 ```
 
@@ -751,8 +755,12 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 ```json
 
 {
-  "content": "User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}.",
-  "note": "{{add_note(content)}}"
+  "context": {
+    "note": {
+      "action": "add_note",
+      "text": "User name: {{user.name}}. Age: {{user.age}}. Order number: {{order_num}}."
+    }
+  }
 }
 ```
 
@@ -761,7 +769,12 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 ```json
 
 {
-  "case": "{{create_case(available_queues[0] if len(available_queues) else 'Default queue')}}"
+  "context": {
+    "case": {
+      "action": "create_case",
+      "queue": "{{available_queues[0] if available_queues | length > 0 else 'Default queue'}}"
+    }
+  }
 }
 ```
 
