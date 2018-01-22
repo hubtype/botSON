@@ -341,6 +341,72 @@ And the last one, is reached when the user enters a loop. We are jumping from st
   <img src="/videos/bot_failures.gif" height="600px" width="400px"/>
 </p>
 
+##Dynamic next state
+
+```
+{
+    "name": "Next State Bot",
+    "input_retry": 1,
+    "triggers": {},
+    "version": "1.0",
+    "states": [
+        {
+            "label": "initial",
+            "output": [
+                {
+                    "type": "text", 
+                    "data": "What do you prefer, rigth or left?",
+                    "keyboard": [
+                        {"label": "Right", "data": "right"},
+                        {"label": "Left", "data": "left"}
+                    ]
+                }
+            ],
+            "input": {
+                "type": "in_keyboard",
+                "variable": "user_choice"
+            },
+            "next_step": [
+                "{% if user_choice.data == 'right' %}",
+                    "right_state",
+                "{% elif user_choice.data == 'left' %}",
+                    "left_state",
+                "{% else %}",
+                    "exit",
+                "{% endif %}"
+            ]
+        },
+        {
+            "label": "right_state",
+            "output": {
+                "type": "text",
+                "data": "Let's go right"
+            },
+            "next_step": "exit"
+        },
+        {
+            "label": "left_state",
+            "output": {
+                "type": "text",
+                "data": "Let's go left"
+            },
+            "next_step": "exit"
+        }
+    ]
+}
+
+```
+
+When we depend on the user response about which will be the way that the bot will follow, we can make a dynamic `next_state` definition.
+
+In this bot, we can see how we store the user decision in `user_choice`. Depending on what the user had chosen, the bot will continue to an specific state.
+If the user decided right, the bot will go to `right_state`, else if he decided left it will got to `left_state`.
+Otherwise, for avoiding posible bugs, we say that if the data it's not right or left, it will go to `exit`.
+
+<p style="text-align:center">
+  <img src="/videos/bot_next_state.gif" height="600px" width="400px"/>
+</p>
+
 #Getting Started
 
 ##Creating a state
