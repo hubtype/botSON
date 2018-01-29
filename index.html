@@ -228,16 +228,16 @@
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the information from the Shopstyle API. </p>
+<p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API. </p>
 
 <p>First of all, we ask what are the user interests. When we get it, we generate the <a href="#carrousel">carrousel</a> of the products.</p>
 
 <p>When we want to make REST API request, we create the <code class="prettyprint">context</code>, and we put all the logic in there.
 In order to get all the information, we store all the items making a request with the user prefence and our API_KEY.</p>
 
-<p>The request it&rsquo;s make into an <code class="prettyprint">url</code>, the specific <code class="prettyprint">method</code>, and if necessary with <code class="prettyprint">params</code>.</p>
+<p>The request goes against a specific <code class="prettyprint">url</code>, with his specific <code class="prettyprint">method</code>, and if necessary with the <code class="prettyprint">params</code>.</p>
 
-<p>For getting all the information of every product, we need to make a call to the API with the shirt id. The id of a product, it&rsquo;s in JSON format, and we can do <code class="prettyprint">item.id</code> or <code class="prettyprint">item[&#39;id&#39;]</code> to access it. </p>
+<p>For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it&rsquo;s in JSON format, and we can do <code class="prettyprint">item.id</code> or <code class="prettyprint">item[&#39;id&#39;]</code> to access it. </p>
 
 <p>When we have all the product information, we can display the <a href="#carrousel">carrousel</a>.</p>
 
@@ -291,7 +291,7 @@ In order to get all the information, we store all the items making a request wit
 <p>Being able to manage location is a powerfull tool nowadays.</p>
 
 <p>This bot ask for your location, and with a simple click, the user can send his location to the bot. 
-In the state <code class="prettyprint">initial</code>, we ask to the user where is he, and with the option <code class="prettyprint">location</code> in the <code class="prettyprint">keyboard</code>, we create a <code class="prettyprint">keyboard</code> that will get the user location.</p>
+In the state <code class="prettyprint">initial</code>, we ask to the user where is he, and with the option <code class="prettyprint">location</code> in the <code class="prettyprint">keyboard</code>, we display a <code class="prettyprint">keyboard</code> that will get the user location.</p>
 
 <p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.
 <p style="text-align:center">
@@ -328,14 +328,19 @@ In the state <code class="prettyprint">initial</code>, we ask to the user where 
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_case"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"_hubtype_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case:Customer Service"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"queue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q1"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An agent will immediately take care of your case"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trash"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_text"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -344,13 +349,9 @@ In the state <code class="prettyprint">initial</code>, we ask to the user where 
 <p>As bots aren&rsquo;t perfects, we can transfer a case to an agent in an easy way, let&rsquo;s have a look how this bot works.</p>
 
 <p>This bot don&rsquo;t understand anything, so any input that we enter it will be redirected to an agent.
-In order to do that, in the state we want to transfer the case, we declare <code class="prettyprint">context</code>, and put a variable <code class="prettyprint">\_hubtype_acion</code> with <code class="prettyprint">create_case:QUEUE_OPTIONS</code>, and when the bot enters this state, a new case will be created in this specific queue, and the agent will take care of the conversation.</p>
+In order to do that, when we reach the state where we want to transfer the case, we declare in the <code class="prettyprint">context</code> an object called <code class="prettyprint">case</code>. This object will have two values, the <code class="prettyprint">action</code> that must be &lsquo;create_case&rsquo; and <code class="prettyprint">queue</code> that it&rsquo;s the name or id of the queue where we will generate the case.</p>
 
 <p>When the case it&rsquo;s resolved by the agent, the bot will continue to the <code class="prettyprint">next_step</code> of the state.</p>
-
-<aside class="softwarn">
-QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
-</aside>
 
 <p style="text-align:center">
   <img src="videos/bot_handover.gif" height="300px" width="600px"/>
@@ -430,19 +431,85 @@ QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>In this bot, we can find all the possible states where the bot can be redirected when the bot gets lost or experience some error. In the first demo, we see how the user enters 3 times (defined in the <code class="prettyprint">input_retry</code>) some input that the bot isn&rsquo;t expecting, and so it jumps to the <code class="prettyprint">input_failure</code> state.</p>
+<p>In this bot, we can find all the possible states where the bot can be redirected when it gets lost or experience some error.</p>
 
-<p>The other demo, we can find the three types of failure states. 
-The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsquo;s reached when the bot tries to enter into the state <code class="prettyprint">not_defined</code>, and don&rsquo;t find it.</p>
+<p>In the first demo, we see how the user enters 3 times some input that the bot isn&rsquo;t expecting, and it will display the same question as many times as you have declares in the <code class="prettyprint">input_retry</code>. If the bot reaches the number of failures as declared, it will go into the <code class="prettyprint">input_failure</code> state.</p>
 
-<p>The second case is the <code class="prettyprint">external_request_failure</code>, in this state we make a get request, and as we don&rsquo;t get any response, the bot jumps.</p>
+<p>In the other demo, we can find the other three types of failure states. 
+The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsquo;s reached when the bot tries to enter into the state <code class="prettyprint">not_defined</code>, and doesn&rsquo;t find it.</p>
 
-<p>And the last one, is reached when the user enters a loop. We are jumping from state <code class="prettyprint">loopA</code> to <code class="prettyprint">loopB</code> and vice versa, when it hits 10 times (defined at <code class="prettyprint">max_loop</code>), the bot jumps to the state <code class="prettyprint">loop_overflow</code>.</p>
+<p>The second case is the <code class="prettyprint">external_request_failure</code>, in this state we make a get request, and as we don&rsquo;t get any response, the bot goes into <code class="prettyprint">external_request_failure</code>.</p>
+
+<p>And the last one is reached when the user enters a loop. We are jumping from state <code class="prettyprint">loopA</code> to <code class="prettyprint">loopB</code> and vice versa. When it hits 10 times (defined at <code class="prettyprint">max_loop</code>), the bot jumps to the state <code class="prettyprint">loop_overflow</code>.</p>
 
 <p style="text-align:center">
   <img src="videos/bot_input_failure.gif" height="600px" width="400px"/>
   <br><br>
   <img src="videos/bot_failures.gif" height="600px" width="400px"/>
+</p>
+
+<h2 id="dynamic-next-state">Dynamic next state</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Next State Bot"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> 
+                    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you prefer, rigth or left?"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right"</span><span class="p">},</span><span class="w">
+                        </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Left"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"left"</span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"{% if user_choice.data == 'right' %}"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"right_state"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"{% elif user_choice.data == 'left' %}"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"left_state"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"{% else %}"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"exit"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"{% endif %}"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right_state"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Let's go right"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"left_state"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Let's go left"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>When the <code class="prettyprint">next_state</code> depends on the user response option, we can make a dynamic <code class="prettyprint">next_state</code> definition.</p>
+
+<p>In this bot, we can see how we store the user decision in <code class="prettyprint">user_choice</code>. Depending on what the user has chosen, the bot will continue to one state or another.</p>
+
+<p>If the user decided &#39;right&rsquo;, the bot will go to <code class="prettyprint">right_state</code>, else if he decided &#39;left&rsquo; it will got to <code class="prettyprint">left_state</code>.
+Otherwise, for avoiding possible errors, we say that if the data it&rsquo;s not right or left, it will go to <code class="prettyprint">exit</code>.</p>
+
+<p style="text-align:center">
+  <img src="videos/bot_next_state.gif" height="600px" width="400px"/>
 </p>
 
 <h1 id="getting-started">Getting Started</h1>
@@ -463,7 +530,7 @@ The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsq
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>A bot is composed by states. Each state has a <code class="prettyprint">label</code>, a <code class="prettyprint">next_step</code> and usually an <code class="prettyprint">output</code> or <code class="prettyprint">input</code> (or both). When the bot enters a state, the first thing it does is to send the <code class="prettyprint">output</code> (if there&rsquo;s one) to the user, then awaits for the user input if there&rsquo;s an <code class="prettyprint">input</code> section. Finally it jumps to the state defined in the expression <code class="prettyprint">next_step</code>. The state &lsquo;exit&rsquo; indicates the end of the session, if the user talks again then a new session will start from the state defined in &#39;initial_state&rsquo;.</p>
+<p>A bot is composed by states. Each state has a <code class="prettyprint">label</code>, a <code class="prettyprint">next_step</code> and usually an <code class="prettyprint">output</code> or <code class="prettyprint">input</code> (or both). When the bot enters a state, the first thing it does is to send the <code class="prettyprint">output</code> (if there&rsquo;s one) to the user, then awaits for the user input if there&rsquo;s an <code class="prettyprint">input</code> section. Finally it jumps to the state defined in the expression <code class="prettyprint">next_step</code>. The state &#39;exit&rsquo; indicates the end of the session, if the user talks again then a new session will start from the state defined in &#39;initial_state&rsquo;.</p>
 
 <p>When the bot enters a state with no <code class="prettyprint">input</code>, it just sends the <code class="prettyprint">output</code> (if any) and jumps to <code class="prettyprint">next_state</code> immediatelly. It is possible to chain several state jumps without any <code class="prettyprint">input</code>, the bot will just send all the outputs consecutively until it reaches a state with an <code class="prettyprint">input</code> statement, then it will pause until the user sends a new message.</p>
 
