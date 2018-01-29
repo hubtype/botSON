@@ -114,16 +114,16 @@ We encourage you to watch the screencasts:
 }
 ```
 
-This is a simple bot, that displays five men or woman shirts and its price, and we are getting the information from the Shopstyle API. 
+This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API. 
 
 First of all, we ask what are the user interests. When we get it, we generate the [carrousel](#carrousel) of the products.
 
 When we want to make REST API request, we create the `context`, and we put all the logic in there.
 In order to get all the information, we store all the items making a request with the user prefence and our API_KEY.
 
-The request it's make into an `url`, the specific `method`, and if necessary with `params`.
+The request goes against a specific `url`, with his specific `method`, and if necessary with the `params`.
 
-For getting all the information of every product, we need to make a call to the API with the shirt id. The id of a product, it's in JSON format, and we can do `item.id` or `item['id']` to access it. 
+For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it's in JSON format, and we can do `item.id` or `item['id']` to access it. 
 
 When we have all the product information, we can display the [carrousel](#carrousel).
 
@@ -182,7 +182,7 @@ For access to this values, we do `item.name` , `item.priceLabel`, etc.
 Being able to manage location is a powerfull tool nowadays.
 
 This bot ask for your location, and with a simple click, the user can send his location to the bot. 
-In the state `initial`, we ask to the user where is he, and with the option `location` in the `keyboard`, we create a `keyboard` that will get the user location.
+In the state `initial`, we ask to the user where is he, and with the option `location` in the `keyboard`, we display a `keyboard` that will get the user location.
 
 Then, in the `input`, we store the user location in the variable `location`.
 <p style="text-align:center">
@@ -221,14 +221,19 @@ Then, in the `input`, we store the user location in the variable `location`.
     {
       "label": "transfer_case",
       "context": {
-                "_hubtype_action": "create_case:Customer Service"
-            },
-      "output": [
-        {
+          "case": {
+            "action": "create_case",
+            "queue": "q1"
+          }
+      },
+      "output": {
           "type": "text",
           "data": "An agent will immediately take care of your case"
-        }
-      ],
+      },
+      "input": {
+          "variable": "trash",
+          "action": "free_text"
+      },
       "next_step": "exit"
     }
   ]
@@ -238,13 +243,10 @@ Then, in the `input`, we store the user location in the variable `location`.
 As bots aren't perfects, we can transfer a case to an agent in an easy way, let's have a look how this bot works.
 
 This bot don't understand anything, so any input that we enter it will be redirected to an agent.
-In order to do that, in the state we want to transfer the case, we declare `context`, and put a variable `\_hubtype_acion` with `create_case:QUEUE_OPTIONS`, and when the bot enters this state, a new case will be created in this specific queue, and the agent will take care of the conversation.
+In order to do that, when we reach the state where we want to transfer the case, we declare in the `context` an object called `case`. This object will have two values, the `action` that must be 'create_case' and `queue` that it's the name or id of the queue where we will generate the case.
 
 When the case it's resolved by the agent, the bot will continue to the `next_step` of the state.
 
-<aside class="softwarn">
-QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
-</aside>
 <p style="text-align:center">
   <img src="/videos/bot_handover.gif" height="300px" width="600px"/>
 </p>
@@ -326,14 +328,16 @@ QUEUE_OPTIONS: Name or Id of the queue where the case will be created.
 
 ```
 
-In this bot, we can find all the possible states where the bot can be redirected when the bot gets lost or experience some error. In the first demo, we see how the user enters 3 times (defined in the `input_retry`) some input that the bot isn't expecting, and so it jumps to the `input_failure` state.
+In this bot, we can find all the possible states where the bot can be redirected when it gets lost or experience some error.
 
-The other demo, we can find the three types of failure states. 
-The first one, the `fallback_instruction`, it's reached when the bot tries to enter into the state `not_defined`, and don't find it.
+In the first demo, we see how the user enters 3 times some input that the bot isn't expecting, and it will display the same question as many times as you have declares in the `input_retry`. If the bot reaches the number of failures as declared, it will go into the `input_failure` state.
 
-The second case is the `external_request_failure`, in this state we make a get request, and as we don't get any response, the bot jumps.
+In the other demo, we can find the other three types of failure states. 
+The first one, the `fallback_instruction`, it's reached when the bot tries to enter into the state `not_defined`, and doesn't find it.
 
-And the last one, is reached when the user enters a loop. We are jumping from state `loopA` to `loopB` and vice versa, when it hits 10 times (defined at `max_loop`), the bot jumps to the state `loop_overflow`.
+The second case is the `external_request_failure`, in this state we make a get request, and as we don't get any response, the bot goes into `external_request_failure`.
+
+And the last one is reached when the user enters a loop. We are jumping from state `loopA` to `loopB` and vice versa. When it hits 10 times (defined at `max_loop`), the bot jumps to the state `loop_overflow`.
 
 <p style="text-align:center">
   <img src="/videos/bot_input_failure.gif" height="600px" width="400px"/>
@@ -397,11 +401,12 @@ And the last one, is reached when the user enters a loop. We are jumping from st
 
 ```
 
-When we depend on the user response about which will be the way that the bot will follow, we can make a dynamic `next_state` definition.
+When the `next_state` depends on the user response option, we can make a dynamic `next_state` definition.
 
-In this bot, we can see how we store the user decision in `user_choice`. Depending on what the user had chosen, the bot will continue to an specific state.
-If the user decided right, the bot will go to `right_state`, else if he decided left it will got to `left_state`.
-Otherwise, for avoiding posible bugs, we say that if the data it's not right or left, it will go to `exit`.
+In this bot, we can see how we store the user decision in `user_choice`. Depending on what the user has chosen, the bot will continue to one state or another.
+
+If the user decided 'right', the bot will go to `right_state`, else if he decided 'left' it will got to `left_state`.
+Otherwise, for avoiding possible errors, we say that if the data it's not right or left, it will go to `exit`.
 
 <p style="text-align:center">
   <img src="/videos/bot_next_state.gif" height="600px" width="400px"/>
