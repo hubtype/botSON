@@ -1276,6 +1276,47 @@ NOTE: The carrousel output is only available on Facebook. Currently other platfo
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
+##Media Message
+```
+{
+  "type": "mediamessage",
+  "image": "https://ToBeOrNot.ToBe.an.url/image.jpg",
+  "buttons": [
+      {
+          "type": "web_url",
+          "title":"Go to image",
+          "url": "http://www.details.es"
+      }
+  ]
+}
+
+{
+  "type": "mediamessage",
+  "video": "https://randompage.es/video.mp4",
+  "buttons": [
+      {
+          "type": "web_url",
+          "title":"Go to Video",
+          "url": "http://www.videourl.es"
+      }
+  ]
+}
+```
+
+It's composed of an image or a video, and followed by a button.
+
+<aside class="softwarn">
+IMPORTANT: The Media Message only accepts an image or a video, not the both in the same output. <br>
+NOTE: The Media Message output is only available on Facebook. Currently other platforms will ignore that output.
+</aside>
+
+| Field     | Value           |   |
+| --------- |:-------------:| -----:|
+| image     |   String |  |
+| video     |   String |  |
+| [buttons](#buttonmessage)  | Array of Buttons  | *max of 1 button* |
+
+
 ##Keyboard (Quick Replies)
 
 ```json
