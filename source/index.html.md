@@ -1772,6 +1772,33 @@ Additionally, BotSON defines the following custom filters:
 
 It's possible to get the current time and operate with dates and time intervals using the functions `date` and `date_interval`. Under the hood we use the [Pendulum](https://pendulum.eustace.io/) library, we encourage you to check out their documentation to learn all the options available.
 
+## Comments
+
+```json
+{
+    "type": "carrousel", #This is a botSON comment
+    "elements": "[
+        {% for item in full_items %}
+            {
+                {# This is a JINJA comment #}
+                'title': '{{item.name}}',
+                'subtitle': '{{item.priceLabel}}',
+                'image_url': '{{item.image.sizes.Best.url}}', 
+                'buttons':[
+                    {
+                        'type': 'web_url', 
+                        'title':'Open product',
+                        'url': '{{item.clickUrl}}'
+                    }
+                ]
+            },
+        {% endfor %}
+    ]"
+}
+```
+
+We allow two types of comments. You can make a simple comment in the JSON code with a `#` followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: `{# your comment #}` 
+
 #Error types
 
 There may be errors during the parsing and execution of a bot. They are of different types inheriting from 
