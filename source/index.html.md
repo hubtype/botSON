@@ -42,75 +42,76 @@ We encourage you to watch the screencasts:
 
 ```
 {
-    "name": "Clothes Bot",
-    "triggers": {},
-    "version": "1.0",
-    "literals": {
-        "api_key": "<API_KEY>"
+  "name": "Clothes Bot",
+  "triggers": {},
+  "version": "1.0",
+  "literals": { #we store our secret api key
+      "api_key": "uid8900-40385330-57"
+  },
+  "states": [
+    {
+      "label": "initial",
+      "output":
+      {
+          "type": "text",
+          "data": "Hey, what clothes are you interested in?",
+          "keyboard": [
+            {"label": "Mens shirt", "data": "mens-shirts"},
+            {"label": "Womens shirt", "data": "womens-tops"}
+          ]
+      },
+      "input": {
+          "variable": "user_response",
+          "action": "get_in_keyboard"
+      },
+      "next_step": "create_carrousel"
     },
-    "states": [
-        {
-            "label": "initial",
-            "output":
-            {
-                "type": "text",
-                "data": "Hey, what clothes are you interested in?",
-                "keyboard": [
-                  {"label": "Mens shirt", "data": "mens-shirts"},
-                  {"label": "Womens shirt", "data": "womens-tops"}
-                ]
-            },
-            "input": {
-                "variable": "user_response",
-                "action": "get_in_keyboard"
-            },
-            "next_step": "create_carrousel"
-        },
-        {
-            "label": "create_carrousel",
-            "context":[
-                {"items": {
-                        "url": "http://api.shopstyle.com/api/v2/products?pid={{api_key}}&fts={{user_response.data}}&offset=0&limit=5",
-                        "method": "GET",
-                        "params": {
-                        }
-                    }
-                },
-                {"full_items": "[
-                    {% for item in items.products %}
-                        {{http('http://api.shopstyle.com/api/v2/products/' + 
-                            item.id|string +
-                            '?pid=' +
-                            api_key|string
-                        )}},
-                    {% endfor %}
-                ]"
-                }
-            ],
-            "output": [
-                {
-                    "type": "carrousel",
-                    "elements": "[
-                        {% for item in full_items %}
-                            {
-                                'title': '{{item.name}}',
-                                'subtitle': '{{item.priceLabel}}',
-                                'image_url': '{{item.image.sizes.Best.url}}', 
-                                'buttons':[
-                                    {
-                                        'type': 'web_url', 
-                                        'title':'Open product',
-                                        'url': '{{item.clickUrl}}'
-                                    }
-                                ]
-                            },
-                        {% endfor %}
-                    ]"
-                }
-            ],
-            "next_step": "exit"
-        }
-    ]
+    {
+      "label": "create_carrousel",
+      "context":[
+          {"items": { #we get all the items id's related with the user_response
+                  "url": "http://api.shopstyle.com/api/v2/products?pid={{api_key}}&fts={{user_response.data}}&offset=0&limit=5",
+                  "method": "GET",
+                  "params": {
+                  }
+              }
+          },
+          {"full_items": "[
+              {# for every item, we store all the information in 'full_items' #}
+              {% for item in items.products %}
+                  {{http('http://api.shopstyle.com/api/v2/products/' +
+                      item.id|string +
+                      '?pid=' +
+                      api_key|string
+                  )}},
+              {% endfor %}
+          ]"
+          }
+      ],
+      "output": [
+          {
+              "type": "carrousel", #for every item, we display his information in a carrousel
+              "elements": "[
+                  {% for item in full_items %}
+                      {
+                          'title': '{{item.name}}',
+                          'subtitle': '{{item.priceLabel}}',
+                          'image_url': '{{item.image.sizes.Best.url}}',
+                          'buttons':[
+                              {
+                                  'type': 'web_url',
+                                  'title':'Open product',
+                                  'url': '{{item.clickUrl}}'
+                              }
+                          ]
+                      },
+                  {% endfor %}
+              ]"
+          }
+      ],
+      "next_step": "exit"
+    }
+  ]
 }
 ```
 
@@ -220,7 +221,7 @@ Then, in the `input`, we store the user location in the variable `location`.
     },
     {
       "label": "transfer_case",
-      "context": {
+      "context": { #we create a new case in the queue q1.
           "case": {
             "action": "create_case",
             "queue": "q1"
@@ -276,11 +277,11 @@ When the case it's resolved by the agent, the bot will continue to the `next_ste
                 "action": "get_in_keyboard",
                 "variable": "user_choice"
             },
-            "next_step": "{{user_choice.data}}"
+            "next_step": "{{user_choice.data}}" #next step depending on the user response
         },
         {
             "label": "http_request",
-            "context":{
+            "context":{ #we make a request to an invented link that doesn't exist.
                 "image_test": {
                     "url": "www.randomurl.com/randomimage.jpg",
                     "method": "GET",
@@ -301,7 +302,7 @@ When the case it's resolved by the agent, the bot will continue to the `next_ste
         {
             "label": "loopB",
             "output": "B",
-            "next_step": "loopA"
+            "next_step": "loopA" #creates a bucle: loopA --> loopB --> loopA
         },
         {
             "label": "input_failure",
