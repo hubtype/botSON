@@ -634,3 +634,8 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+.highlight .err {
+    color: #ddd;
+    background-color: transparent;
+}

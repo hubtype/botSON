@@ -538,10 +538,6 @@ The name of the bot.
 
 Version of the BotSON language. We encourage you to explicitly set this setting to "1.0" as it's the version this documentation refers to. If not set, the default value in "0.1", a version that is NOT compatible with "1.0".
 
-##language
-
-Indicates the language the bot will use.
-
 <aside class="softwarn">
 Currently this field is not used.
 </aside>
@@ -554,25 +550,75 @@ Label of the first state of the bot. Defaults to "initial".
 
 Defines the default values that are used throughout the chatbot flow in different states:
 
-* **requests**
+###requests
 
-  Currently only supports default `headers` to be used in every url request.
+Currently only supports default `headers` to be used in every url request.
 
-* **delay**:
+###delay:
 
-  Time (in seconds) to delay sending any outputs. It can be a decimal number. This parameter can be overridden in each output. Defaults to 0.
+Time (in seconds) to delay sending any outputs. It can be a decimal number. This parameter can be overridden in each output. Defaults to 0.
 
-* **typing**
+###typing
 
-  Time (in seconds) that the bot will display the "typing..." effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. This parameter can be overridden in each output. Defaults to 0.
+Time (in seconds) that the bot will display the "typing..." effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. This parameter can be overridden in each output. Defaults to 0.
 
-* **context**
+###context
 
-  Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.
+Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.
 
 ##literals
 
-TODO
+> Simple literals
+
+```json
+
+{
+    "literals": {
+        "text1": "Hello!",
+        "text2": "Goodbye my friend!"
+    },
+    "states": [
+        {
+            "label": "initial",
+            "output": "{{text1}}",
+            "next_step": "exit"
+        }
+    ]
+}
+```
+
+> Literals for multiple languages
+
+```json
+{
+    "literals": {
+        "text1": {
+            "en": ["Hello!", "Hey there!", "Alohaaa"],
+            "es": ["Hola!", "Hey que tal!", "Buenaaas"]
+        },
+        "text2": {
+            "en": ["Goodbye my friend!", "bye byee"],
+            "es": ["Adiós amigo!", "Hasta luegoo"]
+        }
+    },
+    "defaults": {
+        "context": {
+            "lang": "en"
+        }
+    },
+    "states": [
+        {
+            "label": "initial",
+            "output": "{{text1[lang] | random}}",
+            "next_step": "exit"
+        }
+    ]
+}
+```
+
+When your bot grows you'll likely want to separate the content of your outputs from the logic of the states. One thing you could do is placing all your texts in a variable in the default context and then use `{{my_copys[1]}}` to dinamically build your output. While this is perfectly fine for small bots, this is generally a bad idea since the default context is evaluated every time the bot jumps from one state to another, so if you have hundreds or thousands of copys it will slow down your bot. Instead, `literals` is a static section where you can put as many variables as you want without incurring into a performance hit.
+
+The way you organize your copys is entirely up to you, but we found that following a convention makes it easy to find them and to keep the code consistent even for really big chatbots. The example "Literals for multiple languages" on the right is the convention we recommend following.
 
 ##session_timeout
 
@@ -580,19 +626,21 @@ Time (in minutes) after the last user interaction to wait before the session is 
 
 ##keep_session
 
-TODO
+A boolean that indicates whether the variables from the context of the previous session should be copied to the new session.
+Defaults to `false`.
 
 ##keep_trace
 
-TODO
+A boolean that indicates whether the `_trace` special variable should be kept between different sessions.
+Defaults to `false`.
 
 ##early_typing
 
-TODO
+A boolean that indicates whether the bot should send a typing indicator as soon as it gets an input from the user. This is usually desirable, so that user gets instant feedback that his message is being processed, however if the bot does not generate an output it results in a weird effect where the typing indicator starts and then ends without any message being sent.
 
-##analytics
+If set to `false`, the bot will delay sending the typing indicator until it knows for sure there's some message to send back. This effectively removes the weird effect, but it will delay the typing feedback for some milliseconds.
 
-TODO
+Defaults to `true`.
 
 ##triggers
 
@@ -628,7 +676,7 @@ Triggers are commands that are available at any point during the bot execution, 
 
 * `payload` triggers can not be fired by user messages. *(Higher priority than text triggers.)*
 
-Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.
+Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables to the context with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.
 
 Triggers must have valid `next_step` and `match` attributes. If `next_step` is `null` the bot will consume that input without any change, which is useful if you want to ignore some words. See [next_step](#next_step) reference for more info.
 
@@ -1835,11 +1883,13 @@ There may be errors during the parsing and execution of a bot. They are of diffe
 
 TODO
 
-#AI integration
+#Integrations
 
-You are able to use watson or api.ai bots to manage the botSON flow.
+##AI/NLP
 
-##Configuration
+The `ai_backends` attribute allows you to easily integrate 3rd party services like Google's Dialogflow (former API.ai) or IBM Watson to add natural language understanding capabilities to your bot. Usually you'll want to pass the input from the user to the AI/NLP service and get an intent back, then use that intent to navigate to a particular state of your bot.
+
+You must create an attribute named after the service you want to integrate, this attribute should contain an object with the credentials needed to talk to that service.
 
 ```json
 {
@@ -1858,7 +1908,7 @@ You are able to use watson or api.ai bots to manage the botSON flow.
 
 > Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: "search" and "buy", and 1 entity: "item".
 
-##AI calls
+###AI calls
 
 ```json
 [
@@ -1912,6 +1962,66 @@ Then you can call the ai in two different ways.
 | intent      | String | |
 | entities    | String | |
 | output_text | String | Verbose response of the AI in that intent|
+| raw | Object | Raw response from the AI backend |
 
-<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
--->
+Available integrations:
+
+| Service     | Availability | Credentials |
+| --------- |:-------------:| ------ |
+| Dialogflow      | Available | {token} |
+| Watson | Available | {username, password, workspace_id} |
+| Wit.ai | Coming Soon |
+
+
+##Analytics
+
+```json
+{
+    "defaults": {
+        "context": {
+            "analytics": {
+                "data": {
+                    "my_id": "123" # This will be sent with all default events
+                },
+                "splunk": {
+                    "url": "SPLUNK_INSTANCE_URL",
+                    "token": "AUTH_TOKEN"
+                }
+            }
+        }
+    },
+    "states": [
+        ...
+        {
+            "label": "buy_item",
+            "context": [
+                {"_": "{{track(analytics, {'event': 'buy_item'})}}"}
+            ],
+            "output": "You have just bought an item",
+            "next_step": "exit"
+        }
+    ]
+}
+```
+
+The analytics attribute allows you to easily integrate 3rd party services like Mixpanel or Google Analytics to track events of your bot. You can use this to measure the activity of your bot's users and create different reports like retention or funnels.
+
+You must create an attribute named after each of the services you want to integrate, this attribute should contain an object with the credentials needed to talk to that service. Then BotSON will automatically track several default events:
+
+| Event     | Data           | Description  |
+| --------- |:-------------:| -----:|
+| user_message      | BotSON encoded message          | A message sent by an end-user |
+| bot_mesage | BotSON encoded message        | A message sent by the bot |
+| bot_state | State label        | The bot moved to a new state |
+
+<p>You can set the attribute `defaults.analytics.data` in order to share data with all the events sent</p>
+<p>Track your own events using the context function `track(analytics, data)`, where `data` is an object with arbitrary parameters that will be merged with the default `analytics.data`</p>
+
+
+Available integrations:
+
+| Service     | Availability | Credentials |
+| --------- |:-------------:| ------ |
+| Splunk      | Available | {url, token}
+| Mixpanel | Coming Soon |
+| Google Analytics | Coming Soon |
