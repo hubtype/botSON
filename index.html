@@ -157,75 +157,76 @@
 
 <h2 id="dynamic-carrousel">Dynamic carrousel</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clothes Bot"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;API_KEY&gt;"</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clothes Bot"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">#we</span><span class="w"> </span><span class="err">store</span><span class="w"> </span><span class="err">our</span><span class="w"> </span><span class="err">secret</span><span class="w"> </span><span class="err">api</span><span class="w"> </span><span class="err">key</span><span class="w">
+      </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uid8900-40385330-57"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey, what clothes are you interested in?"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mens-shirts"</span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Womens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"womens-tops"</span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_response"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_keyboard"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey, what clothes are you interested in?"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mens-shirts"</span><span class="p">},</span><span class="w">
-                  </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Womens shirt"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"womens-tops"</span><span class="p">}</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_response"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_keyboard"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"context"</span><span class="p">:[</span><span class="w">
-                </span><span class="p">{</span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.shopstyle.com/api/v2/products?pid={{api_key}}&amp;fts={{user_response.data}}&amp;offset=0&amp;limit=5"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="nt">"full_items"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
-                    {% for item in items.products %}
-                        {{http('http://api.shopstyle.com/api/v2/products/' + 
-                            item.id|string +
-                            '?pid=' +
-                            api_key|string
-                        )}},
-                    {% endfor %}
-                ]"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
-                        {% for item in full_items %}
-                            {
-                                'title': '{{item.name}}',
-                                'subtitle': '{{item.priceLabel}}',
-                                'image_url': '{{item.image.sizes.Best.url}}', 
-                                'buttons':[
-                                    {
-                                        'type': 'web_url', 
-                                        'title':'Open product',
-                                        'url': '{{item.clickUrl}}'
-                                    }
-                                ]
-                            },
-                        {% endfor %}
-                    ]"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_carrousel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"context"</span><span class="p">:[</span><span class="w">
+          </span><span class="p">{</span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">#we</span><span class="w"> </span><span class="err">get</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">items</span><span class="w"> </span><span class="err">id's</span><span class="w"> </span><span class="err">related</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">user_response</span><span class="w">
+                  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.shopstyle.com/api/v2/products?pid={{api_key}}&amp;fts={{user_response.data}}&amp;offset=0&amp;limit=5"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="nt">"full_items"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
+              {# for every item, we store all the information in 'full_items' #}
+              {% for item in items.products %}
+                  {{http('http://api.shopstyle.com/api/v2/products/' +
+                      item.id|string +
+                      '?pid=' +
+                      api_key|string
+                  )}},
+              {% endfor %}
+          ]"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w"> </span><span class="err">#for</span><span class="w"> </span><span class="err">every</span><span class="w"> </span><span class="err">item,</span><span class="w"> </span><span class="err">we</span><span class="w"> </span><span class="err">display</span><span class="w"> </span><span class="err">his</span><span class="w"> </span><span class="err">information</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">carrousel</span><span class="w">
+              </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
+                  {% for item in full_items %}
+                      {
+                          'title': '{{item.name}}',
+                          'subtitle': '{{item.priceLabel}}',
+                          'image_url': '{{item.image.sizes.Best.url}}',
+                          'buttons':[
+                              {
+                                  'type': 'web_url',
+                                  'title':'Open product',
+                                  'url': '{{item.clickUrl}}'
+                              }
+                          ]
+                      },
+                  {% endfor %}
+              ]"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API. </p>
@@ -327,7 +328,7 @@ In the state <code class="prettyprint">initial</code>, we ask to the user where 
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer_case"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">#we</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">new</span><span class="w"> </span><span class="err">case</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">queue</span><span class="w"> </span><span class="err">q1.</span><span class="w">
           </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"queue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q1"</span><span class="w">
@@ -380,11 +381,11 @@ In order to do that, when we reach the state where we want to transfer the case,
                 </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_in_keyboard"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user_choice.data}}"</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{user_choice.data}}"</span><span class="w"> </span><span class="err">#next</span><span class="w"> </span><span class="err">step</span><span class="w"> </span><span class="err">depending</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">response</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http_request"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"context"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"context"</span><span class="p">:{</span><span class="w"> </span><span class="err">#we</span><span class="w"> </span><span class="err">make</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">request</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">invented</span><span class="w"> </span><span class="err">link</span><span class="w"> </span><span class="err">that</span><span class="w"> </span><span class="err">doesn't</span><span class="w"> </span><span class="err">exist.</span><span class="w">
                 </span><span class="nt">"image_test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.randomurl.com/randomimage.jpg"</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -405,7 +406,7 @@ In order to do that, when we reach the state where we want to transfer the case,
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopB"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopA"</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loopA"</span><span class="w"> </span><span class="err">#creates</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">bucle:</span><span class="w"> </span><span class="err">loopA</span><span class="w"> </span><span class="err">--&gt;</span><span class="w"> </span><span class="err">loopB</span><span class="w"> </span><span class="err">--&gt;</span><span class="w"> </span><span class="err">loopA</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
@@ -627,10 +628,6 @@ An input failure is given when the <a href="#input-actions">type of input</a> do
 
 <p>Version of the BotSON language. We encourage you to explicitly set this setting to &ldquo;1.0&rdquo; as it&rsquo;s the version this documentation refers to. If not set, the default value in &ldquo;0.1&rdquo;, a version that is NOT compatible with &ldquo;1.0&rdquo;.</p>
 
-<h2 id="language">language</h2>
-
-<p>Indicates the language the bot will use.</p>
-
 <aside class="softwarn">
 Currently this field is not used.
 </aside>
@@ -643,33 +640,73 @@ Currently this field is not used.
 
 <p>Defines the default values that are used throughout the chatbot flow in different states:</p>
 
-<ul>
-<li><strong>requests</strong></li>
-</ul>
+<h3 id="requests">requests</h3>
 
 <p>Currently only supports default <code class="prettyprint">headers</code> to be used in every url request.</p>
 
-<ul>
-<li><strong>delay</strong>:</li>
-</ul>
+<h3 id="delay">delay:</h3>
 
 <p>Time (in seconds) to delay sending any outputs. It can be a decimal number. This parameter can be overridden in each output. Defaults to 0.</p>
 
-<ul>
-<li><strong>typing</strong></li>
-</ul>
+<h3 id="typing">typing</h3>
 
 <p>Time (in seconds) that the bot will display the &ldquo;typing&hellip;&rdquo; effect before sending this output. It can be a decimal number. If the typing effect is not supported by the messenger it will result in extra delay time. This parameter can be overridden in each output. Defaults to 0.</p>
 
-<ul>
-<li><strong>context</strong></li>
-</ul>
+<h3 id="context">context</h3>
 
 <p>Variables that will be always available at any state of the bot. They are recalculated every time there is an input, so, if a bot definition is changed, previous conversations will have updated variables.</p>
 
 <h2 id="literals">literals</h2>
 
-<p>TODO</p>
+<blockquote>
+<p>Simple literals</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goodbye my friend!"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1}}"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Literals for multiple languages</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey there!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Alohaaa"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hola!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey que tal!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Buenaaas"</span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goodbye my friend!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bye byee"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Adiós amigo!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hasta luegoo"</span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1[lang] | random}}"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When your bot grows you&rsquo;ll likely want to separate the content of your outputs from the logic of the states. One thing you could do is placing all your texts in a variable in the default context and then use <code class="prettyprint">{{my_copys[1]}}</code> to dinamically build your output. While this is perfectly fine for small bots, this is generally a bad idea since the default context is evaluated every time the bot jumps from one state to another, so if you have hundreds or thousands of copys it will slow down your bot. Instead, <code class="prettyprint">literals</code> is a static section where you can put as many variables as you want without incurring into a performance hit.</p>
+
+<p>The way you organize your copys is entirely up to you, but we found that following a convention makes it easy to find them and to keep the code consistent even for really big chatbots. The example &ldquo;Literals for multiple languages&rdquo; on the right is the convention we recommend following.</p>
 
 <h2 id="session_timeout">session_timeout</h2>
 
@@ -677,19 +714,21 @@ Currently this field is not used.
 
 <h2 id="keep_session">keep_session</h2>
 
-<p>TODO</p>
+<p>A boolean that indicates whether the variables from the context of the previous session should be copied to the new session.
+Defaults to <code class="prettyprint">false</code>.</p>
 
 <h2 id="keep_trace">keep_trace</h2>
 
-<p>TODO</p>
+<p>A boolean that indicates whether the <code class="prettyprint">_trace</code> special variable should be kept between different sessions.
+Defaults to <code class="prettyprint">false</code>.</p>
 
 <h2 id="early_typing">early_typing</h2>
 
-<p>TODO</p>
+<p>A boolean that indicates whether the bot should send a typing indicator as soon as it gets an input from the user. This is usually desirable, so that user gets instant feedback that his message is being processed, however if the bot does not generate an output it results in a weird effect where the typing indicator starts and then ends without any message being sent.</p>
 
-<h2 id="analytics">analytics</h2>
+<p>If set to <code class="prettyprint">false</code>, the bot will delay sending the typing indicator until it knows for sure there&rsquo;s some message to send back. This effectively removes the weird effect, but it will delay the typing feedback for some milliseconds.</p>
 
-<p>TODO</p>
+<p>Defaults to <code class="prettyprint">true</code>.</p>
 
 <h2 id="triggers">triggers</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -723,7 +762,7 @@ Currently this field is not used.
 <li><p><code class="prettyprint">payload</code> triggers can not be fired by user messages. <em>(Higher priority than text triggers.)</em></p></li>
 </ul>
 
-<p>Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.</p>
+<p>Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables to the context with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.</p>
 
 <p>Triggers must have valid <code class="prettyprint">next_step</code> and <code class="prettyprint">match</code> attributes. If <code class="prettyprint">next_step</code> is <code class="prettyprint">null</code> the bot will consume that input without any change, which is useful if you want to ignore some words. See <a href="#next_step">next_step</a> reference for more info.</p>
 
@@ -1604,6 +1643,62 @@ NOTE: The carrousel output is only available on Facebook. Currently other platfo
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
+<h2 id="media-message">Media Message</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mediamessage"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ToBeOrNot.ToBe.an.url/image.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Go to image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.details.es"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mediamessage"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"video"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://randompage.es/video.mp4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Go to Video"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.videourl.es"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>It&rsquo;s composed of an image or a video, and followed by a button.</p>
+
+<aside class="softwarn">
+IMPORTANT: The Media Message only accepts an image or a video, not the both in the same output. <br>
+NOTE: The Media Message output is only available on Facebook. Currently other platforms will ignore that output.
+</aside>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th style="text-align: center">Value</th>
+<th style="text-align: right"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>image</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right">  </td>
+</tr>
+<tr>
+<td>video</td>
+<td style="text-align: center">String</td>
+<td style="text-align: right"></td>
+</tr>
+<tr>
+<td><a href="#buttonmessage">buttons</a></td>
+<td style="text-align: center">Array of Buttons</td>
+<td style="text-align: right"><em>max of 1 button</em></td>
+</tr>
+</tbody></table>
+
 <h2 id="keyboard-quick-replies">Keyboard (Quick Replies)</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select_restaurant_type"</span><span class="p">,</span><span class="w">
@@ -2200,6 +2295,30 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 </span></code></pre>
 <p>It&rsquo;s possible to get the current time and operate with dates and time intervals using the functions <code class="prettyprint">date</code> and <code class="prettyprint">date_interval</code>. Under the hood we use the <a href="https://pendulum.eustace.io/">Pendulum</a> library, we encourage you to check out their documentation to learn all the options available.</p>
 
+<h2 id="comments">Comments</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w"> </span><span class="err">#This</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">botSON</span><span class="w"> </span><span class="err">comment</span><span class="w">
+    </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[
+        {% for item in full_items %}
+            {
+                {# This is a JINJA comment #}
+                'title': '{{item.name}}',
+                'subtitle': '{{item.priceLabel}}',
+                'image_url': '{{item.image.sizes.Best.url}}', 
+                'buttons':[
+                    {
+                        'type': 'web_url', 
+                        'title':'Open product',
+                        'url': '{{item.clickUrl}}'
+                    }
+                ]
+            },
+        {% endfor %}
+    ]"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>We allow two types of comments. You can make a simple comment in the JSON code with a <code class="prettyprint">#</code> followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: <code class="prettyprint">{# your comment #}</code> </p>
+
 <h1 id="error-types">Error types</h1>
 
 <p>There may be errors during the parsing and execution of a bot. They are of different types inheriting from 
@@ -2281,11 +2400,13 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <p>TODO</p>
 
-<h1 id="ai-integration">AI integration</h1>
+<h1 id="integrations">Integrations</h1>
 
-<p>You are able to use watson or api.ai bots to manage the botSON flow.</p>
+<h2 id="ai-nlp">AI/NLP</h2>
 
-<h2 id="configuration">Configuration</h2>
+<p>The <code class="prettyprint">ai_backends</code> attribute allows you to easily integrate 3rd party services like Google&rsquo;s Dialogflow (former API.ai) or IBM Watson to add natural language understanding capabilities to your bot. Usually you&rsquo;ll want to pass the input from the user to the AI/NLP service and get an intent back, then use that intent to navigate to a particular state of your bot.</p>
+
+<p>You must create an attribute named after the service you want to integrate, this attribute should contain an object with the credentials needed to talk to that service.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ai_backends"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"watson"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2303,7 +2424,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <p>Get the user intent using AI and fetch an API. Here we assume our AI backend has a couple of intents defined: &ldquo;search&rdquo; and &ldquo;buy&rdquo;, and 1 entity: &ldquo;item&rdquo;.</p>
 </blockquote>
 
-<h2 id="ai-calls">AI calls</h2>
+<h3 id="ai-calls">AI calls</h3>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search_menu"</span><span class="p">,</span><span class="w">
@@ -2370,10 +2491,124 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 <td style="text-align: center">String</td>
 <td style="text-align: right">Verbose response of the AI in that intent</td>
 </tr>
+<tr>
+<td>raw</td>
+<td style="text-align: center">Object</td>
+<td style="text-align: right">Raw response from the AI backend</td>
+</tr>
 </tbody></table>
 
-<!-- | raw         | Object | *Depending on your AI the object <br>could have different structures* |
-&ndash;>
+<p>Available integrations:</p>
+
+<table><thead>
+<tr>
+<th>Service</th>
+<th style="text-align: center">Availability</th>
+<th>Credentials</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Dialogflow</td>
+<td style="text-align: center">Available</td>
+<td>{token}</td>
+</tr>
+<tr>
+<td>Watson</td>
+<td style="text-align: center">Available</td>
+<td>{username, password, workspace_id}</td>
+</tr>
+<tr>
+<td>Wit.ai</td>
+<td style="text-align: center">Coming Soon</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="analytics">Analytics</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"analytics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"my_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">This</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">sent</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">default</span><span class="w"> </span><span class="err">events</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"splunk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPLUNK_INSTANCE_URL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTH_TOKEN"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nt">"_"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{track(analytics, {'event': 'buy_item'})}}"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have just bought an item"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The analytics attribute allows you to easily integrate 3rd party services like Mixpanel or Google Analytics to track events of your bot. You can use this to measure the activity of your bot&rsquo;s users and create different reports like retention or funnels.</p>
+
+<p>You must create an attribute named after each of the services you want to integrate, this attribute should contain an object with the credentials needed to talk to that service. Then BotSON will automatically track several default events:</p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th style="text-align: center">Data</th>
+<th style="text-align: right">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_message</td>
+<td style="text-align: center">BotSON encoded message</td>
+<td style="text-align: right">A message sent by an end-user</td>
+</tr>
+<tr>
+<td>bot_mesage</td>
+<td style="text-align: center">BotSON encoded message</td>
+<td style="text-align: right">A message sent by the bot</td>
+</tr>
+<tr>
+<td>bot_state</td>
+<td style="text-align: center">State label</td>
+<td style="text-align: right">The bot moved to a new state</td>
+</tr>
+</tbody></table>
+
+<p>You can set the attribute `defaults.analytics.data` in order to share data with all the events sent</p>
+
+<p>Track your own events using the context function `track(analytics, data)`, where `data` is an object with arbitrary parameters that will be merged with the default `analytics.data`</p>
+
+<p>Available integrations:</p>
+
+<table><thead>
+<tr>
+<th>Service</th>
+<th style="text-align: center">Availability</th>
+<th>Credentials</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Splunk</td>
+<td style="text-align: center">Available</td>
+<td>{url, token}</td>
+</tr>
+<tr>
+<td>Mixpanel</td>
+<td style="text-align: center">Coming Soon</td>
+<td></td>
+</tr>
+<tr>
+<td>Google Analytics</td>
+<td style="text-align: center">Coming Soon</td>
+<td></td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
