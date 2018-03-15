@@ -468,7 +468,7 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
         },
         {
             "label": "result",
-            "output": "You're choice was {{user_choice.data}}",
+            "output": "Your choice was {{user_choice.data}}",
             "next_step": "choice"
         },
         {
@@ -696,7 +696,7 @@ When the bot enters a state, the first thing it does is to update the context, t
     {
       "label": "first_state",
       "input": {
-        "type": "free-text",
+        "type": "free_text",
         "variable": "first_input_from_user"
       },
       "output": {
