@@ -6,8 +6,11 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 search: true
-
 ---
+
+#Deprecation Notice
+
+botSON is no longer maintained. Please refer to [Botonic](https://botonic.io) to learn about the latest and recommended framework for building bots for the [Hubtype](https://hubtypee.com) platform. Botonic is open-source, based on [React](https://reactjs.org/) and allows for way more features, flexibility and ease of use.
 
 #Introduction
 
@@ -34,7 +37,7 @@ botSON is messenger agnostic, meaning that it's not designed specifically for a 
 
 We encourage you to watch the screencasts:
 
-* Part 1: [Scaffolding and publishing](https://www.youtube.com/watch?v=h53SjVGMwos)
+- Part 1: [Scaffolding and publishing](https://www.youtube.com/watch?v=h53SjVGMwos)
 
 #Examples
 
@@ -115,7 +118,7 @@ We encourage you to watch the screencasts:
 }
 ```
 
-This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API. 
+This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API.
 
 First of all, we ask what are the user interests. When we get it, we generate the [carrousel](#carrousel) of the products.
 
@@ -124,7 +127,7 @@ In order to get all the information, we store all the items making a request wit
 
 The request goes against a specific `url`, with his specific `method`, and if necessary with the `params`.
 
-For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it's in JSON format, and we can do `item.id` or `item['id']` to access it. 
+For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it's in JSON format, and we can do `item.id` or `item['id']` to access it.
 
 When we have all the product information, we can display the [carrousel](#carrousel).
 
@@ -135,8 +138,6 @@ For access to this values, we do `item.name` , `item.priceLabel`, etc.
 <p style="text-align:center">
   <img src="/videos/dynamic_carrousel.gif" align="middle" height="600px" width="400px"/>
 </p>
-
-
 
 ##Location Bot
 
@@ -182,10 +183,11 @@ For access to this values, we do `item.name` , `item.priceLabel`, etc.
 
 Being able to manage location is a powerfull tool nowadays.
 
-This bot ask for your location, and with a simple click, the user can send his location to the bot. 
+This bot ask for your location, and with a simple click, the user can send his location to the bot.
 In the state `initial`, we ask to the user where is he, and with the option `location` in the `keyboard`, we display a `keyboard` that will get the user location.
 
 Then, in the `input`, we store the user location in the variable `location`.
+
 <p style="text-align:center">
   <img src="/videos/bot_location.gif" height="600px" width="400px"/>
 </p>
@@ -201,7 +203,7 @@ Then, in the `input`, we store the user location in the variable `location`.
           {
               "match": "^reset$",
               "next_step": "initial"
-          }    
+          }
       ]
   },
   "version": "1.0",
@@ -333,7 +335,7 @@ In this bot, we can find all the possible states where the bot can be redirected
 
 In the first demo, we see how the user enters 3 times some input that the bot isn't expecting, and it will display the same question as many times as you have declares in the `input_retry`. If the bot reaches the number of failures as declared, it will go into the `input_failure` state.
 
-In the other demo, we can find the other three types of failure states. 
+In the other demo, we can find the other three types of failure states.
 The first one, the `fallback_instruction`, it's reached when the bot tries to enter into the state `not_defined`, and doesn't find it.
 
 The second case is the `external_request_failure`, in this state we make a get request, and as we don't get any response, the bot goes into `external_request_failure`.
@@ -359,7 +361,7 @@ And the last one is reached when the user enters a loop. We are jumping from sta
             "label": "initial",
             "output": [
                 {
-                    "type": "text", 
+                    "type": "text",
                     "data": "What do you prefer, rigth or left?",
                     "keyboard": [
                         {"label": "Right", "data": "right"},
@@ -442,41 +444,41 @@ When the bot enters a state with no `input`, it just sends the `output` (if any)
 
 ```json
 {
-    "input_retry": 3,
-    "version": "1.0",
-    "states": [
-        {
-            "label": "first_state",
-            "next_step": "choice"
-        },
-        {
-            "label": "choice",
-            "output": {
-                "type": "text",
-                "data": "Here you have to choose:",
-                "keyboard": [
-                    {"label": "Red", "data": "RED"},
-                    {"label": "Blue", "data": "BLUE"},
-                    {"label": "Green", "data": "GREEN"}
-                ]
-            },
-            "input": {
-                "type": "in_keyboard",
-                "variable": "user_choice"
-            },
-            "next_step": "result"
-        },
-        {
-            "label": "result",
-            "output": "Your choice was {{user_choice.data}}",
-            "next_step": "choice"
-        },
-        {
-            "label": "input_failure",
-            "output": "I don't understand what you're trying to tell me, it seems I'm not smart enough for you =(",
-            "next_step": "choice"
-        }
-    ]
+  "input_retry": 3,
+  "version": "1.0",
+  "states": [
+    {
+      "label": "first_state",
+      "next_step": "choice"
+    },
+    {
+      "label": "choice",
+      "output": {
+        "type": "text",
+        "data": "Here you have to choose:",
+        "keyboard": [
+          { "label": "Red", "data": "RED" },
+          { "label": "Blue", "data": "BLUE" },
+          { "label": "Green", "data": "GREEN" }
+        ]
+      },
+      "input": {
+        "type": "in_keyboard",
+        "variable": "user_choice"
+      },
+      "next_step": "result"
+    },
+    {
+      "label": "result",
+      "output": "Your choice was {{user_choice.data}}",
+      "next_step": "choice"
+    },
+    {
+      "label": "input_failure",
+      "output": "I don't understand what you're trying to tell me, it seems I'm not smart enough for you =(",
+      "next_step": "choice"
+    }
+  ]
 }
 ```
 
@@ -491,6 +493,7 @@ If the user wrote any random sentence, the chatbot would ignore that input and p
 Finally, in the state `result` the bot sends a text message saying what was the pick of the user and returns to the `choice` state.
 
 ##botSON code
+
 ```json
 {
   "something": "this is a multiline
@@ -498,7 +501,9 @@ Finally, in the state `result` the bot sends a text message saying what was the 
     botSON is cooler than JSON"
 }
 ```
-botSON and JSON are slightly different, botSON allows multiline strings while JSON don't. 
+
+botSON and JSON are slightly different, botSON allows multiline strings while JSON don't.
+
 <aside class="softwarn">
 Please keep in mind that if there is some error in those lines the bug report will point to the first line.
 </aside>
@@ -528,7 +533,7 @@ Please keep in mind that if there is some error in those lines the bug report wi
 ```
 
 Specifies the number of input failures before the machine goes to the 'input_failure' state. By default is set to 3.
-An input failure is given when the [type of input](#input-actions) doesn't match the required data. 
+An input failure is given when the [type of input](#input-actions) doesn't match the required data.
 
 ##name
 
@@ -571,19 +576,18 @@ Variables that will be always available at any state of the bot. They are recalc
 > Simple literals
 
 ```json
-
 {
-    "literals": {
-        "text1": "Hello!",
-        "text2": "Goodbye my friend!"
-    },
-    "states": [
-        {
-            "label": "initial",
-            "output": "{{text1}}",
-            "next_step": "exit"
-        }
-    ]
+  "literals": {
+    "text1": "Hello!",
+    "text2": "Goodbye my friend!"
+  },
+  "states": [
+    {
+      "label": "initial",
+      "output": "{{text1}}",
+      "next_step": "exit"
+    }
+  ]
 }
 ```
 
@@ -591,28 +595,28 @@ Variables that will be always available at any state of the bot. They are recalc
 
 ```json
 {
-    "literals": {
-        "text1": {
-            "en": ["Hello!", "Hey there!", "Alohaaa"],
-            "es": ["Hola!", "Hey que tal!", "Buenaaas"]
-        },
-        "text2": {
-            "en": ["Goodbye my friend!", "bye byee"],
-            "es": ["Adiós amigo!", "Hasta luegoo"]
-        }
+  "literals": {
+    "text1": {
+      "en": ["Hello!", "Hey there!", "Alohaaa"],
+      "es": ["Hola!", "Hey que tal!", "Buenaaas"]
     },
-    "defaults": {
-        "context": {
-            "lang": "en"
-        }
-    },
-    "states": [
-        {
-            "label": "initial",
-            "output": "{{text1[lang] | random}}",
-            "next_step": "exit"
-        }
-    ]
+    "text2": {
+      "en": ["Goodbye my friend!", "bye byee"],
+      "es": ["Adiós amigo!", "Hasta luegoo"]
+    }
+  },
+  "defaults": {
+    "context": {
+      "lang": "en"
+    }
+  },
+  "states": [
+    {
+      "label": "initial",
+      "output": "{{text1[lang] | random}}",
+      "next_step": "exit"
+    }
+  ]
 }
 ```
 
@@ -647,7 +651,7 @@ Defaults to `true`.
 ```json
 {
   "triggers": {
-    "payload":[
+    "payload": [
       {
         "match": "^WATCH_VIDEO_(?P<video_id>[a-z0-9-]+)$",
         "context": {
@@ -656,7 +660,7 @@ Defaults to `true`.
         "next_step": "watch_video"
       }
     ],
-    "text":[
+    "text": [
       {
         "match": "trigger_(?P<id>\\w+)",
         "next_step": "trigger_{{id}}"
@@ -672,9 +676,9 @@ Defaults to `true`.
 
 Triggers are commands that are available at any point during the bot execution, regardless of its current state.
 
-* `text` triggers can be fired by user inputs or payloads
+- `text` triggers can be fired by user inputs or payloads
 
-* `payload` triggers can not be fired by user messages. *(Higher priority than text triggers.)*
+- `payload` triggers can not be fired by user messages. _(Higher priority than text triggers.)_
 
 Triggers are matched with regular expressions. If the regexp contains named groups, those will be added as variables to the context with the corresponding matched value. When a user input is captured by a trigger, it is not consumed by the current state.
 
@@ -690,8 +694,8 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-  "version":"1.0",
-  "initial_state":"first_state",
+  "version": "1.0",
+  "initial_state": "first_state",
   "states": [
     {
       "label": "first_state",
@@ -734,9 +738,9 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-    "label": "input_failure",
-    "output": "input_failure",
-    "next_step": "exit"
+  "label": "input_failure",
+  "output": "input_failure",
+  "next_step": "exit"
 }
 ```
 
@@ -744,9 +748,9 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-    "label": "external_request_failure",
-    "output": "external_request_failure",
-    "next_step": "exit"
+  "label": "external_request_failure",
+  "output": "external_request_failure",
+  "next_step": "exit"
 }
 ```
 
@@ -754,9 +758,9 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-    "label": "fallback_instruction",
-    "output": "fallback_instruction",
-    "next_step": "exit"
+  "label": "fallback_instruction",
+  "output": "fallback_instruction",
+  "next_step": "exit"
 }
 ```
 
@@ -764,9 +768,9 @@ When the bot enters a state, the first thing it does is to update the context, t
 
 ```json
 {
-    "label": "loop_overflow",
-    "output": "loop_overflow",
-    "next_step": "exit"
+  "label": "loop_overflow",
+  "output": "loop_overflow",
+  "next_step": "exit"
 }
 ```
 
@@ -776,43 +780,41 @@ It is required to set some 'initial_state', that is the first state in the conve
 
 The state name.
 
-###context 
+###context
 
-*(Optional)*
+_(Optional)_
 
 Variables to be assigned when entering the state. See [context](#context).
 
-###output 
+###output
 
-*(Optional)*
+_(Optional)_
 
 The bot will send in order all outputs defined here. It has different possible [data types](#output-types).
 
-###input 
+###input
 
-*(Optional)*
+_(Optional)_
 
-Input of the bot. It can come from the user or as a response to url calls. The field "actions" specifies the expected 
+Input of the bot. It can come from the user or as a response to url calls. The field "actions" specifies the expected
 [type of input](#input-actions).
 
 ###next_step
 
-Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states 
+Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states
 depending of variables) see [templating](#templating).
-
 
 ### Implicit states
 
 There are some implicit states that are always defined under the hood. You can always redefine these states in your code in order to customize their default behaviour.
 
-* `input_failure`: The chatbot jumps to this state when the user fails to give an appropiate answer after N attempts. This can be controlled using the global setting `input_retry`.
+- `input_failure`: The chatbot jumps to this state when the user fails to give an appropiate answer after N attempts. This can be controlled using the global setting `input_retry`.
 
-* `external_request_failure`: The chatbot jumps to this state when it fails to make an http request. This can be triggered for a variety of reasons, for example, if the request took too long or the response code was ouside the 2XX range.
+- `external_request_failure`: The chatbot jumps to this state when it fails to make an http request. This can be triggered for a variety of reasons, for example, if the request took too long or the response code was ouside the 2XX range.
 
-* `fallback_instruction`: The chatbot jumps to this state when it encounters a `next_step` statement that points to a label that doesn't exist. This can happen when you define a dynamic `next_step` using some templating expression like `my_state_{{option}}` and the variable `option` is not defined.
+- `fallback_instruction`: The chatbot jumps to this state when it encounters a `next_step` statement that points to a label that doesn't exist. This can happen when you define a dynamic `next_step` using some templating expression like `my_state_{{option}}` and the variable `option` is not defined.
 
-* `loop_overflow`: The chatbot jumps to this state when it's been jumping from state to state N times without finding any "input" statement which makes the bot to pause and wait for user input. This is needed in order to prevent infinite loops where state A has a next_step to state B and vice versa. You can set the max number of iterations using the global setting `max_loop`, but it can't be higher than 50.
-
+- `loop_overflow`: The chatbot jumps to this state when it's been jumping from state to state N times without finding any "input" statement which makes the bot to pause and wait for user input. This is needed in order to prevent infinite loops where state A has a next_step to state B and vice versa. You can set the max number of iterations using the global setting `max_loop`, but it can't be higher than 50.
 
 #Context
 
@@ -835,11 +837,12 @@ There are some implicit states that are always defined under the hood. You can a
 ```json
 {
   "context": [
-    {"first_var": 1},
-    {"second_var": "This depends on the {{first_var}}"}
+    { "first_var": 1 },
+    { "second_var": "This depends on the {{first_var}}" }
   ]
 }
 ```
+
 The context is a set of variables that is carried along during the whole session. Everytime the bot transitions to a new state, the context is updated with all the variables defined in the new state `context` statement. Context variables can then be used to build the outputs dynamically and in other places by using the [templating syntax](#templating).
 
 <aside class="softwarn">
@@ -851,7 +854,6 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 > In this example, 'new_user' will contain the json response of the call.
 
 ```json
-
 {
   "new_user": "{{http('http://my-api.example.com/new_user', params={'q': 'apples'})}}"
 }
@@ -860,7 +862,6 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 > In this example, the variable 'queues' will contain an array of names: the queues that are open in Hubtype DESK.
 
 ```json
-
 {
   "context": {
     "queues": {
@@ -873,7 +874,6 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 > Here we create a note so the human agent that is going to attend the conversation can quickly see a summary of the customer.
 
 ```json
-
 {
   "context": {
     "note": {
@@ -887,7 +887,6 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 > Finally, we create a case in one of the available queues or in the default one if there are none available.
 
 ```json
-
 {
   "context": {
     "case": {
@@ -900,30 +899,30 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 
 Context actions are used to interact with the outside world. Probably the most handy action is `http`, which allows you to make calls to any standard JSON API. Here's a complete list of available actions:
 
-* **http**: Makes a starndard http request to a url and retrieves the response in json. The expected parameters are:
+- **http**: Makes a starndard http request to a url and retrieves the response in json. The expected parameters are:
 
-| Action     | Type           |   |
-| --------- |:-------------:| -----:|
-| url      | String          |  |
-| method | String (GET, POST, PUT, PATCH, DELETE, HEAD)        | Optional. Defaults to GET |
-| headers | Object        | Optional |
-| params | Object        | Optional. Query parameters (GET params) |
-| data | Object        | Optional. Form data to send along with the request |
-| json | Object        | Optional. JSON data to send in the body of the request |
+| Action  |                     Type                     |                                                        |
+| ------- | :------------------------------------------: | -----------------------------------------------------: |
+| url     |                    String                    |                                                        |
+| method  | String (GET, POST, PUT, PATCH, DELETE, HEAD) |                              Optional. Defaults to GET |
+| headers |                    Object                    |                                               Optional |
+| params  |                    Object                    |                Optional. Query parameters (GET params) |
+| data    |                    Object                    |     Optional. Form data to send along with the request |
+| json    |                    Object                    | Optional. JSON data to send in the body of the request |
 
-* **active_queues**: Returns the IDs of the queues in status "Open" from your organization at Hubtype DESK. Useful when your chatbot has qualified a lead and has to handover the conversation to a human agent.
+- **active_queues**: Returns the IDs of the queues in status "Open" from your organization at Hubtype DESK. Useful when your chatbot has qualified a lead and has to handover the conversation to a human agent.
 
-* **add_note**: It creates a note in the conversation. You can use this to make a summary of the user details before a human agent handover.
+- **add_note**: It creates a note in the conversation. You can use this to make a summary of the user details before a human agent handover.
 
-| Action     | Type           |   |
-| --------- |:-------------:| -----:|
-| text      | String          | Content of the note |
+| Action |  Type  |                     |
+| ------ | :----: | ------------------: |
+| text   | String | Content of the note |
 
-* **create_case**: It creates a case in Hubtype DESK so that a human agent gets over the conversation. While the case is open, the chatbot won't respond to any user input. Only when the agent resolves the case the chatbot will continue its flow.
+- **create_case**: It creates a case in Hubtype DESK so that a human agent gets over the conversation. While the case is open, the chatbot won't respond to any user input. Only when the agent resolves the case the chatbot will continue its flow.
 
-| Action     | Type           |   |
-| --------- |:-------------:| -----:|
-| queue      | String          | ID or name of the queue that the case will be created on |
+| Action |  Type  |                                                          |
+| ------ | :----: | -------------------------------------------------------: |
+| queue  | String | ID or name of the queue that the case will be created on |
 
 <aside class="softwarn">
 NOTE: active_queues are the only ones that some user can be transferred
@@ -934,9 +933,10 @@ NOTE: active_queues are the only ones that some user can be transferred
 There are some special variables in the context that the bot populates automatically when a new session starts or when certain events occur:
 
 ###User
+
 ```json
 {
-  "user":{
+  "user": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "name": "John Doe",
     "provider": "facebook | telegram | twitter...",
@@ -945,17 +945,21 @@ There are some special variables in the context that the bot populates automatic
   }
 }
 ```
+
 This variable contains the main information about the provider from which the user contacts. It can be useful to prevent sending some kind of output that is not supported on specifics providers.
 
 ###Organization
+
 ```json
 {
   "organization": "ACME"
 }
 ```
+
 This is the name of your organization at Hubtype.
 
 ###Bot
+
 ```json
 {
   "bot": {
@@ -964,14 +968,17 @@ This is the name of your organization at Hubtype.
   }
 }
 ```
+
 Contains a unique identifier set when you created the bot. Also the name of the bot stated in the "name" attribute.
 
 ###Trace
+
 ```json
 {
-  "_trace":["initial", "welcome_message", "show_products", "buy_item"]
+  "_trace": ["initial", "welcome_message", "show_products", "buy_item"]
 }
 ```
+
 List of states for which the user has passed. It can be useful to retrieve behaviour data about your users.
 
 ###First text
@@ -985,9 +992,10 @@ List of states for which the user has passed. It can be useful to retrieve behav
 First text message from the user
 
 ###Last session
+
 ```json
 {
-  "last_session":{
+  "last_session": {
     "last_state": "buy_item",
     "created_at": "2017-10-24T15:05:31.949553Z",
     "last_interaction": {
@@ -1001,11 +1009,12 @@ First text message from the user
 All information you need about the last time this user contacts the bot.
 
 ###Last keyboard
+
 ```json
 {
   "_last_keyboard": [
-    {"label": "Yeah", "data": "yes"},
-    {"label": "Nope", "data": "no"}
+    { "label": "Yeah", "data": "yes" },
+    { "label": "Nope", "data": "no" }
   ]
 }
 ```
@@ -1013,6 +1022,7 @@ All information you need about the last time this user contacts the bot.
 Array with the different options of last shown keyboard
 
 ###Hubtype case typification and status
+
 ```json
 {
   "_hubtype_case_typification": "timetable",
@@ -1047,10 +1057,10 @@ Outputs are the messages that the bot sends to the user when it reaches the curr
 
 All outputs accept the following parameters:
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| delay      | Number | Time (in seconds) to delay sending this output. It can be a decimal number. Defaults to 0. |
-| typing      | Number | Time (in seconds) that the bot will display the "typing..." effect. It can be a decimal number. Defaults to 0. |
+| Field  | Value  |                                                                                                                |
+| ------ | :----: | -------------------------------------------------------------------------------------------------------------: |
+| delay  | Number |                     Time (in seconds) to delay sending this output. It can be a decimal number. Defaults to 0. |
+| typing | Number | Time (in seconds) that the bot will display the "typing..." effect. It can be a decimal number. Defaults to 0. |
 
 <aside class="softwarn">
 NOTE: If the typing effect is not supported by the messenger it will result in extra delay time.
@@ -1068,10 +1078,11 @@ Next, we will define all the available output types:
   "data": "Done! 😉"
 }
 ```
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "text" | |
-| data      | String      | *Any UTF-8 encoded string*|
+
+| Field | Value  |                            |
+| ----- | :----: | -------------------------: |
+| type  | "text" |                            |
+| data  | String | _Any UTF-8 encoded string_ |
 
 ##Image
 
@@ -1082,10 +1093,10 @@ Next, we will define all the available output types:
 }
 ```
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "image" | |
-| data      | String      | *The image URL*|
+| Field |  Value  |                 |
+| ----- | :-----: | --------------: |
+| type  | "image" |                 |
+| data  | String  | _The image URL_ |
 
 ##Video
 
@@ -1094,13 +1105,12 @@ Next, we will define all the available output types:
   "type": "video",
   "data": "http://this.is.the/url/of/the/video.mp4"
 }
-
 ```
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "video" | |
-| data      | String      | |
+| Field |  Value  |     |
+| ----- | :-----: | --: |
+| type  | "video" |     |
+| data  | String  |     |
 
 ##Audio
 
@@ -1110,14 +1120,13 @@ Next, we will define all the available output types:
   "data": "http://this.is.the/url/of/the/audio.mp3",
   "caption": "Some video subtitle"
 }
-
 ```
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "audio" | |
-| data      | String      | |
-| caption   | String      | *optional*|
+| Field   |  Value  |            |
+| ------- | :-----: | ---------: |
+| type    | "audio" |            |
+| data    | String  |            |
+| caption | String  | _optional_ |
 
 ##Document
 
@@ -1128,11 +1137,12 @@ Next, we will define all the available output types:
   "caption": "Some document subtitle"
 }
 ```
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "image" | |
-| data      | String      | |
-| caption   | String      | *optional*|
+
+| Field   |  Value  |            |
+| ------- | :-----: | ---------: |
+| type    | "image" |            |
+| data    | String  |            |
+| caption | String  | _optional_ |
 
 ##Location
 
@@ -1147,14 +1157,14 @@ Next, we will define all the available output types:
 }
 ```
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "location" | |
-| latitude  | Number      |    |
-| longitude | Number      |    |
-| title     | String      |  *optional*<br>*32 chars max*  |
-| address   | String      |  *optional*  |
-| url       | String      |  *optional*  |
+| Field     |   Value    |                              |
+| --------- | :--------: | ---------------------------: |
+| type      | "location" |                              |
+| latitude  |   Number   |                              |
+| longitude |   Number   |                              |
+| title     |   String   | _optional_<br>_32 chars max_ |
+| address   |   String   |                   _optional_ |
+| url       |   String   |                   _optional_ |
 
 <aside class="softwarn">
 NOTE: The Location Output is not available on Facebook.
@@ -1168,19 +1178,20 @@ NOTE: The Location Output is not available on Facebook.
   "first_name": "John",
   "last_name": "Doe",
   "phone_number": "678909909",
-  "vcard": "vcard:data"                 
+  "vcard": "vcard:data"
 }
 ```
 
-| Field       | Value           |   |
-| ---------   |:-------------:| -----:|
-| type        | "contact" | |
-| first_name  | String      |    |
-| last_name   | String      |  *optional*  |
-| phone_number| Number      |  *optional*  |
-| vcard       | String      |  *optional*  |
+| Field        |   Value   |            |
+| ------------ | :-------: | ---------: |
+| type         | "contact" |            |
+| first_name   |  String   |            |
+| last_name    |  String   | _optional_ |
+| phone_number |  Number   | _optional_ |
+| vcard        |  String   | _optional_ |
 
 ##Buttonmessage
+
 ```json
 {
   "type": "buttonmessage",
@@ -1214,16 +1225,16 @@ A text message followed by a collection of at most 4 buttons displayed verticall
 
 ###Button:
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type                 | "web_url", "postback" or "phone_number" | |
-| title                | String  |   |
-| webview_height_ratio | String | *Possible in web_url* |
-| messenger_extensions | String | *Possible in web_url* |
-| fallback_url         | String | *Possible in web_url* | 
-| url                  | String | *mandatory if type is "web_url"*  |
-| payload              | String | *mandatory if type is "postback" or "phone_number"* |
-| next_step            | String | *optional substitute of payload when type is "postback"* |
+| Field                |                  Value                  |                                                          |
+| -------------------- | :-------------------------------------: | -------------------------------------------------------: |
+| type                 | "web_url", "postback" or "phone_number" |                                                          |
+| title                |                 String                  |                                                          |
+| webview_height_ratio |                 String                  |                                    _Possible in web_url_ |
+| messenger_extensions |                 String                  |                                    _Possible in web_url_ |
+| fallback_url         |                 String                  |                                    _Possible in web_url_ |
+| url                  |                 String                  |                         _mandatory if type is "web_url"_ |
+| payload              |                 String                  |      _mandatory if type is "postback" or "phone_number"_ |
+| next_step            |                 String                  | _optional substitute of payload when type is "postback"_ |
 
 <aside class="softwarn">
 NOTE: The messagebutton output is only available on Facebook and Telegram. Also, phone_number button type only is available on Facebook. Currently other platforms will ignore that output.
@@ -1234,7 +1245,7 @@ NOTE: The messagebutton output is only available on Facebook and Telegram. Also,
 ```json
 {
   "type": "carrousel",
-  "elements":[
+  "elements": [
     {
       "title": "Pepperoni",
       "subtitle": "Authentic soft New York style dough topped with tasty pepperoni",
@@ -1271,61 +1282,68 @@ If you want the bot to stop and wait for the user to tap on a button, then you m
 
 <img width="300" src="/images/carrousel.png">
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| type      | "carrousel" | |
-| elements  | Array of Elements  | *10 elements max (will truncate)* |
+| Field    |       Value       |                                   |
+| -------- | :---------------: | --------------------------------: |
+| type     |    "carrousel"    |                                   |
+| elements | Array of Elements | _10 elements max (will truncate)_ |
 
 ###Element:
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| title      | String | |
-| subtitle  | String  | |
-| image_url  | String  | |
-| [buttons](#buttonmessage)  | Array of Buttons  | *3 elements max (will truncate)* |
+| Field                     |      Value       |                                  |
+| ------------------------- | :--------------: | -------------------------------: |
+| title                     |      String      |                                  |
+| subtitle                  |      String      |                                  |
+| image_url                 |      String      |                                  |
+| [buttons](#buttonmessage) | Array of Buttons | _3 elements max (will truncate)_ |
 
 <aside class="softwarn">
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
 ##List
+
 ```json
 {
-    "type": "list",
-    "elements": [{
-        "title": "First title",
-        "subtitle": "Some subtitle",
-        "image_url": "https://www.url/g/image.png",
-        "buttons": [{
-            "type" : "phone_number",
-            "title" : "Call",
-            "payload" : "{% raw %}+44 7700 900200{% endraw %}"
-        }]
-        },
+  "type": "list",
+  "elements": [
+    {
+      "title": "First title",
+      "subtitle": "Some subtitle",
+      "image_url": "https://www.url/g/image.png",
+      "buttons": [
         {
-        "title": "Second title",
-        "subtitle": "Oh my god",
-        "image_url": "https://ToBeOrNot.ToBe.an.url/image.jpg",
-        "buttons": [{
-            "type": "web_url",
-            "title": "Go details",
-            "url": "http://www.details.url/#section"
-
-        }]
-    }]
+          "type": "phone_number",
+          "title": "Call",
+          "payload": "{% raw %}+44 7700 900200{% endraw %}"
+        }
+      ]
+    },
+    {
+      "title": "Second title",
+      "subtitle": "Oh my god",
+      "image_url": "https://ToBeOrNot.ToBe.an.url/image.jpg",
+      "buttons": [
+        {
+          "type": "web_url",
+          "title": "Go details",
+          "url": "http://www.details.url/#section"
+        }
+      ]
+    }
+  ]
 }
 ```
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| [elements](#carrousel) | Array of Elements  | *min 2 elements <br> max 4 elements*   |
+| Field                  |       Value       |                                      |
+| ---------------------- | :---------------: | -----------------------------------: |
+| [elements](#carrousel) | Array of Elements | _min 2 elements <br> max 4 elements_ |
 
 <aside class="softwarn">
 NOTE: The carrousel output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
 ##Media Message
+
 ```
 {
   "type": "mediamessage",
@@ -1359,41 +1377,40 @@ IMPORTANT: The Media Message only accepts an image or a video, not the both in t
 NOTE: The Media Message output is only available on Facebook. Currently other platforms will ignore that output.
 </aside>
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| image     |   String |  |
-| video     |   String |  |
-| [buttons](#buttonmessage)  | Array of Buttons  | *max of 1 button* |
-
+| Field                     |      Value       |                   |
+| ------------------------- | :--------------: | ----------------: |
+| image                     |      String      |                   |
+| video                     |      String      |                   |
+| [buttons](#buttonmessage) | Array of Buttons | _max of 1 button_ |
 
 ##Keyboard (Quick Replies)
 
 ```json
 {
-    "label": "select_restaurant_type",
-    "output": {
-        "type": "text",
-        "data": "What's your budget for dinner?",
-        "keyboard": [
-            {
-              "label": "$10 or less",
-              "data": "cheap"
-            },
-            {
-              "label": "$15 - $25",
-              "data": "medium"
-            },
-            {
-              "label": "$25 or more",
-              "data": "expensive"
-            }
-        ]
-    },
-    "input": {
-        "type": "in_keyboard",
-        "variable": "budget"
-    },
-    "next_step": "show_{{budget.data}}"
+  "label": "select_restaurant_type",
+  "output": {
+    "type": "text",
+    "data": "What's your budget for dinner?",
+    "keyboard": [
+      {
+        "label": "$10 or less",
+        "data": "cheap"
+      },
+      {
+        "label": "$15 - $25",
+        "data": "medium"
+      },
+      {
+        "label": "$25 or more",
+        "data": "expensive"
+      }
+    ]
+  },
+  "input": {
+    "type": "in_keyboard",
+    "variable": "budget"
+  },
+  "next_step": "show_{{budget.data}}"
 }
 ```
 
@@ -1401,20 +1418,20 @@ NOTE: The Media Message output is only available on Facebook. Currently other pl
 
 ```json
 {
-    "label": "ask_location",
-    "output": {
-        "data": "Please, share your location with me",
-        "keyboard": [
-            {
-                "location": ""
-            }
-        ]
-    },
-    "input": {
-        "type": "location",
-        "variable": "location"
-    },
-    "next_step": "show_nearby_shops"
+  "label": "ask_location",
+  "output": {
+    "data": "Please, share your location with me",
+    "keyboard": [
+      {
+        "location": ""
+      }
+    ]
+  },
+  "input": {
+    "type": "location",
+    "variable": "location"
+  },
+  "next_step": "show_nearby_shops"
 }
 ```
 
@@ -1495,7 +1512,7 @@ The "location" keyboard only works on Facebook Messenger.
 }
 ```
 
-This output is used to send receipts to users. It can be simple with not much information or very detailed. The user 
+This output is used to send receipts to users. It can be simple with not much information or very detailed. The user
 will see a summarised version that will be expanded with all the information when the user click it.
 
 <img width="300" src="/images/receipt.png">
@@ -1510,52 +1527,52 @@ Detailed receipt that uses all possible fields.
 
 Previous receipt expanded when clicked by the user.
 
-| Field          | Value  ||
-| -------------  |:------:| -----:|
-| recipient_name | String ||
-| merchant_name  | String | *Optional* |
-| order_number   | String ||
-| currency       | String ||
-| payment_method | String ||
-| timestamp      | String | *Optional* |
-| order_url      | String | *Optional* |
-| elements       | Array of ReceiptElement | *Optional<br>Facebook doesn't<br>guarantee the order* |
-| address        | Address | *Optional* |
-| summary        | Summary ||
-| adjustments    | Array of Adjustment | *Optional* |
+| Field          |          Value          |                                                       |
+| -------------- | :---------------------: | ----------------------------------------------------: |
+| recipient_name |         String          |                                                       |
+| merchant_name  |         String          |                                            _Optional_ |
+| order_number   |         String          |                                                       |
+| currency       |         String          |                                                       |
+| payment_method |         String          |                                                       |
+| timestamp      |         String          |                                            _Optional_ |
+| order_url      |         String          |                                            _Optional_ |
+| elements       | Array of ReceiptElement | _Optional<br>Facebook doesn't<br>guarantee the order_ |
+| address        |         Address         |                                            _Optional_ |
+| summary        |         Summary         |                                                       |
+| adjustments    |   Array of Adjustment   |                                            _Optional_ |
 
 ###ReceiptElement
-| Field    | Value  |   |
+| Field | Value | |
 | -------- |:------:| -----:|
-| title    | String ||
-| subtitle | String | *Optional* |
-| quantity | Number | *Optional* |
-| price    | Number | *Can be 0* |
-| currency | String | *Optional* |
-| image_url | Link  | *Optional* |
+| title | String ||
+| subtitle | String | _Optional_ |
+| quantity | Number | _Optional_ |
+| price | Number | _Can be 0_ |
+| currency | String | _Optional_ |
+| image_url | Link | _Optional_ |
 
 ###Address
-| Field   | Value  |   |
+| Field | Value | |
 | ------- |:------:| -----:|
 | street1 | String ||
-| street2 | String | *Optional* |
-| city    | String ||
+| street2 | String | _Optional_ |
+| city | String ||
 | postal_code | String ||
-| state   | String ||
+| state | String ||
 | country | String ||
 
 ###Summary
-| Field         | Value  |            |
+| Field | Value | |
 | ------------- |:------:| ----------:|
-| subtotal      | Number | *Optional* |
-| shipping_cost | Number | *Optional* |
-| total_tax     | Number | *Optional* |
-| total_cost    | Number ||
+| subtotal | Number | _Optional_ |
+| shipping_cost | Number | _Optional_ |
+| total_tax | Number | _Optional_ |
+| total_cost | Number ||
 
 ###Adjustment
-| Field  | Value  |   |
+| Field | Value | |
 | ------ |:------:| -----:|
-| name   | String ||
+| name | String ||
 | amount | Number ||
 
 <aside class="softwarn">
@@ -1601,8 +1618,8 @@ Accepts any integer as input , other kinds of inputs are rejected.
 
 Only accepts these parameters as answer. It will ask at most `input_retry` times.
 
-| Field     | Value           |
-| --------- |:-------------:|
+| Field             |      Value       |
+| ----------------- | :--------------: |
 | action_parameters | Array of strings |
 
 ##Get in Set Fuzzy
@@ -1617,8 +1634,8 @@ Only accepts these parameters as answer. It will ask at most `input_retry` times
 
 Same as get in set, but it does not require a perfect match.
 
-| Field             | Value            |
-| ----------------- |:----------------:|
+| Field             |      Value       |
+| ----------------- | :--------------: |
 | action_parameters | Array of strings |
 
 ##Get in keyboard
@@ -1630,8 +1647,8 @@ Same as get in set, but it does not require a perfect match.
     "type": "text",
     "data": "Select one option:",
     "keyboard": [
-      {"label": "Item 1", "data": "1"},
-      {"label": "Item 2", "data": "2"}
+      { "label": "Item 1", "data": "1" },
+      { "label": "Item 2", "data": "2" }
     ]
   },
   "input": {
@@ -1642,7 +1659,7 @@ Same as get in set, but it does not require a perfect match.
 }
 ```
 
-Puts in the variable the key object (*label, data*) of the key pressed by the user. There must be a 
+Puts in the variable the key object (_label, data_) of the key pressed by the user. There must be a
 [keyboard](#quick-replies) present.
 
 You can access both variables using jinja: `{{key_user_choice.label}}` and `{{key_user_choice.data}}`
@@ -1676,17 +1693,17 @@ The accepted outputs are `yes`, `si`, `sí` and `no` in lowercase or uppercase.
 
 It makes a call to the url and stores the response json object in the variable name.
 
-| Field     | Value           |
-| --------- |:-------------:|
-| url | Get url |
+| Field  |                Value                 |
+| ------ | :----------------------------------: |
+| url    |               Get url                |
 | params | Array of parameters for the get call |
 
 ##Get name
 
 ```json
 {
-  "type":"name",
-  "variables":"confirm_get_name"
+  "type": "name",
+  "variables": "confirm_get_name"
 }
 ```
 
@@ -1707,8 +1724,8 @@ Gets the email and check if it is well writed. **something@someother**
 
 ```json
 {
-  "type":"age",
-  "variable":"age"
+  "type": "age",
+  "variable": "age"
 }
 ```
 
@@ -1718,12 +1735,12 @@ Saves a number representing the age. Age should match 1 <= age < 120.
 
 ```json
 {
-  "type":"location",
-  "variable":"location"
+  "type": "location",
+  "variable": "location"
 }
 ```
 
-The variable location will contain the components: `latitude` , `longitude`, `title`, `address`, `url`. For field 
+The variable location will contain the components: `latitude` , `longitude`, `title`, `address`, `url`. For field
 info see [location](#location).
 
 <aside class="softwarn">
@@ -1731,12 +1748,14 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 </aside>
 
 ##Get image
+
 ```json
 {
   "type": "image",
   "variable": "the_image_url"
 }
 ```
+
 It will save in the variable the url given by the provider.
 
 <aside class="softwarn">
@@ -1774,7 +1793,6 @@ Usually, templating engines transform text strings into new text strings, howeve
 
 ## Filters
 
-
 ```json
 {
   "context": {
@@ -1793,29 +1811,29 @@ Filters are used to modify the variables inside your template and are expressed 
 
 Additionally, BotSON defines the following custom filters:
 
-| Filter |  |
-| --------- | ------------- |
-| slugify | Returns the slug of any string  |
-| type | Returns the type of a variable |
-| escape_quotes | Escapes single quotes |
-| ascii | Returns the closest ascii codification of any unicode string |
+| Filter        |                                                              |
+| ------------- | ------------------------------------------------------------ |
+| slugify       | Returns the slug of any string                               |
+| type          | Returns the type of a variable                               |
+| escape_quotes | Escapes single quotes                                        |
+| ascii         | Returns the closest ascii codification of any unicode string |
 
 ## Dates
 
 ```json
 {
-    "context": {
-        "a1": "{{date()}}",
-        "a2": "{{date('tomorrow')}}",
-        "a3": "{{date('1984/05/05')}}",
-        "a4": "{{date('now', 'Europe/Paris')}}"
-    },
-    "output": [
-        "{{date(a1) - date() < date_interval(minutes=1)}} == True",
-        "{{date(a2).start_of('week') < date()}} == True",
-        "{{date(a3).year}} == 1984",
-        "{{date(a4).to_datetime_string()}} == current time in Paris"
-    ]
+  "context": {
+    "a1": "{{date()}}",
+    "a2": "{{date('tomorrow')}}",
+    "a3": "{{date('1984/05/05')}}",
+    "a4": "{{date('now', 'Europe/Paris')}}"
+  },
+  "output": [
+    "{{date(a1) - date() < date_interval(minutes=1)}} == True",
+    "{{date(a2).start_of('week') < date()}} == True",
+    "{{date(a3).year}} == 1984",
+    "{{date(a4).to_datetime_string()}} == current time in Paris"
+  ]
 }
 ```
 
@@ -1832,10 +1850,10 @@ It's possible to get the current time and operate with dates and time intervals 
                 {# This is a JINJA comment #}
                 'title': '{{item.name}}',
                 'subtitle': '{{item.priceLabel}}',
-                'image_url': '{{item.image.sizes.Best.url}}', 
+                'image_url': '{{item.image.sizes.Best.url}}',
                 'buttons':[
                     {
-                        'type': 'web_url', 
+                        'type': 'web_url',
                         'title':'Open product',
                         'url': '{{item.clickUrl}}'
                     }
@@ -1846,38 +1864,37 @@ It's possible to get the current time and operate with dates and time intervals 
 }
 ```
 
-We allow two types of comments. You can make a simple comment in the JSON code with a `#` followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: `{# your comment #}` 
+We allow two types of comments. You can make a simple comment in the JSON code with a `#` followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: `{# your comment #}`
 
 #Error types
 
-There may be errors during the parsing and execution of a bot. They are of different types inheriting from 
+There may be errors during the parsing and execution of a bot. They are of different types inheriting from
 `BotException`, and are mainly classified as JSON or BotSON related.
 
-| BotException |  |
-| --------- | ------------- |
+| BotException       |                                 |
+| ------------------ | ------------------------------- |
 | JSONParseException | Raises when the JSON is invalid |
-| BotSONException | Raises otherwise |
+| BotSONException    | Raises otherwise                |
 
 ##JSONParseException
 
-| Attributes | Contains |
-| --------- | ------------- |
-| message | Reason why the json is invalid |
-| line | Line of the problem in the json |
-| column | Column of the problem in the json |
+| Attributes | Contains                          |
+| ---------- | --------------------------------- |
+| message    | Reason why the json is invalid    |
+| line       | Line of the problem in the json   |
+| column     | Column of the problem in the json |
 
 ##BotSONException
 
-| Types |  |
-| --------- | ------------- |
-| BotSONParseException | Raises during parsing |
-| BotSONExecException | Raises during execution |
+| Types                |                         |
+| -------------------- | ----------------------- |
+| BotSONParseException | Raises during parsing   |
+| BotSONExecException  | Raises during execution |
 
-
-| Attributes | Contains |
-| --------- | ------------- |
-| message | Explanation of the error |
-| trace | Approximate path to the error in the json. _Note: in states and trigger arrays it will use label/match value instead of index number_  |
+| Attributes | Contains                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| message    | Explanation of the error                                                                                                              |
+| trace      | Approximate path to the error in the json. _Note: in states and trigger arrays it will use label/match value instead of index number_ |
 
 #Jobs
 
@@ -1912,31 +1929,31 @@ You must create an attribute named after the service you want to integrate, this
 
 ```json
 [
-    {
-        "label": "search_menu",
-        "output": "What do you want to do?",
-        "input": {
-            "type": "intent",
-            "variable": "ai_result"
-        },
-        "next_step": "{{ai_result.intent}}"
+  {
+    "label": "search_menu",
+    "output": "What do you want to do?",
+    "input": {
+      "type": "intent",
+      "variable": "ai_result"
     },
-    {
-        "label": "search",
-        "context": {
-            "search_result": {
-                "url": "http://my-api.my-company.com/search",
-                "params": { "query": "{{ai_result.item}}" }
-            }
-        },
-        "output": "I've searched for {{ai_result.item}} and found {{search_result | length}} results.",
-        "next_step": "exit"
+    "next_step": "{{ai_result.intent}}"
+  },
+  {
+    "label": "search",
+    "context": {
+      "search_result": {
+        "url": "http://my-api.my-company.com/search",
+        "params": { "query": "{{ai_result.item}}" }
+      }
     },
-    {
-        "label": "buy",
-        "output": "Are you sure you want to buy {{ai_result.item}}?",
-        "next_step": "exit"
-    }
+    "output": "I've searched for {{ai_result.item}} and found {{search_result | length}} results.",
+    "next_step": "exit"
+  },
+  {
+    "label": "buy",
+    "output": "Are you sure you want to buy {{ai_result.item}}?",
+    "next_step": "exit"
+  }
 ]
 ```
 
@@ -1950,28 +1967,27 @@ You must create an attribute named after the service you want to integrate, this
 }
 ```
 
-You are able to use watson or api.ai bots to manage the botSON flow. 
+You are able to use watson or api.ai bots to manage the botSON flow.
 
 To start just configure the credentials
 
 Then you can call the ai in two different ways.
 <br><br>The object return has `intent`, `entities`. The object saved in the variable will have the following fields:
 
-| Field     | Value           |   |
-| --------- |:-------------:| -----:|
-| intent      | String | |
-| entities    | String | |
-| output_text | String | Verbose response of the AI in that intent|
-| raw | Object | Raw response from the AI backend |
+| Field       | Value  |                                           |
+| ----------- | :----: | ----------------------------------------: |
+| intent      | String |                                           |
+| entities    | String |                                           |
+| output_text | String | Verbose response of the AI in that intent |
+| raw         | Object |          Raw response from the AI backend |
 
 Available integrations:
 
-| Service     | Availability | Credentials |
-| --------- |:-------------:| ------ |
-| Dialogflow      | Available | {token} |
-| Watson | Available | {username, password, workspace_id} |
-| Wit.ai | Coming Soon |
-
+| Service    | Availability | Credentials                        |
+| ---------- | :----------: | ---------------------------------- |
+| Dialogflow |  Available   | {token}                            |
+| Watson     |  Available   | {username, password, workspace_id} |
+| Wit.ai     | Coming Soon  |
 
 ##Analytics
 
@@ -2008,20 +2024,19 @@ The analytics attribute allows you to easily integrate 3rd party services like M
 
 You must create an attribute named after each of the services you want to integrate, this attribute should contain an object with the credentials needed to talk to that service. Then BotSON will automatically track several default events:
 
-| Event     | Data           | Description  |
-| --------- |:-------------:| -----:|
-| user_message      | BotSON encoded message          | A message sent by an end-user |
-| bot_mesage | BotSON encoded message        | A message sent by the bot |
-| bot_state | State label        | The bot moved to a new state |
+| Event        |          Data          |                   Description |
+| ------------ | :--------------------: | ----------------------------: |
+| user_message | BotSON encoded message | A message sent by an end-user |
+| bot_mesage   | BotSON encoded message |     A message sent by the bot |
+| bot_state    |      State label       |  The bot moved to a new state |
 
 <p>You can set the attribute `defaults.analytics.data` in order to share data with all the events sent</p>
 <p>Track your own events using the context function `track(analytics, data)`, where `data` is an object with arbitrary parameters that will be merged with the default `analytics.data`</p>
 
-
 Available integrations:
 
-| Service     | Availability | Credentials |
-| --------- |:-------------:| ------ |
-| Splunk      | Available | {url, token}
-| Mixpanel | Coming Soon |
-| Google Analytics | Coming Soon |
+| Service          | Availability | Credentials  |
+| ---------------- | :----------: | ------------ |
+| Splunk           |  Available   | {url, token} |
+| Mixpanel         | Coming Soon  |
+| Google Analytics | Coming Soon  |
