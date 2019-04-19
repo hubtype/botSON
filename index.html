@@ -125,7 +125,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id="deprecation-notice">Deprecation Notice</h1>
+
+<p>botSON is no longer maintained. Please refer to <a href="https://botonic.io">Botonic</a> to learn about the latest and recommended framework for building bots for the <a href="https://hubtypee.com">Hubtype</a> platform. Botonic is open-source, based on <a href="https://reactjs.org/">React</a> and allows for way more features, flexibility and ease of use.</p>
+
+<h1 id="introduction">Introduction</h1>
 
 <blockquote>
 <p>This is the simplest possible bot in botSON.</p>
@@ -229,7 +233,7 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API. </p>
+<p>This is a simple bot, that displays five men or woman shirts and its price, and we are getting the clothes information from the Shopstyle API.</p>
 
 <p>First of all, we ask what are the user interests. When we get it, we generate the <a href="#carrousel">carrousel</a> of the products.</p>
 
@@ -238,7 +242,7 @@ In order to get all the information, we store all the items making a request wit
 
 <p>The request goes against a specific <code class="prettyprint">url</code>, with his specific <code class="prettyprint">method</code>, and if necessary with the <code class="prettyprint">params</code>.</p>
 
-<p>For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it&rsquo;s in JSON format, and we can do <code class="prettyprint">item.id</code> or <code class="prettyprint">item[&#39;id&#39;]</code> to access it. </p>
+<p>For getting all the information of every product, we need to make a call to the API for all the shirt ids. The id of a product, it&rsquo;s in JSON format, and we can do <code class="prettyprint">item.id</code> or <code class="prettyprint">item[&#39;id&#39;]</code> to access it.</p>
 
 <p>When we have all the product information, we can display the <a href="#carrousel">carrousel</a>.</p>
 
@@ -291,13 +295,14 @@ In order to get all the information, we store all the items making a request wit
 </span></code></pre>
 <p>Being able to manage location is a powerfull tool nowadays.</p>
 
-<p>This bot ask for your location, and with a simple click, the user can send his location to the bot. 
+<p>This bot ask for your location, and with a simple click, the user can send his location to the bot.
 In the state <code class="prettyprint">initial</code>, we ask to the user where is he, and with the option <code class="prettyprint">location</code> in the <code class="prettyprint">keyboard</code>, we display a <code class="prettyprint">keyboard</code> that will get the user location.</p>
 
-<p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.
+<p>Then, in the <code class="prettyprint">input</code>, we store the user location in the variable <code class="prettyprint">location</code>.</p>
+
 <p style="text-align:center">
   <img src="videos/bot_location.gif" height="600px" width="400px"/>
-</p></p>
+</p>
 
 <h2 id="handover-bot">Handover Bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -308,7 +313,7 @@ In the state <code class="prettyprint">initial</code>, we ask to the user where 
           </span><span class="p">{</span><span class="w">
               </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^reset$"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="w">
-          </span><span class="p">}</span><span class="w">    
+          </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
@@ -436,7 +441,7 @@ In order to do that, when we reach the state where we want to transfer the case,
 
 <p>In the first demo, we see how the user enters 3 times some input that the bot isn&rsquo;t expecting, and it will display the same question as many times as you have declares in the <code class="prettyprint">input_retry</code>. If the bot reaches the number of failures as declared, it will go into the <code class="prettyprint">input_failure</code> state.</p>
 
-<p>In the other demo, we can find the other three types of failure states. 
+<p>In the other demo, we can find the other three types of failure states.
 The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsquo;s reached when the bot tries to enter into the state <code class="prettyprint">not_defined</code>, and doesn&rsquo;t find it.</p>
 
 <p>The second case is the <code class="prettyprint">external_request_failure</code>, in this state we make a get request, and as we don&rsquo;t get any response, the bot goes into <code class="prettyprint">external_request_failure</code>.</p>
@@ -460,7 +465,7 @@ The first one, the <code class="prettyprint">fallback_instruction</code>, it&rsq
             </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> 
+                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you prefer, rigth or left?"</span><span class="p">,</span><span class="w">
                     </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Right"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right"</span><span class="p">},</span><span class="w">
@@ -537,41 +542,41 @@ Otherwise, for avoiding possible errors, we say that if the data it&rsquo;s not 
 
 <h2 id="basic-bot">Basic bot</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Here you have to choose:"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RED"</span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLUE"</span><span class="p">},</span><span class="w">
-                    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Green"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GREEN"</span><span class="p">}</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your choice was {{user_choice.data}}"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I don't understand what you're trying to tell me, it seems I'm not smart enough for you =("</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"input_retry"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Here you have to choose:"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RED"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blue"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLUE"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Green"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GREEN"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_choice"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your choice was {{user_choice.data}}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I don't understand what you're trying to tell me, it seems I'm not smart enough for you =("</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>A complete bot usually never ends, it loops back to previous states. Also, it can use variables and other forms of <code class="prettyprint">input</code> and <code class="prettyprint">output</code> other than simple text.</p>
@@ -591,10 +596,11 @@ Otherwise, for avoiding possible errors, we say that if the data it&rsquo;s not 
     botSON is cooler than JSON"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>botSON and JSON are slightly different, botSON allows multiline strings while JSON don&rsquo;t. 
+<p>botSON and JSON are slightly different, botSON allows multiline strings while JSON don&rsquo;t.</p>
+
 <aside class="softwarn">
 Please keep in mind that if there is some error in those lines the bug report will point to the first line.
-</aside></p>
+</aside>
 
 <h1 id="top-level-properties">Top level properties</h1>
 
@@ -618,7 +624,7 @@ Please keep in mind that if there is some error in those lines the bug report wi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Specifies the number of input failures before the machine goes to the &#39;input_failure&rsquo; state. By default is set to 3.
-An input failure is given when the <a href="#input-actions">type of input</a> doesn&rsquo;t match the required data. </p>
+An input failure is given when the <a href="#input-actions">type of input</a> doesn&rsquo;t match the required data.</p>
 
 <h2 id="name">name</h2>
 
@@ -661,47 +667,46 @@ Currently this field is not used.
 <blockquote>
 <p>Simple literals</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
-    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goodbye my friend!"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1}}"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goodbye my friend!"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1}}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Literals for multiple languages</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey there!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Alohaaa"</span><span class="p">],</span><span class="w">
-            </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hola!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey que tal!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Buenaaas"</span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goodbye my friend!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bye byee"</span><span class="p">],</span><span class="w">
-            </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Adiós amigo!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hasta luegoo"</span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"literals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"text1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey there!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Alohaaa"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Hola!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hey que tal!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Buenaaas"</span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1[lang] | random}}"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"text2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"en"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Goodbye my friend!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bye byee"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"es"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Adiós amigo!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Hasta luegoo"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{text1[lang] | random}}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>When your bot grows you&rsquo;ll likely want to separate the content of your outputs from the logic of the states. One thing you could do is placing all your texts in a variable in the default context and then use <code class="prettyprint">{{my_copys[1]}}</code> to dinamically build your output. While this is perfectly fine for small bots, this is generally a bad idea since the default context is evaluated every time the bot jumps from one state to another, so if you have hundreds or thousands of copys it will slow down your bot. Instead, <code class="prettyprint">literals</code> is a static section where you can put as many variables as you want without incurring into a performance hit.</p>
@@ -733,7 +738,7 @@ Defaults to <code class="prettyprint">false</code>.</p>
 <h2 id="triggers">triggers</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"payload"</span><span class="p">:[</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^WATCH_VIDEO_(?P&lt;video_id&gt;[a-z0-9-]+)$"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -742,7 +747,7 @@ Defaults to <code class="prettyprint">false</code>.</p>
         </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"watch_video"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"text"</span><span class="p">:[</span><span class="w">
+    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trigger_(?P&lt;id&gt;\\w+)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trigger_{{id}}"</span><span class="w">
@@ -774,8 +779,8 @@ Defaults to <code class="prettyprint">false</code>.</p>
 
 <p>When the bot enters a state, the first thing it does is to update the context, then it writes all the outputs (if any) and finally wait for a user input (if defined). Finally, it jumps to the state defined in the <code class="prettyprint">next_step</code> expression.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"initial_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_state"</span><span class="p">,</span><span class="w">
@@ -817,36 +822,36 @@ Defaults to <code class="prettyprint">false</code>.</p>
 <p>Default input_failure</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_failure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Default external_request_failure</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external_request_failure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Default fallback_instruction</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fallback_instruction"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Default loop_overflow</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loop_overflow"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>It is required to set some &#39;initial_state&rsquo;, that is the first state in the conversation flow. &#39;initial_state&rsquo; will only start after the user sends it&rsquo;s first input. Then, it will update the context, write the outputs and go to <code class="prettyprint">next_step</code>.</p>
@@ -871,12 +876,12 @@ Defaults to <code class="prettyprint">false</code>.</p>
 
 <p><em>(Optional)</em></p>
 
-<p>Input of the bot. It can come from the user or as a response to url calls. The field &ldquo;actions&rdquo; specifies the expected 
+<p>Input of the bot. It can come from the user or as a response to url calls. The field &ldquo;actions&rdquo; specifies the expected
 <a href="#input-actions">type of input</a>.</p>
 
 <h3 id="next_step">next_step</h3>
 
-<p>Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states 
+<p>Name of the next state in the flow of the bot. For a conditional next_step (i.e. jumping to different states
 depending of variables) see <a href="#templating">templating</a>.</p>
 
 <h3 id="implicit-states">Implicit states</h3>
@@ -910,8 +915,8 @@ depending of variables) see <a href="#templating">templating</a>.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="nt">"first_var"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="nt">"second_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This depends on the {{first_var}}"</span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"first_var"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"second_var"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This depends on the {{first_var}}"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -926,16 +931,14 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 <blockquote>
 <p>In this example, &#39;new_user&rsquo; will contain the json response of the call.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"new_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{http('http://my-api.example.com/new_user', params={'q': 'apples'})}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>In this example, the variable &#39;queues&rsquo; will contain an array of names: the queues that are open in Hubtype DESK.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"queues"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_queues"</span><span class="w">
@@ -946,8 +949,7 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 <blockquote>
 <p>Here we create a note so the human agent that is going to attend the conversation can quickly see a summary of the customer.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"add_note"</span><span class="p">,</span><span class="w">
@@ -959,8 +961,7 @@ NOTE: JSON objects have no ordering by definition. So if you define a set of var
 <blockquote>
 <p>Finally, we create a case in one of the available queues or in the default one if there are none available.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"case"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_case"</span><span class="p">,</span><span class="w">
@@ -1061,7 +1062,7 @@ NOTE: active_queues are the only ones that some user can be transferred
 
 <h3 id="user">User</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"facebook | telegram | twitter..."</span><span class="p">,</span><span class="w">
@@ -1091,7 +1092,7 @@ NOTE: active_queues are the only ones that some user can be transferred
 
 <h3 id="trace">Trace</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_trace"</span><span class="p">:[</span><span class="s2">"initial"</span><span class="p">,</span><span class="w"> </span><span class="s2">"welcome_message"</span><span class="p">,</span><span class="w"> </span><span class="s2">"show_products"</span><span class="p">,</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">]</span><span class="w">
+  </span><span class="nt">"_trace"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"initial"</span><span class="p">,</span><span class="w"> </span><span class="s2">"welcome_message"</span><span class="p">,</span><span class="w"> </span><span class="s2">"show_products"</span><span class="p">,</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>List of states for which the user has passed. It can be useful to retrieve behaviour data about your users.</p>
@@ -1105,7 +1106,7 @@ NOTE: active_queues are the only ones that some user can be transferred
 
 <h3 id="last-session">Last session</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"last_session"</span><span class="p">:{</span><span class="w">
+  </span><span class="nt">"last_session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"last_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy_item"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-24T15:05:31.949553Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"last_interaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1120,8 +1121,8 @@ NOTE: active_queues are the only ones that some user can be transferred
 <h3 id="last-keyboard">Last keyboard</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_last_keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yeah"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nope"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yeah"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nope"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1241,7 +1242,6 @@ NOTE: If the typing effect is not supported by the messenger it will result in e
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/video.mp4"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
 <table><thead>
 <tr>
@@ -1268,7 +1268,6 @@ NOTE: If the typing effect is not supported by the messenger it will result in e
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://this.is.the/url/of/the/audio.mp3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some video subtitle"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
 <table><thead>
 <tr>
@@ -1384,7 +1383,7 @@ NOTE: The Location Output is not available on Facebook.
   </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"678909909"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"vcard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcard:data"</span><span class="w">                 
+  </span><span class="nt">"vcard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcard:data"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -1473,27 +1472,27 @@ NOTE: The Location Output is not available on Facebook.
 <tr>
 <td>webview_height_ratio</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>Possible in web_url</em></td>
+<td style="text-align: right"><em>Possible in web</em>url_</td>
 </tr>
 <tr>
 <td>messenger_extensions</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>Possible in web_url</em></td>
+<td style="text-align: right"><em>Possible in web</em>url_</td>
 </tr>
 <tr>
 <td>fallback_url</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>Possible in web_url</em></td>
+<td style="text-align: right"><em>Possible in web</em>url_</td>
 </tr>
 <tr>
 <td>url</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>mandatory if type is &ldquo;web_url&rdquo;</em></td>
+<td style="text-align: right"><em>mandatory if type is &ldquo;web</em>url&rdquo;_</td>
 </tr>
 <tr>
 <td>payload</td>
 <td style="text-align: center">String</td>
-<td style="text-align: right"><em>mandatory if type is &ldquo;postback&rdquo; or &ldquo;phone_number&rdquo;</em></td>
+<td style="text-align: right"><em>mandatory if type is &ldquo;postback&rdquo; or &ldquo;phone</em>number&rdquo;_</td>
 </tr>
 <tr>
 <td>next_step</td>
@@ -1509,7 +1508,7 @@ NOTE: The messagebutton output is only available on Facebook and Telegram. Also,
 <h2 id="carrousel">Carrousel</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"carrousel"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"elements"</span><span class="p">:[</span><span class="w">
+  </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pepperoni"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentic soft New York style dough topped with tasty pepperoni"</span><span class="p">,</span><span class="w">
@@ -1601,28 +1600,33 @@ NOTE: The carrousel output is only available on Facebook. Currently other platfo
 
 <h2 id="list">List</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First title"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some subtitle"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.url/g/image.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Call"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"payload"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"{% raw %}+44 7700 900200{% endraw %}"</span><span class="w">
-        </span><span class="p">}]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"elements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First title"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some subtitle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.url/g/image.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Second title"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh my god"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ToBeOrNot.ToBe.an.url/image.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Go details"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.details.url/#section"</span><span class="w">
-
-        </span><span class="p">}]</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Call"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{% raw %}+44 7700 900200{% endraw %}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Second title"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh my god"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ToBeOrNot.ToBe.an.url/image.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"buttons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Go details"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.details.url/#section"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -1701,50 +1705,50 @@ NOTE: The Media Message output is only available on Facebook. Currently other pl
 
 <h2 id="keyboard-quick-replies">Keyboard (Quick Replies)</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select_restaurant_type"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What's your budget for dinner?"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$10 or less"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheap"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15 - $25"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25 or more"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expensive"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"budget"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_{{budget.data}}"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select_restaurant_type"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What's your budget for dinner?"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$10 or less"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheap"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15 - $25"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25 or more"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expensive"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in_keyboard"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"budget"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_{{budget.data}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Location keyboard</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ask_location"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please, share your location with me"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_nearby_shops"</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ask_location"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please, share your location with me"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"show_nearby_shops"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Quick Replies are a convenient way to let users know the available options to type. Also, they save the end-user the effort to type all words and let them navigate through options much faster.</p>
@@ -1818,7 +1822,7 @@ The &ldquo;location&rdquo; keyboard only works on Facebook Messenger.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This output is used to send receipts to users. It can be simple with not much information or very detailed. The user 
+<p>This output is used to send receipts to users. It can be simple with not much information or very detailed. The user
 will see a summarised version that will be expanded with all the information when the user click it.</p>
 
 <p><img width="300" src="images/receipt.png"></p>
@@ -2105,8 +2109,8 @@ variable see <a href="#templating">Templating</a>.</p>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select one option:"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"keyboard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">}</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w"> </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2116,7 +2120,7 @@ variable see <a href="#templating">Templating</a>.</p>
   </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"another_state"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Puts in the variable the key object (<em>label, data</em>) of the key pressed by the user. There must be a 
+<p>Puts in the variable the key object (<em>label, data</em>) of the key pressed by the user. There must be a
 <a href="#quick-replies">keyboard</a> present.</p>
 
 <p>You can access both variables using jinja: <code class="prettyprint">{{key_user_choice.label}}</code> and <code class="prettyprint">{{key_user_choice.data}}</code></p>
@@ -2162,8 +2166,8 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-name">Get name</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"variables"</span><span class="p">:</span><span class="s2">"confirm_get_name"</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"variables"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirm_get_name"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>The user input should be a text with at most 3 words.</p>
@@ -2178,19 +2182,19 @@ variable see <a href="#templating">Templating</a>.</p>
 
 <h2 id="get-age">Get age</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"age"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"age"</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"age"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"age"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Saves a number representing the age. Age should match 1 &lt;= age &lt; 120.</p>
 
 <h2 id="get-location">Get location</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"location"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"variable"</span><span class="p">:</span><span class="s2">"location"</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The variable location will contain the components: <code class="prettyprint">latitude</code> , <code class="prettyprint">longitude</code>, <code class="prettyprint">title</code>, <code class="prettyprint">address</code>, <code class="prettyprint">url</code>. For field 
+<p>The variable location will contain the components: <code class="prettyprint">latitude</code> , <code class="prettyprint">longitude</code>, <code class="prettyprint">title</code>, <code class="prettyprint">address</code>, <code class="prettyprint">url</code>. For field
 info see <a href="#location">location</a>.</p>
 
 <aside class="softwarn">
@@ -2279,18 +2283,18 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h2 id="dates">Dates</h2>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"a1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date()}}"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"a2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('tomorrow')}}"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"a3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('1984/05/05')}}"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"a4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('now', 'Europe/Paris')}}"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"{{date(a1) - date() &lt; date_interval(minutes=1)}} == True"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"{{date(a2).start_of('week') &lt; date()}} == True"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"{{date(a3).year}} == 1984"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"{{date(a4).to_datetime_string()}} == current time in Paris"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"a1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date()}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"a2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('tomorrow')}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"a3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('1984/05/05')}}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"a4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{date('now', 'Europe/Paris')}}"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"{{date(a1) - date() &lt; date_interval(minutes=1)}} == True"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{date(a2).start_of('week') &lt; date()}} == True"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{date(a3).year}} == 1984"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"{{date(a4).to_datetime_string()}} == current time in Paris"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>It&rsquo;s possible to get the current time and operate with dates and time intervals using the functions <code class="prettyprint">date</code> and <code class="prettyprint">date_interval</code>. Under the hood we use the <a href="https://pendulum.eustace.io/">Pendulum</a> library, we encourage you to check out their documentation to learn all the options available.</p>
@@ -2304,10 +2308,10 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
                 {# This is a JINJA comment #}
                 'title': '{{item.name}}',
                 'subtitle': '{{item.priceLabel}}',
-                'image_url': '{{item.image.sizes.Best.url}}', 
+                'image_url': '{{item.image.sizes.Best.url}}',
                 'buttons':[
                     {
-                        'type': 'web_url', 
+                        'type': 'web_url',
                         'title':'Open product',
                         'url': '{{item.clickUrl}}'
                     }
@@ -2317,11 +2321,11 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
     ]"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>We allow two types of comments. You can make a simple comment in the JSON code with a <code class="prettyprint">#</code> followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: <code class="prettyprint">{# your comment #}</code> </p>
+<p>We allow two types of comments. You can make a simple comment in the JSON code with a <code class="prettyprint">#</code> followed by your comment, or if you want to put a comment inside a jinja template, it must be done with this syntaxis: <code class="prettyprint">{# your comment #}</code></p>
 
 <h1 id="error-types">Error types</h1>
 
-<p>There may be errors during the parsing and execution of a bot. They are of different types inheriting from 
+<p>There may be errors during the parsing and execution of a bot. They are of different types inheriting from
 <code class="prettyprint">BotException</code>, and are mainly classified as JSON or BotSON related.</p>
 
 <table><thead>
@@ -2426,31 +2430,31 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
 
 <h3 id="ai-calls">AI calls</h3>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search_menu"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you want to do?"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intent"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_result"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.intent}}"</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search_menu"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What do you want to do?"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"intent"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai_result"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"search_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-api.my-company.com/search"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.item}}"</span><span class="w"> </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I've searched for {{ai_result.item}} and found {{search_result | length}} results."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.intent}}"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"search_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-api.my-company.com/search"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{{ai_result.item}}"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Are you sure you want to buy {{ai_result.item}}?"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I've searched for {{ai_result.item}} and found {{search_result | length}} results."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Are you sure you want to buy {{ai_result.item}}?"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -2462,7 +2466,7 @@ NOTE: The get image input is only available on Facebook. Currently other platfor
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>You are able to use watson or api.ai bots to manage the botSON flow. </p>
+<p>You are able to use watson or api.ai bots to manage the botSON flow.</p>
 
 <p>To start just configure the credentials</p>
 
